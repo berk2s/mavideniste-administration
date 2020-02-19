@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->integer('user_role');
             $table->tinyInteger('is_theme_dark');
 
-            $table->bigInteger('user_dealer');
+            $table->bigInteger('user_branch');
 
 
             $table->rememberToken();

@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
             'user_phone' => '05396861440',
             'user_address' => '1625.ada d blok daire 5',
             'user_role' => 1,
-            'user_dealer' => 1,
+            'user_branch' => 54,
             'is_theme_dark' => true,
             'email' => 'berk@mavideniste.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('14052000')
+            'password' => \Illuminate\Support\Facades\Hash::make('1234')
         ]);
 
         DB::table('user_roles')->insert([

@@ -10,6 +10,8 @@
     });
 </script>
 <script src="/mod/assets/js/custom.js"></script>
+<script src="/mod/js/constants.js"></script>
+<script src="/mod/js/fetchfunctions.js"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
 

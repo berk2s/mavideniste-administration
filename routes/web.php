@@ -37,3 +37,7 @@ Route::post('/sifre-degistir', 'Backside\Pages\Profile\ChangePasswordController@
     ->middleware('auth');
 Route::get('/cikis', 'Backside\Partials\LogoutController@logout')
     ->middleware('auth');
+
+Route::group(['prefix' => '/kategori', 'middleware' => ['auth']], function() {
+    Route::get('/', 'Backside\Pages\Category\ListCategory@get_view');
+});
