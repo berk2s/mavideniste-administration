@@ -125,5 +125,11 @@
             </script>";
         }
 
+        if(!empty($_GET['short'])){
+            echo "<script>
+                Snackbar.show({text: 'Şifreler en az 6 haneli olmalı', duration: 50000});
+            </script>";
+        }
+
     @endphp
 @endsection

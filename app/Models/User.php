@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function role(){
         return $this->hasOne(UserRoles::class,'role_id','user_role');
     }
+
+    public function log(){
+        return $this->hasMany(Log::class, 'user_id','user_id')->orderBy('log_id', 'DESC');;
+    }
 }

@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('/upload', 'Backside\Api\CategoryImageUploadApi');
+Route::resource('/user/log', 'Backside\Api\Log\LogApi');

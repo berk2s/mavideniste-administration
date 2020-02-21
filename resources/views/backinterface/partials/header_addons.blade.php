@@ -1,4 +1,4 @@
-<link rel="icon" type="image/x-icon" href=/fav.ico"/>
+<link rel="icon" type="image/x-icon" href="/fav.ico"/>
 <link href="/mod/assets/css/loader.css" rel="stylesheet" type="text/css" />
 <script src="/mod/assets/js/loader.js"></script>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->

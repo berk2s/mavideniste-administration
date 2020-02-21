@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backside\Pages\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +25,29 @@ class ChangePasswordController extends Controller
 
         if($new_password == $renew_password) {
 
+            /*
+             * checks for security, if shorter than 6, returns false
+             */
+            if(strlen($new_password) < 6){
+                return redirect('/sifre-degistir?short=' . Str::random(5));
+            }
+
             if (Auth::attempt(['email' => Auth::user()->email, 'password' => $current_password])) {
 
                 $user = User::find($user_id);
                 $user->password = Hash::make($new_password);
                 $user->save();
+
+                /*
+                 * record user process
+                 */
+
+                $log = new Log;
+                $log->user_id = $user_id;
+                $log->branch_id = $user->user_branch;
+                $log->log_type = 2;
+                $log->log_msg = $user->user_name. ' ('.$user_id.') kullanıcı şifresini değiştirdi!';
+                $log->save();
 
                 return redirect('/sifre-degistir?success=' . Str::random(5));
 
