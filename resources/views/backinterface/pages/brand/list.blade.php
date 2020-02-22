@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Ürünler Listesi')
+@section('title', 'Maviden İste - Markalar Listesi')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Ürünler</a></li>
@@ -14,9 +14,9 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Ürünler Listesi
+                                <h4>Markalar Listesi
 
-                                    <div id='loadingSpin' class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px"></div>
+                                    <div id='loadingSpin' class="spinner-border text-success align-self-center loader-sm" style="display:none;float:right;width:20px;height:20px"></div>
                                 </h4>
                             </div>
                         </div>
@@ -27,15 +27,10 @@
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ÜRÜN ADI</th>
-                                    <th>KATEGORİ</th>
-                                    <th>MARKA</th>
-                                    <th>LİSTE FİYATI</th>
-                                    <th>İNDİRİM</th>
-                                    <th>GRAMAJ TİPİ</th>
-                                    <th>GRAMAJ</th>
+                                    <th>MARKA ADI</th>
+                                    <th>ÜRÜN SAYISI</th>
                                     <th>EKLENME TARİHİ</th>
-                                    <th></th>
+                                    <th class="text-center"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -55,7 +50,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" >
-                    <h5 class="modal-title" id="edit_categoryName">Kategori Düzenle
+                    <h5 class="modal-title" id="edit_categoryName">Marka Düzenle
                         <div id='loadingSpinForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -69,37 +64,23 @@
                         <div class="work-section">
 
                             <div class="row">
-                                <form id="EditCategoryForm" enctype="multipart/form-data" method="post">
+                                <form id="EditCategoryForm" class="w-100" enctype="multipart/form-data" method="post">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="degree2">Kategori Adı</label>
-                                            <input type="text" class="form-control mb-4" id="EDIT_categoryName" value="">
+                                            <label for="degree2">Marka Adı</label>
+                                            <input type="text" class="form-control mb-4" id="EDIT_brandname" value="">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="degree2">Durum <small id="EDIT_categoryStatus_TEXT"></small></label>
-
-                                            <label style='float:right' class="switch s-icons s-outline  s-outline-success">
-                                                <input type="checkbox" name="darktheme" id="EDIT_categoryStatus">
-                                                <span class="slider round"></span>
-                                            </label>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
 
-                                            <div class="custom-file-container" data-upload-id="categoryImageChange">
-                                                <label>Resmi Değiştir <a id="clearImage" href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
-                                                <label class="custom-file-container__custom-file" >
-                                                    <input type="file" name='file' id="EDIT_categoryfile" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
-                                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-                                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
-                                                </label>
-                                                <div class="custom-file-container__image-preview" style="height:120px"></div>
-                                            </div>
+
 
                                         </div>
                                     </div>
@@ -115,38 +96,13 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Vazgeç</button>
-                    <button type="button" id='EDIT_categorySaveBtn' onclick="clickCategoryEditSave(this)" class="btn btn-primary">
+                    <button type="button" id='EDIT_brandSaveBtn' onclick="clickBrandEditSave(this)" class="btn btn-primary">
                         Kaydet</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="imagePlay" class="modal animated fadeInDown" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header" >
-                    <h5 class="modal-title" id="edit_categoryName">Kategori Resmi
-                        <div id='loadingSpinForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="col-md-12 p-0" style="display: flex;justify-content: center;align-items: center">
-
-                        <img id='imageShowSrc' />
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 
 
 
@@ -188,7 +144,7 @@
 
     </script>
 
-    <script src="/mod/js/product/list.js"></script>
+    <script src="/mod/js/brand/list.js"></script>
 
     <script src="/mod/plugins/table/datatable/datatables.js"></script>
     <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->

@@ -49,7 +49,14 @@ Route::group(['prefix' => '/kategori', 'middleware' => ['auth']], function() {
     Route::post('/ekle', 'Backside\Pages\Category\NewCategory@handle_post');
 });
 
+Route::group(['prefix' => '/marka', 'middleware' => ['auth']], function() {
+    Route::get('/', 'Backside\Pages\Brand\ListBrandController@get_view');
+    Route::get('/ekle', 'Backside\Pages\Brand\NewBrandController@get_view');
+
+});
+
 Route::group(['prefix' => '/urun', 'middleware' => ['auth']], function() {
     Route::get('/', 'Backside\Pages\Product\ListProductController@get_view');
+    Route::get('/ekle', 'Backside\Pages\Product\NewProductController@get_view');
 
 });

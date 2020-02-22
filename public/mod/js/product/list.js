@@ -38,6 +38,9 @@ window.onload = () => {
             "sSearchPlaceholder": "Ara...",
             "sLengthMenu": "Listele :  _MENU_",
         },
+        "language": {
+            "zeroRecords": "Hiç sonuç bulunamadı"
+        },
         "stripeClasses": [],
         "lengthMenu": [7, 10, 20, 50],
         "pageLength": 10

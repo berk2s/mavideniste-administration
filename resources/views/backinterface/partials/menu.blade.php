@@ -78,6 +78,45 @@
 
             <li class="menu">
                 <a
+                    href="#brands"
+                    data-toggle="collapse"
+                    class="dropdown-toggle"
+                    {{ Request::path() == 'marka' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'marka' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+                    {{ Request::path() == 'marka/ekle' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'marka/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+                >
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                        <span>Markalar</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled
+                    {{ Request::path() == 'marka' ? 'show' : '' }}
+                    {{ Request::path() == 'marka/ekle' ? 'show' : '' }}
+
+                    " id="brands" data-parent="#accordionExample">
+                    <li
+                        {{ Request::path() == 'marka' ? 'class=active' : '' }}
+                    >
+                        <a href="/marka"> Markalar </a>
+                    </li>
+                    <li
+                        {{ Request::path() == 'marka/ekle' ? 'class=active' : '' }}
+                    >
+                        <a href="/marka/ekle"> Marka Ekle </a>
+                    </li>
+                    <li>
+                        <a href="/marka/analiz"> Marka Analizleri </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu">
+                <a
                     href="#products"
                     data-toggle="collapse"
                     class="dropdown-toggle"
@@ -105,9 +144,9 @@
                         <a href="/urun"> Ürünler </a>
                     </li>
                     <li
-                        {{ Request::path() == 'kategori/ekle' ? 'class=active' : '' }}
+                        {{ Request::path() == 'urun/ekle' ? 'class=active' : '' }}
                     >
-                        <a href="/kategori/ekle"> Ürün Ekle </a>
+                        <a href="/urun/ekle"> Ürün Ekle </a>
                     </li>
                     <li>
                         <a href="/kategori/analiz"> Ürün Analizleri </a>

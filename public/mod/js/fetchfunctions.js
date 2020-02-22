@@ -25,4 +25,53 @@ sendLog = async (user_id, branch_id, log_type, log_msg) => {
     }catch(e){
         return e;
     }
+};
+
+dateParse = (date) => {
+    const date_ = date.split('T');
+    const date_2 = date_[1].split('.');
+
+    return date_[0]+' '+date_2[0];
 }
+
+checkNumeric = (e) => {
+    const value = e.value;
+    if(isNaN(value)){
+        let newVal = '';
+        for(let i = 0;i<(value.length-1);i++){
+            newVal += e.value[i];
+        }
+        e.value = newVal;
+    }
+    e.value = e.value.trim()
+}
+
+fetchBranchCategories = async () => {
+    try{
+        const result =  await fetch(`${API_URL}/api/category/${BRANCH_ID}`, {
+            method:'GET',
+            headers:{
+                'x-api-key': API_KEY
+            }
+        });
+        return result.json();
+    }catch(e){
+        return e;
+    }
+};
+
+fetchBrands = async () => {
+    try{
+        //`${API_URL}/api/category/${BRANCH_ID}`,
+        const brands = await fetch(`${API_URL}/api/brand/${BRANCH_ID}`, {
+            method:'GET',
+            headers:{
+                'x-api-key': API_KEY
+            }
+        });
+
+        return brands.json();
+    }catch(e){
+        return e;
+    }
+};

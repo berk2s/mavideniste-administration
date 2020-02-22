@@ -193,19 +193,6 @@ window.onload = () => {
 
     }
 
-    fetchBranchCategories = async () => {
-        try{
-            const result =  await fetch(`${API_URL}/api/category/${BRANCH_ID}`, {
-                method:'GET',
-                headers:{
-                    'x-api-key': API_KEY
-                }
-            });
-            return result.json();
-        }catch(e){
-            return e;
-        }
-    }
 
     fetchCategory = async (category_id) => {
         try{
