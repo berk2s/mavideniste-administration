@@ -55,16 +55,54 @@
 
                                                     <div class="form-row ">
 
-                                                        <div class="form-group  col-md-6">
-                                                            <label for="productName">Liste Fiyatı</label>
+                                                        <div class="form-group  col-md-4">
+                                                            <label for="productListPrice">Liste Fiyatı</label>
                                                             <input oninput="checkNumeric(this)" type="text" class="form-control" id="productListPrice" placeholder="50">
                                                             <small class="form-text text-muted">Sadece sayı giriniz</small>
                                                         </div>
+                                                        <div class="form-group  col-md-8">
+                                                            <div class="form-row">
+                                                                <div
+                                                                    style="
+                                                                        width: 100%;
+                                                                        position: absolute;
+                                                                        height: 115px;
+                                                                        z-index: 9;
+                                                                        display: flex;
+                                                                        justify-content: center;
+                                                                        align-items: center;
+                                                                    "
+                                                                        id="switchArea"
+                                                                    >
+                                                                    <div style="position: absolute;">
+                                                                        <label class="switch s-primary mr-2">
+                                                                            <input type="checkbox" id='blurSwitch' data-type="isDiscount">
+                                                                            <span class="slider round"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group  col-md-12" style="filter:blur(4px);transition: 0.4s" id="filterBlurArea">
+                                                                    <div class="form-row">
+                                                                        <div class="form-group  col-md-6">
+                                                                            <label for="productDiscountPrice">İndirimli Fiyatı</label>
+                                                                            <input oninput="checkNumeric(this)" type="text" class="form-control" id="productDiscountPrice" value="0">
+                                                                            <small class="form-text text-muted">Sadece sayı giriniz</small>
+                                                                        </div>
 
-                                                        <div class="form-group  col-md-6">
-                                                            <label for="productName">İndirim (%)</label>
-                                                            <input type="text" class="form-control" id="productDiscount" value="0">
-                                                            <small id="discountText" class="form-text text-muted">İndirimli Fiyat: <span style="font-family: Arial">₺</span>58</small>
+                                                                        <div class="form-group  col-md-6">
+                                                                            <label for="productDiscount " style="margin-bottom: 0px;" class="w-100">İndirim (%)
+
+                                                                                <label class="switch s-primary  float-right" id="labelAreaSwitch" style="opacity: 0">
+                                                                                    <input type="checkbox" id="areaSwitch" data-type="isDiscount">
+                                                                                    <span class="slider round"></span>
+                                                                                </label>
+                                                                            </label>
+                                                                            <input type="text" class="form-control" id="productDiscount" value="0">
+                                                                            <small id="discountText" class="form-text text-muted">İndirimli Fiyat: <span style="font-family: Arial">₺</span>58</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                     </div>
@@ -72,19 +110,20 @@
                                                     <div class="form-row ">
 
                                                         <div class="form-group  col-md-4">
-                                                            <label for="productName">Gramaj Tipi</label>
+                                                            <label for="productUnitType">Gramaj Tipi</label>
                                                             <select id='productUnitType' class="form-control basic">
-                                                                <option>Kilogram (kg)</option>
-                                                                <option>Gram (g)</option>
-                                                                <option>Miligram (mg)</option>
-                                                                <option>Litre (L)</option>
-                                                                <option>Santilite (cL)</option>
-                                                                <option>Mililitre (mL)</option>
+                                                                <option value="kg" selected>Kilogram (kg)</option>
+                                                                <option value="g">Gram (g)</option>
+                                                                <option value="mg">Miligram (mg)</option>
+                                                                <option value="L">Litre (L)</option>
+                                                                <option value="cL">Santilite (cL)</option>
+                                                                <option value="mL">Mililitre (mL)</option>
+                                                                <option value="adet">Adet</option>
                                                             </select>
                                                         </div>
 
                                                         <div class="form-group  col-md-4">
-                                                            <label for="productName">Gramaj</label>
+                                                            <label for="productUnitWeight">Gramaj</label>
                                                             <input oninput="checkNumeric(this)" type="text" class="form-control" id="productUnitWeight" placeholder="250">
                                                             <small class="form-text text-muted">Sadece sayı giriniz</small>
                                                         </div>
@@ -100,10 +139,10 @@
                                                     <div class="form-group">
 
 
-                                                        <div class="custom-file-container" data-upload-id="categoryImageNew">
-                                                            <label>Kategori Resmi <a id="clearImage" href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                                        <div class="custom-file-container" data-upload-id="productImageNew">
+                                                            <label>Kategori Resmi <a id="clearImage" href="javascript:void(0)" class="custom-file-container__image-clear" title="Resmi Sil">x</a></label>
                                                             <label class="custom-file-container__custom-file" >
-                                                                <input type="file" name='categoryFile' id="NEW_categoryfile" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                                                <input type="file" name='productFile' id="productFile" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
                                                                 <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                                                 <span class="custom-file-container__custom-file__custom-file-control"></span>
                                                             </label>
@@ -134,19 +173,13 @@
                     <a
                         type="submit"
                         class="btn btn-primary"
-                        id="btnAddBrand"
-                        onclick="clickBrandAdd()"
+                        id="btnAddProduct"
+                        onclick="addProductSave(this)"
                         href="javascript:void(0);"
                     >Kaydet</a>
 
                     </a>
 
-                    <a
-                        class="btn btn-info"
-                        onclick="clickCategoryPreview()"
-                    >
-                        Önizleme
-                    </a>
 
                 </div>
 
@@ -170,6 +203,7 @@
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/select2/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
     <link href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/mod/assets/css/forms/switches.css">
 
 @endsection
 
@@ -193,7 +227,7 @@
     <script src="/mod/js/product/new.js"></script>
 
     <script>
-        var firstUpload = new FileUploadWithPreview('categoryImageNew')
+        var firstUpload = new FileUploadWithPreview('productImageNew')
 
 
         var ss = $(".basic").select2({

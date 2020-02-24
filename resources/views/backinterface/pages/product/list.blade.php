@@ -16,7 +16,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Ürünler Listesi
 
-                                    <div id='loadingSpin' class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px"></div>
+                                    <div id='loadingSpin' class="spinner-border text-success align-self-center loader-sm" style="display: none;float:right;width:20px;height:20px"></div>
                                 </h4>
                             </div>
                         </div>
@@ -27,14 +27,15 @@
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ÜRÜN ADI</th>
+                                    <th>ÜRÜN</th>
                                     <th>KATEGORİ</th>
                                     <th>MARKA</th>
                                     <th>LİSTE FİYATI</th>
-                                    <th>İNDİRİM</th>
-                                    <th>GRAMAJ TİPİ</th>
+                                    <th>İNDRM FİYATI</th>
+                                    <th>İNDİRİM(%)</th>
                                     <th>GRAMAJ</th>
-                                    <th>EKLENME TARİHİ</th>
+                                    <th>MİKTAR</th>
+                                    <th>DURUM</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -51,11 +52,11 @@
     </div>
 
     <div id="fadeinModal" class="modal animated fadeInDown" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" >
-                    <h5 class="modal-title" id="edit_categoryName">Kategori Düzenle
+                    <h5 class="modal-title" id="edit_categoryName">Ürün Düzenle
                         <div id='loadingSpinForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -69,40 +70,51 @@
                         <div class="work-section">
 
                             <div class="row">
-                                <form id="EditCategoryForm" enctype="multipart/form-data" method="post">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="degree2">Kategori Adı</label>
-                                            <input type="text" class="form-control mb-4" id="EDIT_categoryName" value="">
+                                <form id="EditCategoryForm" class='w-100' enctype="multipart/form-data" method="post">
+                                    <div class="form-group mb-4">
+                                        <label for="productName">Ürün Adı</label>
+                                        <input type="text" class="form-control" id="productName" placeholder="Eti Browni İntense Fındıklı">
+                                    </div>
+
+                                    <div class="form-row ">
+                                        <div class="form-group  col-md-6">
+                                            <label for="productCategory">Kategori</label>
+                                            <select id='productCategory' class="form-control  basic">
+
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group  col-md-6">
+                                            <label for="productBrand">Marka</label>
+                                            <select id='productBrand' class="form-control  basic">
+
+                                            </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="degree2">Durum <small id="EDIT_categoryStatus_TEXT"></small></label>
+                                    <div class="form-row ">
 
-                                            <label style='float:right' class="switch s-icons s-outline  s-outline-success">
-                                                <input type="checkbox" name="darktheme" id="EDIT_categoryStatus">
-                                                <span class="slider round"></span>
-                                            </label>
+                                        <div class="form-group  col-md-4">
+                                            <label for="productUnitType">Gramaj Tipi</label>
+                                            <select id='productUnitType' class="form-control basic">
 
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
 
-                                            <div class="custom-file-container" data-upload-id="categoryImageChange">
-                                                <label>Resmi Değiştir <a id="clearImage" href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
-                                                <label class="custom-file-container__custom-file" >
-                                                    <input type="file" name='file' id="EDIT_categoryfile" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
-                                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-                                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
-                                                </label>
-                                                <div class="custom-file-container__image-preview" style="height:120px"></div>
-                                            </div>
-
+                                        <div class="form-group  col-md-4">
+                                            <label for="productUnitWeight">Gramaj</label>
+                                            <input oninput="checkNumeric(this)" type="text" class="form-control" id="productUnitWeight" placeholder="250">
+                                            <small class="form-text text-muted">Sadece sayı giriniz</small>
                                         </div>
+
+                                        <div class="form-group  col-md-4">
+                                            <label for="productName">Miktar</label>
+                                            <input oninput="checkNumeric(this)" type="text" class="form-control" id="productAmount" placeholder="30">
+                                            <small class="form-text text-muted">Sadece sayı giriniz</small>
+                                        </div>
+
                                     </div>
+
                                 </form>
 
                             </div>
@@ -115,7 +127,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Vazgeç</button>
-                    <button type="button" id='EDIT_categorySaveBtn' onclick="clickCategoryEditSave(this)" class="btn btn-primary">
+                    <button type="button" id='EDIT_productSaveBtn' onclick="clickProductEditSave(this)" class="btn btn-primary">
                         Kaydet</button>
                 </div>
             </div>
@@ -127,8 +139,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" >
-                    <h5 class="modal-title" id="edit_categoryName">Kategori Resmi
-                        <div id='loadingSpinForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
+                    <h5 class="modal-title" id="edit_categoryName">Ürün Resmi
+                        <div id='loadingImageViewForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
@@ -148,6 +160,111 @@
         </div>
     </div>
 
+    <div id="product" class="modal animated fadeInDown" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="edit_categoryName">Ürün Resmi
+                        <div id='loadingImageViewForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="col-md-12 p-0" style="display: flex;justify-content: center;align-items: center">
+
+                        <img id='imageShowSrc' />
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="setDiscount" class="modal animated fadeInDown" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="edit_categoryName">İndirim Yap
+                        <div id='loadingSpinForDiscount' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="col-md-12 p-0">
+
+                        <div class="work-section">
+
+                            <div class="row">
+                                <form id="" class="w-100" enctype="multipart/form-data" method="post">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="degree2">Ürün <span style="font-size:12px;color:green" id="DISCOUNT_productStatusText"></span></label>
+                                            <input type="text" class="form-control mb-4" id="DISCOUNT_productname" value="" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="degree2">Liste Fiyatı</label>
+                                            <input type="text" class="form-control mb-4" onchange='clearNumericTrimToZero(this)' oninput="checkNumeric(this)" id="DISCOUNT_listprice" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="degree2">İndirim </label>
+                                            <label style='float:right' class="switch s-icons s-outline  s-outline-success">
+                                                <input type="checkbox" name="darktheme" id="DISCOUNT_switch">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12" style="transition: 0.4s" id="discountPriceArea">
+                                        <div class="form-group">
+                                            <label for="degree2">İndirim Fiyatı</label>
+                                            <input type="text" onchange='clearNumericTrimToZero(this)' oninput="checkNumeric(this)" class="form-control mb-4" id="DISCOUNT_discountprice" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12" style="transition: 0.4s" id="discountPercentageArea">
+                                        <div class="form-group">
+
+                                            <label for="degree2">İndirim (%)</label>
+                                            <input type="text" onchange='clearNumericTrimToZero(this)' oninput="checkNumeric(this)" class="form-control" id="DISCOUNT_discount" value="0">
+                                            <small id="discountText" class="form-text text-muted">
+                                            </small>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Vazgeç</button>
+                    <button type="button" id='DISCOUNT_btn' onclick="clickDiscountEditSave(this)" class="btn btn-primary">
+                        Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 @endsection
@@ -162,10 +279,12 @@
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/css/forms/switches.css">
     <link href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
 
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/datatables.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/dt-global_style.css">
+    <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/select2/select2.min.css">
 
 @endsection
 
@@ -181,12 +300,13 @@
     <!--  END CUSTOM SCRIPTS FILE  -->
 
     <script src="/mod/plugins/file-upload/file-upload-with-preview.min.js"></script>
+    <script src="/mod/plugins/select2/select2.min.js"></script>
 
-    <script>
-        //First upload
-        var firstUpload = new FileUploadWithPreview('categoryImageChange')
+    <script src="/mod/plugins/select2/custom-select2.js"></script>
+    <script src="/mod/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="/mod/plugins/bootstrap-touchspin/custom-bootstrap-touchspin.js"></script>
 
-    </script>
+
 
     <script src="/mod/js/product/list.js"></script>
 
@@ -196,5 +316,19 @@
     <script src="/mod/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="/mod/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="/mod/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+
+    <script>
+        //First upload
+        //var firstUpload = new FileUploadWithPreview('productImageNew')
+        $("#DISCOUNT_discount").TouchSpin({
+            postfix: '%',
+            buttondown_class: "btn btn-classic btn-primary downProductDiscount",
+            buttonup_class: "btn btn-classic btn-primary upProductDiscount"
+        });
+
+        var ss = $(".basic").select2({
+        });
+
+    </script>
 
 @endsection

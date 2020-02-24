@@ -12,7 +12,7 @@ window.onload = () => {
                     const dataURL = reader.result;
                     document.getElementById('imageBase64').value = dataURL;
 
-                    fetch('/api/upload',{
+                    fetch('/api/category/upload',{
                         method:'POST',
                         headers:{
                             'Content-Type':'application/json'

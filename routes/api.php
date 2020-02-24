@@ -17,5 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/upload', 'Backside\Api\CategoryImageUploadApi');
+Route::resource('/category/upload', 'Backside\Api\CategoryImageUploadApi');
+Route::resource('/product/upload', 'Backside\Api\ProductImageUploadApi');
 Route::resource('/user/log', 'Backside\Api\Log\LogApi');

@@ -69,7 +69,7 @@ window.onload = () => {
 
     categoryAddImage = async (category_image) => {
         try{
-            const upload = await fetch('/api/upload',{
+            const upload = await fetch('/api/category/upload',{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

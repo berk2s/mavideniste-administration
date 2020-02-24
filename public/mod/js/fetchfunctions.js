@@ -43,7 +43,13 @@ checkNumeric = (e) => {
         }
         e.value = newVal;
     }
-    e.value = e.value.trim()
+    e.value = e.value.trim();
+}
+
+clearNumericTrimToZero = (e) => {
+    const value = e.value;
+    if(e.value.trim() == '')
+        e.value = 0
 }
 
 fetchBranchCategories = async () => {
