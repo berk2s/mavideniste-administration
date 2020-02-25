@@ -67,7 +67,25 @@ window.onload = async () => {
                                 onclick="clickProductEdit(this)"
 
                                 >Düzenle</a>
-                             <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);" data-productid="${e._id}">Detaylar</a>
+                             <a
+                                class="dropdown-item"
+                                data-toggle="modal"
+                                data-target="#productDetail"
+                                href="javascript:void(0);"
+                                data-productid='${e._id}'
+                                data-productname='${e.product_name}'
+                                data-productdiscount='${e.product_discount}'
+                                data-productdiscountprice='${e.product_discount_price}'
+                                data-productunitweight='${e.product_unit_weight}'
+                                data-productunittype='${e.product_unit_type}'
+                                data-productlistprice='${e.product_list_price}'
+                                data-productamount='${e.product_amonut}'
+                                data-productdate='${dateParse(e.product_date)}'
+                                data-productcategory='${e.category.category_name}'
+                                data-productbrand='${e.brand.brand_name}'
+                                data-productstatus='${e.product_status}'
+                                onclick='clickProductDetail(this)'
+                                >Detaylar</a>
                              <a
                                 class="dropdown-item"
                                 data-toggle="modal"
@@ -81,7 +99,7 @@ window.onload = async () => {
                                 data-productdiscountprice="${e.product_discount_price}"
                                 data-productstatustext="${productStatus}"
                                 >İndirim</a>
-                             <a class="dropdown-item" data-toggle="modal" data-target="#imagePlay" href="javascript:void(0);" data-productid="${e._id}" onclick="clickProductImage(this);" data-image="${e.product_image}">Ürün Resmi</a>
+                             <a class="dropdown-item" data-toggle="modal" data-target="#imagePlay" href="javascript:void(0);" data-productid="${e._id}" onclick="clickProductImage(this);" data-image="${e.product_image}" data-productid="${e._id}">Ürün Resmi</a>
                              <a class="dropdown-item" data-toggle="modal" data-target="#imagePlay" href="javascript:void(0);" data-productid="${e._id}" onclick="clickProductImage(this);" data-image="${e.product_image}">Önizleme</a>
                              <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);">Analiz</a>
                              <a class="dropdown-item" href="javascript:void(0);" data-productid="${e._id}" onclick="clickChangeStatusProduct(this)" data-currentstatus="${e.product_status}">${changeStatusText}</a>
@@ -125,6 +143,37 @@ window.onload = async () => {
             console.log(e);
         }
     };
+
+    clickProductDetail = (e) => {
+        document.getElementById('DETAIL_productname').innerHTML = e.getAttribute('data-productname');
+        document.getElementById('DETAIL_productcategory').innerHTML = e.getAttribute('data-productcategory');
+        document.getElementById('DETAIL_productbrand').innerHTML = e.getAttribute('data-productcategory');
+        document.getElementById('DETAIL_productlistprice').innerHTML = e.getAttribute('data-productlistprice')+' TL';
+
+        document.getElementById('DETAIL_productweightunittype').innerHTML = e.getAttribute('data-productunittype');
+        document.getElementById('DETAIL_productunitweight').innerHTML = e.getAttribute('data-productunitweight');
+        document.getElementById('DETAIL_productamount').innerHTML = e.getAttribute('data-productamount');
+
+        if(e.getAttribute('data-productstatus') == 'true'){
+            document.getElementById('DETAIL_productstatus').innerHTML = 'Yayında'
+        }else{
+            document.getElementById('DETAIL_productstatus').innerHTML = 'Yayında değil'
+        }
+
+        if(e.getAttribute('data-productdiscountprice') == 'null'){
+            document.getElementById('DETAIL_productdiscountprice').innerHTML = 'İndirim Yok'
+        }else{
+            document.getElementById('DETAIL_productdiscountprice').innerHTML = e.getAttribute('data-productdiscountprice')+' TL'
+        }
+
+        if(e.getAttribute('data-productdiscount') == 'null'){
+            document.getElementById('DETAIL_productdiscount').innerHTML = 'İndirim Yok'
+        }else{
+            document.getElementById('DETAIL_productdiscount').innerHTML = e.getAttribute('data-productdiscount')+'%'
+        }
+
+        document.getElementById('DETAIL_productdate').innerHTML = e.getAttribute('data-productdate');
+    }
 
     document.getElementById('DISCOUNT_switch').addEventListener('change', () => {
         const value = document.getElementById('DISCOUNT_switch').checked;
@@ -284,6 +333,8 @@ window.onload = async () => {
                 document.getElementById('DISCOUNT_switch').checked = true;
                 document.getElementById('discountPriceArea').style.filter = 'none';
                 document.getElementById('discountPercentageArea').style.filter = 'none';
+                document.getElementById('DISCOUNT_discountprice').disabled = false;
+                document.getElementById('DISCOUNT_discount').disabled = false;
 
                 document.getElementById('discountText').innerHTML = `<b><span style='font-family:Arial'>₺</span>${productlistprice}</b> liste fiyatının <b>%${productdiscount}</b> indirim ile yeni fiyatı <b><span style='font-family:Arial'>₺</span>${productdiscountprice}</b> `
 
@@ -305,7 +356,70 @@ window.onload = async () => {
         const image = e.getAttribute('data-image');
         document.getElementById('imageShowSrc').src = image;
         document.getElementById('loadingImageViewForEdit').display = 'none';
+        document.getElementById('EDIT_imageSaveBtn').setAttribute('data-productid', e.getAttribute('data-productid'))
     };
+
+    clickChangeImage = async (e) => {
+        try{
+            document.getElementById('EDIT_imageSaveBtn').innerHTML = `<div class="spinner-border text-white mr-2 align-self-center loader-sm" style="width:20px;height:20px"></div>`;
+            const file = document.getElementById('productFile');
+            if(file.files.length == 0){
+                Snackbar.show({text: 'Lütfen bir resim yükleyin.', duration:4000});
+                document.getElementById('EDIT_imageSaveBtn').innerHTML = 'Kaydet';
+            }else{
+                const reader = new FileReader();
+                reader.onload = async () => {
+                    const image = reader.result;
+
+                    const uploade = await uploadImage(image, e.getAttribute('data-productid'));
+                    await changeImageName(uploade.status.imagename, e.getAttribute('data-productid'));
+                    await readyProducts();
+                    document.getElementById('EDIT_imageSaveBtn').innerHTML = 'Kaydet';
+                    document.getElementById('clearImage').click();
+                    Snackbar.show({text:'Resim güncellendi.', duration: 4000})
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+        }catch(e){
+            console.log(e);
+        }
+    }
+
+    changeImageName = async(name, productid) => {
+        try{
+            const update = await fetch(`${API_URL}/api/product/edit/image`, {
+                method: 'PUT',
+                headers:{
+                    'Content-Type':'application/json',
+                    'x-api-key': API_KEY
+                },
+                body:JSON.stringify({
+                    imagename: `${PRODUCT_IMAGE_DIR}${name}`,
+                    product_id: productid
+                })
+            })
+            return update.json()
+        }catch(e){
+            return e;
+        }
+    }
+
+    uploadImage = async(image, productid) => {
+        try{
+            const upload = await fetch(`/api/product/upload`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    dataimage:image
+                })
+            });
+            return upload.json();
+        }catch(e){
+            return e;
+        }
+    }
 
     clickChangeStatusProduct = async (e) => {
         try{

@@ -148,12 +148,27 @@
 
                 <div class="modal-body">
 
-                    <div class="col-md-12 p-0" style="display: flex;justify-content: center;align-items: center">
+                    <div class="col-md-12 p-0" style="flex-direction:column;display: flex;justify-content: center;align-items: center">
+
 
                         <img id='imageShowSrc' />
 
+                        <div class="custom-file-container mt-5" data-upload-id="productImageNew">
+                            <label>Ürün Resmi Değiştir <a id="clearImage" href="javascript:void(0)" class="custom-file-container__image-clear" title="Resmi Sil">x</a></label>
+                            <label class="custom-file-container__custom-file" >
+                                <input type="file" name='productFile' id="productFile" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                <span class="custom-file-container__custom-file__custom-file-control"></span>
+                            </label>
+                            <div class="custom-file-container__image-preview" style="height:120px"></div>
+                        </div>
                     </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Vazgeç</button>
+                    <button type="button" id='EDIT_imageSaveBtn' onclick="clickChangeImage(this)" class="btn btn-primary">
+                        Kaydet</button>
                 </div>
 
             </div>
@@ -265,7 +280,154 @@
         </div>
     </div>
 
+    <div id="productDetail" class="modal animated fadeInDown" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="edit_categoryName">Ürün Detayları
+                        <div id='loadingImageViewForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
 
+                <div class="modal-body">
+
+                    <div class="col-md-12 p-0" >
+
+                        <ul class="list-group list-group-icons-meta">
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Ürün Adı</h6>
+                                        <p class="mg-b-0" id="DETAIL_productname"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action ">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Kategori</h6>
+                                        <p class="mg-b-0" id="DETAIL_productcategory"></p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item list-group-item-action ">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Marka</h6>
+                                        <p class="mg-b-0" id="DETAIL_productbrand"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Liste Fiyatı</h6>
+                                        <p class="mg-b-0" id="DETAIL_productlistprice"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">İndirimli Fiyat</h6>
+                                        <p class="mg-b-0" id="DETAIL_productdiscountprice"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">İndirim</h6>
+                                        <p class="mg-b-0" id="DETAIL_productdiscount"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Birim Gramaj Tipi</h6>
+                                        <p class="mg-b-0" id="DETAIL_productweightunittype"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Gramaj</h6>
+                                        <p class="mg-b-0" id="DETAIL_productunitweight"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Miktar</h6>
+                                        <p class="mg-b-0" id="DETAIL_productamount"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Durum</h6>
+                                        <p class="mg-b-0" id="DETAIL_productstatus"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <div class="d-flex mr-3">
+                                        <svg> ... </svg>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="tx-inverse">Eklenme Tarihi</h6>
+                                        <p class="mg-b-0" id="DETAIL_productdate"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -285,6 +447,7 @@
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/dt-global_style.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/select2/select2.min.css">
+    <link href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/css/components/custom-list-group.css" rel="stylesheet" type="text/css">
 
 @endsection
 
@@ -319,7 +482,7 @@
 
     <script>
         //First upload
-        //var firstUpload = new FileUploadWithPreview('productImageNew')
+        var firstUpload = new FileUploadWithPreview('productImageNew')
         $("#DISCOUNT_discount").TouchSpin({
             postfix: '%',
             buttondown_class: "btn btn-classic btn-primary downProductDiscount",
