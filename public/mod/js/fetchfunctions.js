@@ -81,3 +81,17 @@ fetchBrands = async () => {
         return e;
     }
 };
+
+getSelectedValues = (el) => {
+    var result = [];
+    var options = el && el.options;
+    var opt;
+
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+        opt = options[i];
+        if (opt.selected) {
+            result.push(opt.value || opt.text);
+        }
+    }
+    return result;
+}

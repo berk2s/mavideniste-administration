@@ -60,3 +60,12 @@ Route::group(['prefix' => '/urun', 'middleware' => ['auth']], function() {
     Route::get('/ekle', 'Backside\Pages\Product\NewProductController@get_view');
 
 });
+
+Route::group(['prefix' => '/etkilesim', 'middleware' => ['auth']], function() {
+
+    Route::get('/', 'Backside\Pages\Product\ListProductController@get_view');
+    Route::get('/bildirim-gonder', 'Backside\Pages\Interactions\SendNotification@get_view');
+    Route::get('/kullanici-gruplari', 'Backside\Pages\Interactions\UserGroups@get_view');
+
+});
+

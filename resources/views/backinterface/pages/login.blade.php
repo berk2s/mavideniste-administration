@@ -80,5 +80,9 @@
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 <script src="/mod/assets/js/authentication/form-2.js"></script>
 
+<script>
+
+</script>
+
 </body>
 </html>

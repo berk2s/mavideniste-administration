@@ -156,6 +156,60 @@
 
             <li class="menu">
                 <a
+                    href="#interactions"
+                    data-toggle="collapse"
+                    class="dropdown-toggle"
+
+                    {{ Request::path() == 'etkilesim' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'etkilesim' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+                    {{ Request::path() == 'etkilesim/bildirim-gonder' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'etkilesim/bildirim-gonder' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+
+                    {{ Request::path() == 'etkilesim/kullanici-gruplari' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'etkilesim/kullanici-gruplari' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+
+                >
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                        <span>Etkileşim</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <ul class="collapse submenu list-unstyled
+                    {{ Request::path() == 'etkilesim' ? 'show' : '' }}
+                    {{ Request::path() == 'etkilesim/bildirim-gonder' ? 'show' : '' }}
+                    {{ Request::path() == 'etkilesim/kullanici-gruplari' ? 'show' : '' }}
+                " id="interactions" data-parent="#accordionExample">
+                    <li
+                        {{ Request::path() == 'profilim' ? 'class=active' : '' }}
+                    >
+                        <a href="/profilim"> Geçmiş bildirimler </a>
+                    </li>
+                    <li
+                        {{ Request::path() == 'etkilesim/bildirim-gonder' ? 'class=active' : '' }}
+                    >
+                        <a href="/etkilesim/bildirim-gonder"> Bildirim gönder  </a>
+                    </li>
+
+                    <li
+                        {{ Request::path() == 'etkilesim/kullanici-gruplari' ? 'class=active' : '' }}
+                    >
+                        <a href="/etkilesim/kullanici-gruplari"> Kullanıcı grupları  </a>
+                    </li>
+
+
+
+                </ul>
+            </li>
+
+            <li class="menu">
+                <a
                     href="#settings"
                     data-toggle="collapse"
                     class="dropdown-toggle"
@@ -180,6 +234,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
+
                 <ul class="collapse submenu list-unstyled
                     {{ Request::path() == 'profilim' ? 'show' : '' }}
                     {{ Request::path() == 'tercihlerim' ? 'show' : '' }}

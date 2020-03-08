@@ -1,7 +1,7 @@
 $('#block-page').on('click', function() {
     $.blockUI({
         message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
-        fadeIn: 800, 
+        fadeIn: 800,
         timeout: 2000, //unblock after 2 seconds
         overlayCSS: {
             backgroundColor: '#1b2024',
@@ -22,7 +22,7 @@ $('#block-page').on('click', function() {
 
 $('#block-content').on('click', function() {
     var block = $('#reload');
-    $(block).block({ 
+    $(block).block({
         message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
         timeout: 2000, //unblock after 2 seconds
         overlayCSS: {
@@ -39,16 +39,16 @@ $('#block-content').on('click', function() {
     });
 });
 
-// Growl notification
+// Growl interactions
 $('#block-growl').on('click', function() {
     $.blockUI({
-        message: $('.blockui-growl-message'), 
-        fadeIn: 700, 
-        fadeOut: 700, 
+        message: $('.blockui-growl-message'),
+        fadeIn: 700,
+        fadeOut: 700,
         timeout: 3000, //unblock after 3 seconds
-        showOverlay: false, 
-        centerY: false, 
-        css: { 
+        showOverlay: false,
+        centerY: false,
+        css: {
             width: '250px',
             backgroundColor: 'transparent',
             top: '20px',
@@ -57,14 +57,14 @@ $('#block-growl').on('click', function() {
             border: 0,
             opacity: .95,
             zIndex: 1200,
-        } 
-    }); 
+        }
+    });
 });
 
 // Custom message position
 $('#message-position').on('click', function() {
     var block = $('#m-s-reload');
-    $(block).block({ 
+    $(block).block({
         message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
         timeout: 2000, //unblock after 2 seconds
         centerX: 0,
@@ -111,7 +111,7 @@ $('#auto-unblock').on('click', function() {
 $('#block-callback').on('click', function() {
     $.blockUI({
         message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
-        fadeIn: 800, 
+        fadeIn: 800,
         timeout: 2000, //unblock after 2 seconds
         overlayCSS: {
             backgroundColor: '#1b2024',
@@ -127,8 +127,8 @@ $('#block-callback').on('click', function() {
             backgroundColor: 'transparent'
         },
         onBlock: function() {
-            alert('Page is now blocked. FadeIn completed.'); 
-        } 
+            alert('Page is now blocked. FadeIn completed.');
+        }
     });
 });
 
@@ -184,7 +184,7 @@ $('#message-animation').on('click', function() {
 // Modal Blockui
 $('#modal-blockui').on('click', function() {
     var block = $('#modal-reload');
-    $(block).block({ 
+    $(block).block({
         message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
         showOverlay: false,
         timeout: 2000, //unblock after 2 seconds
@@ -201,7 +201,7 @@ $('#modal-blockui').on('click', function() {
 // Custom Overlay
 $('#overlay-custom').on('click', function() {
     var block = $('#custom-overlay');
-    $(block).block({ 
+    $(block).block({
         message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
         timeout: 2000, //unblock after 2 seconds
         overlayCSS: {
@@ -245,7 +245,7 @@ $('#custom-message').on('click', function() {
 $('#multiple-messages').on('click', function() {
     var message = $(this).next('.multiMessageBlockUi');
     var block = $(this).parent();
-    $(block).block({ 
+    $(block).block({
         message: message,
         overlayCSS: {
             backgroundColor: '#fff',
@@ -267,11 +267,11 @@ $('#multiple-messages').on('click', function() {
 
     window.setTimeout(function () {
        message.html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg> <span class="text-semibold display-block">Loading</span>')
-    }, 0); 
+    }, 0);
 
     window.setTimeout(function () {
        message.html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg> <span class="text-semibold display-block">Please wait</span>')
-    }, 2000); 
+    }, 2000);
 
     window.setTimeout(function () {
        message.addClass('bg-danger').html('<i class="flaticon-danger-3"></i> <span class="text-semibold display-block">Load error</span>')

@@ -109,7 +109,8 @@ window.onload = async () => {
                 `;
 
                 data.push([e.product_name, e.category.category_name, e.brand.brand_name, e.product_list_price, discountPriceText, discountText, unitWeightText, e.product_amonut, productStatus, process]);
-            })
+            });
+
             $('#html5-extension').DataTable( {
                 destroy:true,
                 data:data,
