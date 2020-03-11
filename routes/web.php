@@ -69,3 +69,15 @@ Route::group(['prefix' => '/etkilesim', 'middleware' => ['auth']], function() {
 
 });
 
+Route::group(['prefix' => '/kullanicilar', 'middleware' => ['auth']], function() {
+
+    Route::get('/', 'Backside\Pages\Users\UserList@get_view');
+
+});
+
+Route::group(['prefix' => '/siparisler', 'middleware' => ['auth']], function() {
+
+    Route::get('/', 'Backside\Pages\Orders\Live@get_view');
+
+});
+

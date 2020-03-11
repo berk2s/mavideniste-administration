@@ -1,45 +1,55 @@
 window.onload = () => {
 
-    const loadingSpin = document.getElementById('loadingSpin');
-
     fetchUsers = async () => {
         try{
-            const users = await fetch(`${API_URL}/api/p/user`, {
+            const result = await fetch(`${API_URL}/api/p/user`, {
                 method:'GET',
                 headers:{
                     'x-api-key': API_KEY
-                },
+                }
             });
-            return users.json();
+            return result.json()
         }catch(e){
             console.log(e)
         }
     }
 
-    putUserDatasToSelect = (data) => {
-        data.map(e => {
-            const {name_surname, _id, phone_number} = e;
-            if(e.token != null) {
-                const option = document.createElement('option');
-
-                option.value = e.token;
-                option.innerHTML = `${name_surname} (${phone_number})`;
-
-                document.getElementById('CREATE_users').append(option);
-            }
-        })
+    handleUserSendNotificationClick = (e) => {
+        const token = e.getAttribute('data-token');
+        document.getElementById('saveSendNotification').setAttribute('data-token', token);
+        document.getElementById('userNameText').innerHTML = e.getAttribute('data-username');
+        document.getElementById('aSendNotification').click()
     }
 
-    userGroups = async () => {
+    clickSendNotification = async (e) => {
         try{
-            const groups = await fetch(`${API_URL}/api/notification/topic`, {
-                method:'GET',
-                headers:{
-                    'x-api-key': API_KEY
-                },
-            });
+            document.getElementById('saveSendNotification').innerHTML = `<div class="spinner-border text-white mr-2 align-self-center loader-sm" style="width:20px;height:20px"></div>`;
+            const token = e.getAttribute('data-token');
+            const title = document.getElementById('Notification_Title').value;
+            const desc = document.getElementById('Notification_Desc').value;
 
-            return groups.json();
+            if(title.trim() == '' || desc.trim() == ''){
+                Snackbar.show({text: 'İlgili alanları doldurunuz', duration: 4000});
+                document.getElementById('saveSendNotification').innerHTML = 'Yolla';
+            }else {
+
+                const send = await fetch(`${API_URL}/api/notification/push/user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json',
+                        'x-api-key': API_KEY
+                    },
+                    body:JSON.stringify({
+                        token:token,
+                        title:title,
+                        body:desc
+                    })
+                });
+                document.getElementById('saveSendNotification').innerHTML = 'Yolla';
+                Snackbar.show({text: 'Bildirim gönderildi.', duration: 4000});
+
+            }
+
         }catch(e){
             console.log(e);
         }
@@ -47,25 +57,33 @@ window.onload = () => {
 
     setReadyPage = async () => {
         try{
+            document.getElementById('loadingSpin').style.display = 'block';
             const users = await fetchUsers();
-            const groups = await userGroups();
             const data = [];
-            groups.data.map(e => {
+            users.data.map(e => {
                 let process = `
                      <div class="dropdown custom-dropdown mx-auto">
                          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                          </a>
-
                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                              <a
                                 class="dropdown-item"
                                 data-toggle="modal"
                                 data-target="#fadeinModal"
                                 href="javascript:void(0);"
-
-
                                 >Düzenle</a>
+
+                                <a
+                                class="dropdown-item"
+                                data-toggle="modal"
+                                data-target="#fadeinModal"
+                                href="javascript:void(0);"
+                                data-username="${e.name_surname}"
+                                onclick="handleUserSendNotificationClick(this)"
+                                data-token="${e.token}"
+                                >Bildirim gönder</a>
+
                                <a
                                 class="dropdown-item"
                                 href="javascript:void(0);"
@@ -73,7 +91,7 @@ window.onload = () => {
                           </div>
                      </div>
                 `;
-                data.push([e.group_name, e.group_desc, e.group_branch, e.group_users.length, dateParse(e.group_date), process]);
+                data.push([e.name_surname, e.email_address, e.phone_number, e.which_platform, dateParse(e.createdAt), process]);
             });
             $('#html5-extension').DataTable( {
                 destroy:true,
@@ -103,70 +121,11 @@ window.onload = () => {
                 "lengthMenu": [7, 10, 20, 50],
                 "pageLength": 10
             } );
-            putUserDatasToSelect(users.data);
+            document.getElementById('loadingSpin').style.display = 'none';
         }catch(e){
             console.log(e);
         }
     };
 
-    postUserGroup = async (name, desc, users) => {
-        try{
-            const usergroup = await fetch(`${API_URL}/api/notification/topic`, {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                    'x-api-key': API_KEY
-                },
-                body:JSON.stringify({
-                    group_name: name,
-                    group_desc: desc,
-                    group_branch: BRANCH_ID,
-                    group_users: users,
-                })
-            });
-
-
-            return usergroup.json();
-        }catch(e){
-            console.log(e);
-        }
-    }
-
-    clickUserGroupsSave = async () => {
-        try{
-            $.blockUI({
-                message: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>',
-                fadeIn: 800,
-                overlayCSS: {
-                    backgroundColor: '#191e3a',
-                    opacity: 0.4,
-                    zIndex: 1200,
-                    cursor: 'wait'
-                },
-                css: {
-                    border: 0,
-                    color: '#fff',
-                    zIndex: 1201,
-                    padding: 0,
-                    backgroundColor: 'transparent'
-                },
-            });
-
-            const group_name  = document.getElementById('CREATE_groupname').value;
-            const group_desc  = document.getElementById('CREATE_groupdesc').value;
-            const group_users_ = document.getElementById('CREATE_users');
-            const group_users = getSelectedValues(group_users_);
-
-            const postit = await postUserGroup(group_name, group_desc, group_users);
-
-            console.log(postit);
-
-            $.unblockUI();
-        }catch(e){
-            console.log(e);
-        }
-    }
-
     setReadyPage()
-
 }

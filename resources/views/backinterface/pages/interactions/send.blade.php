@@ -41,12 +41,7 @@
                                                             <input type="text" class="form-control" id="notificationDescInput" placeholder="Bugüne özel 20% indirim">
                                                         </div>
 
-                                                        <div class="form-group mb-4">
-                                                            <label for="notificationDescInput">Kullanıcı Grubu</label>
-                                                            <select id='CREATE_users' class="form-control tagging">
-                                                                <option>Herkes</option>
-                                                            </select>
-                                                        </div>
+
                                                         <input type="submit" id="sendNotificationBtn" class="btn btn-primary" value="Bildirimi gönder">
                                                 </div>
 

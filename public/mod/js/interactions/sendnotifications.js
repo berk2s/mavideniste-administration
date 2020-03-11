@@ -15,7 +15,6 @@ window.onload = () => {
 
             const title = document.getElementById('notificationTitleInput').value;
             const desc = document.getElementById('notificationDescInput').value;
-
             if(title.trim() == '' || desc.trim() == ''){
                 Snackbar.show({text: 'İlgili alanları doldurunuz', duration: 4000});
                 return false;
@@ -45,12 +44,10 @@ window.onload = () => {
                         'x-api-key': API_KEY
                     },
                     body:JSON.stringify({
-                        tokens: [
-                            'f-VJ-IpLTnc:APA91bFv2xXQlolI_NzNmD7Qw1vm9q_0wbNx4y4lGJbUDSmKcL_LAmE_DRlz3SP5GgykZH9hkCbeoGnC2xKvSn4Wt64R3J2pX6wPvV-Wpo_24Z2tpMintOlxhpc496Lra-2dAP3LBN4W',
-                            'dakCxsXSRO6k2hfePosXPB:APA91bE7DMioq6NDvzGZ1GGj_RYxczX3rBeh_VGIUwCswg6M0PRtGFy9NJfiDQElKosIda56gi5wVx6YIdsSKtXZiVEj03x1VEXU8_jaXiz6uB5frZTie45nSEpwIulsqa8NIVPkj20s',
-                        ],
+                        group:TOPIC_EVERYBODY,
                         title:title,
-                        body:desc
+                        body:desc,
+
                     })
                 });
 
@@ -66,4 +63,5 @@ window.onload = () => {
         }
 
     });
+
 }
