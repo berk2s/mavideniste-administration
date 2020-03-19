@@ -188,6 +188,48 @@
 
             <li class="menu">
                 <a
+                    href="#coupon"
+                    data-toggle="collapse"
+                    class="dropdown-toggle"
+
+                    {{ Request::path() == 'kupon' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'kupon' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+                    {{ Request::path() == 'kupon/olustur' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'kupon/olustur' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+
+                >
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <span>Kupon</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <ul class="collapse submenu list-unstyled
+                    {{ Request::path() == 'kupon' ? 'show' : '' }}
+                    {{ Request::path() == 'kupon/olustur' ? 'show' : '' }}
+                " id="coupon" data-parent="#accordionExample">
+                    <li
+                        {{ Request::path() == 'kupon' ? 'class=active' : '' }}
+                    >
+                        <a href="/kupon"> Kuponlar </a>
+                    </li>
+                    <li
+                        {{ Request::path() == 'kupon/olustur' ? 'class=active' : '' }}
+                    >
+                        <a href="/kupon/olustur"> Kupon oluştur  </a>
+                    </li>
+
+                </ul>
+            </li>
+
+
+            <li class="menu">
+                <a
                     href="#interactions"
                     data-toggle="collapse"
                     class="dropdown-toggle"

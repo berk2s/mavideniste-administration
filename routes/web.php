@@ -81,3 +81,9 @@ Route::group(['prefix' => '/siparisler', 'middleware' => ['auth']], function() {
 
 });
 
+Route::group(['prefix' => '/kupon', 'middleware' => ['auth']], function() {
+
+    Route::get('/olustur', 'Backside\Pages\Coupon\NewCoupon@get_view');
+
+});
+
