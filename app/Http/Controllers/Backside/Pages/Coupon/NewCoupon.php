@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class NewCoupon extends Controller
 {
     public function get_view(){
-        return view('backinterface.pages.coupon.new');
+        $coupon_name = 'MAVIDEN'.mt_rand(1,1000000);
+        return view('backinterface.pages.coupon.new', compact('coupon_name'));
     }
 }

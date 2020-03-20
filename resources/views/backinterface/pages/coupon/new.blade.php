@@ -33,7 +33,7 @@
                                                         <div class="form-group row  mb-4">
                                                             <label for="couponTitle" class="col-sm-4 col-form-label col-form-label-sm">Kupon adı</label>
                                                             <div class="col-sm-8">
-                                                                <input type="email" class="form-control form-control-sm border-none" id="couponTitle">
+                                                                <input type="text" class="form-control form-control-sm border-none" id="couponTitle" value="{{$coupon_name}}">
                                                             </div>
                                                         </div>
 
@@ -49,25 +49,28 @@
                                                     <section>
 
                                                         <div class="form-group row  mb-4">
-                                                            <label for="couponTitle" class="col-sm-4 col-form-label col-form-label-sm">Geçerlilik süresi (saat)</label>
+                                                            <label for="couponTime" class="col-sm-4 col-form-label col-form-label-sm">
+                                                                Geçerlilik süresi (saat) <br />
+                                                                <small id="couponTimeDesc"></small>
+                                                            </label>
                                                             <div class="col-sm-8">
-                                                                <input type="email" class="form-control form-control-sm border-none"id="couponTitle">
+                                                                <input type="text" oninput="checkNumeric(this);calcTimeDesc(this)" class="form-control form-control-sm border-none" id="couponTime">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row  mb-4">
-                                                            <label for="couponTitle" class="col-sm-4 col-form-label col-form-label-sm">Kupon adeti <br /> <small>Sınırsız ise 0 giriniz</small></label>
+                                                            <label for="couponAmount" class="col-sm-4 col-form-label col-form-label-sm">Kupon adeti <br /> <small>Sınırsız ise 0 giriniz</small></label>
                                                             <div class="col-sm-8">
-                                                                <input type="email" class="form-control form-control-sm border-none"  id="couponTitle">
+                                                                <input type="text" oninput="checkNumeric(this)" class="form-control form-control-sm border-none"  id="couponAmount">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row  mb-4">
-                                                            <label for="couponTitle" class="col-sm-4 col-form-label col-form-label-sm">Durum <br /> <small>Kuponu yayınlandığı gibi aktifleştir</small></label>
+                                                            <label for="couponStatus" class="col-sm-4 col-form-label col-form-label-sm">Durum <br /> <small>Kuponu yayınlandığı gibi aktifleştir</small></label>
                                                             <div class="col-sm-8">
 
                                                                 <label class="switch s-info">
-                                                                    <input type="checkbox" checked>
+                                                                    <input type="checkbox" id="couponStatus" checked>
                                                                     <span class="slider round"></span>
                                                                 </label>
 
@@ -81,21 +84,23 @@
                                                     <section>
 
                                                         <div class="form-group row  mb-4">
-                                                            <label for="couponTitle" class="col-sm-4 col-form-label col-form-label-sm">Fiyatlandırma birimi</label>
+                                                            <label for="coupunPriceType" class="col-sm-4 col-form-label col-form-label-sm">Fiyatlandırma birimi</label>
                                                             <div class="col-sm-8">
                                                                 <select
                                                                     class="form-control"
+                                                                    id="coupunPriceType"
+                                                                    onchange="couponPriceTypeChange(this)"
                                                                 >
-                                                                    <option>Lira</option>
-                                                                    <option>Yüzde</option>
+                                                                    <option value="TL">Lira</option>
+                                                                    <option value="%">Yüzde</option>
                                                                 </select>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row  mb-4">
-                                                            <label for="couponTitle" class="col-sm-4 col-form-label col-form-label-sm">Fiyat Birimi (TL)</label>
+                                                            <label for="coupunPriceUnit" class="col-sm-4 col-form-label col-form-label-sm">Fiyat Birimi (<span id="couponPriceTypeDesc"></span>)</label>
                                                             <div class="col-sm-8">
-                                                                <input type="email" class="form-control form-control-sm border-none"  id="couponTitle">
+                                                                <input type="text" value="1" oninput="checkNumeric(this);handleMinPrice(this)" onblur="clearNumericTrimToZero(this)" class="form-control form-control-sm border-none"  id="coupunPriceUnit">
                                                             </div>
                                                         </div>
 
@@ -105,41 +110,38 @@
                                                     <section>
 
                                                         <ul class="list-group " style="list-style:none!important;">
-                                                            <li class="list-group-item" style="padding:10px">Minumum fiyat sınırlaması
-                                                                <span class="badge badge-primary" style="float:right"> <a href="" style="color:white">Ekle</a> </span>
+                                                            <li class="list-group-item" style="padding:10px" >Minumum fiyat sınırlaması
+
+                                                                <div id="minPriceArea" style="float:right">
+                                                                    <span class="badge badge-primary" style="float:right" data-toggle="modal" data-target="#minPriceModal"> <a style="color:white"  href="javascript:void(0)">Ekle</a> </span>
+                                                                </div>
+
                                                             </li>
-                                                            <li class="list-group-item" style="padding:10px">Sadece seçili ürünlerde/üründe
-                                                                <span class="badge badge-danger" style="float:right;margin-left:10px"> <a href="" style="color:white">Sil</a> </span>
-                                                                <span class="badge badge-info" style="float:right"> <a href="" style="color:white">Düzenle</a> </span>
+                                                            <li class="list-group-item" style="padding:10px" >Sadece seçili ürünlerde/üründe
+
+                                                                <div id="selectedItemsOnlyArea" style="float:right">
+                                                                    <span class="badge badge-primary" style="float:right" data-toggle="modal" data-target="#selectedOnlyItemsModal"> <a style="color:white" href="javascript:void(0)">Ekle</a> </span>
+                                                                </div>
 
                                                             </li>
                                                             <li class="list-group-item" style="padding:10px">Sadece seçili kategorilerde/kategoride
-                                                                <span class="badge badge-primary" style="float:right"> <a href="" style="color:white">Ekle</a> </span>
+
+                                                                <div id="selectedCategoriesOnlyArea" style="float:right">
+                                                                    <span class="badge badge-primary" data-toggle="modal" data-target="#selectedCategories" style="float:right"> <a href="javascript:void(0)" style="color:white">Ekle</a> </span>
+                                                                </div>
+
                                                             </li>
-                                                            <li class="list-group-item" style="padding:10px">Belirli ürün/ürünlerin olduğu sepette
-                                                                <span class="badge badge-primary" style="float:right"> <a href="" style="color:white">Ekle</a> </span>
+                                                            <li class="list-group-item" style="padding:10px" >Belirli ürün/ürünlerin olduğu sepette
+
+                                                                <div id="selectedItemsArea" style="float:right">
+                                                                    <span class="badge badge-primary" data-toggle="modal" data-target="#selectedItemsModal" style="float:right"> <a href="javascript:void(0)" style="color:white">Ekle</a> </span>
+                                                                </div>
+
                                                             </li>
                                                         </ul>
 
                                                     </section>
-                                                    <h3>Sonuç</h3>
-                                                    <section>
 
-                                                        <div class="infobox-2">
-
-                                                            <p class="info-text"><b>Kupon adı: </b> MVDN54</p>
-                                                            <p class="info-text"><b>Kupon bilgisi: </b> Şimdi yapacağınız alışverişlerde sepette yüzde elli indirim bizden</p>
-
-                                                            <p class="info-text"><b>Geçerlilik süresi: </b> 360 saat (Beklemede)</p>
-                                                            <p class="info-text"><b>Kupon adeti: </b> Sınırsız</p>
-                                                            <p class="info-text"><b>Durum: </b> Taslak</p>
-                                                            <p class="info-text"><b>Fiyatlandırma tipi: </b> Lira</p>
-                                                            <p class="info-text"><b>Fiyatlandırma birimi: </b> 10</p>
-                                                            <p class="info-text"><b>Minumum fiyat sınırlaması: </b> 50</p>
-                                                            <p class="info-text"><b>Sadece seçili ürünlerde: </b> Elma, armut, kalp, seks</p>
-                                                        </div>
-
-                                                    </section>
 
                                                 </div>
 
@@ -156,12 +158,126 @@
                 </div>
             </div>
 
-
+            <input type="hidden" id="couponMinPrice_" value="false">
+            <input type="hidden" id="couponSelectedOnlyItems_" value="false">
+            <input type="hidden" id="couponSelectedOnlyCategories_" value="false">
+            <input type="hidden" id="couponSelectedItems_" value="false">
 
         </div>
 
     </div>
 
+
+    <div class="modal fade" id="minPriceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Minumum fiyat sınırlaması
+                    <br />
+                        <small id="infoMinPrice"></small>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row  mb-4">
+                        <label for="couponMinPrice" class="col-sm-4 col-form-label col-form-label-sm">Min. Fiyat
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" oninput="checkNumeric(this)" class="form-control form-control-sm border-none"  id="couponMinPrice">
+                            <small>Kuponun geçerli olması için sepetin minumum fiyatı</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Kapat</button>
+                    <button type="button" class="btn btn-primary" onclick="couponMinPriceSave()" id="couponMinPriceSaveBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="selectedOnlyItemsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sadece seçili ürünlerde/üründe</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row  mb-4">
+                        <label for="couponSelectedOnlyItems" class="col-sm-12 col-form-label col-form-label-sm">Seçili ürünler
+                        </label>
+                        <div class="col-sm-12 mt-4">
+
+                            <select class="form-control tagging" multiple="multiple" id="couponSelectedOnlyItems">
+
+                            </select>
+
+                            <small>Kuponun geçerli olması için sepette <b>sadece</b> seçili bu ürünler bulunmalı</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> İptal</button>
+                    <button type="button" class="btn btn-primary" onclick="couponSelectedOnlyItemsSave()" id="couponSelectedOnlyItemsSaveBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="selectedItemsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Belirli ürün/ürünlerin olduğu sepette</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row  mb-4">
+                        <label for="couponSelectedItems" class="col-sm-12 col-form-label col-form-label-sm">Seçili ürünler
+                        </label>
+                        <div class="col-sm-12 mt-4">
+
+                            <select class="form-control tagging" multiple="multiple" id="couponSelectedItems">
+
+                            </select>
+
+                            <small>Kuponun geçerli olması için sepette seçili bu ürünler bulunmalı</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> İptal</button>
+                    <button type="button" class="btn btn-primary" onclick="couponSelectedItemsSave()" id="couponSelectedItemsSaveBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="selectedCategories" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sadece seçili kategorilerde/kategoride</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row  mb-4">
+                        <label for="couponSelectedCategories" class="col-sm-12 col-form-label col-form-label-sm">Seçili kategoriler
+                        </label>
+                        <div class="col-sm-12 mt-4">
+
+                            <select class="form-control tagging" multiple="multiple" id="couponSelectedCategories">
+
+                            </select>
+
+                            <small>Kuponun geçerli olması için sepette <b>sadece</b> bu kategorilerden ürün olmalı</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> İptal</button>
+                    <button type="button" class="btn btn-primary" onclick="couponSelectedCategoriesSave()" id="couponSelectedCategoriesSaveBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('header_addons')
@@ -213,19 +329,9 @@
     <script src="/mod/plugins/jquery-step/custom-jquery.steps.js"></script>
 
     <script>
-        $(".tagging").select2();
-        $("#couponWizard").steps({
-            headerTag: "h3",
-            bodyTag: "section",
-            transitionEffect: "slideLeft",
-            autoFocus: true,
-            cssClass: 'pill wizard',
-            onFinished: function(){
-                alert('test')
-            },
-            onStepChanging:function(d){
-                return true
-            }
+        $(".tagging").select2({
+          //  tags: true
         });
+
     </script>
 @endsection
