@@ -120,7 +120,7 @@ window.onload = () => {
                         coupon_time:coupon_time,
                         coupon_amount:coupon_amount,
                         coupon_status:coupon_status,
-                        coupun_price_type:unit,
+                        coupon_price_type:unit,
                         coupon_price_unit:coupon_price_unit,
                         limit_price:LIMIT_priceLimitation,
                         limit_selected_items_only:LIMIT_selectedOnlyItems,
@@ -131,13 +131,14 @@ window.onload = () => {
 
                 Snackbar.show({text:'Kupon oluşturuldu', duration:4000});
 
+
                 console.log(JSON.stringify({
                     coupon_name:coupon_name,
                     coupon_text:coupon_desc,
                     coupon_time:coupon_time,
                     coupon_amount:coupon_amount,
                     coupon_status:coupon_status,
-                    coupun_price_type:unit,
+                    coupon_price_type:unit,
                     coupon_price_unit:coupon_price_unit,
                     limit_price:LIMIT_priceLimitation,
                     limit_selected_items_only:LIMIT_selectedOnlyItems,
