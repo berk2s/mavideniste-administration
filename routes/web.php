@@ -36,6 +36,22 @@ Route::get('/sifre-degistir', 'Backside\Pages\Profile\ChangePasswordController@g
 Route::post('/sifre-degistir', 'Backside\Pages\Profile\ChangePasswordController@handle_post')
     ->middleware('auth');
 
+Route::get('/bildirim-ayarlari', 'Backside\Pages\Profile\NotificationSettings@get_view')
+    ->middleware('auth');
+
+Route::post('/bildirim-ayarlari/degistir/hazirlaniyor', 'Backside\Pages\Profile\NotificationSettings@handle_prepare')
+    ->name('handle_change_prepare_notification_settings')
+    ->middleware('auth');
+
+Route::post('/bildirim-ayarlari/degistir/yolda', 'Backside\Pages\Profile\NotificationSettings@handle_enroute')
+    ->name('handle_change_enroute_notification_settings')
+    ->middleware('auth');
+
+Route::post('/bildirim-ayarlari/degistir/basarili', 'Backside\Pages\Profile\NotificationSettings@handle_delivered')
+    ->name('handle_change_delivered_notification_settings')
+    ->middleware('auth');
+
+
 
 Route::get('/log', 'Backside\Pages\Profile\LogController@get_view')
     ->middleware('auth');

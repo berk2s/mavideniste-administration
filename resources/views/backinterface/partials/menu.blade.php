@@ -29,10 +29,10 @@
                         <a href="/anasayfa"> Genel Bilgiler </a>
                     </li>
                     <li>
-                        <a href="index2.html"> Satış Analizleri </a>
+                        <a href="index2.html"> Satış analizleri </a>
                     </li>
                     <li>
-                        <a href="index2.html"> APP Analizleri </a>
+                        <a href="index2.html"> APP analizleri </a>
                     </li>
                 </ul>
             </li>
@@ -68,10 +68,10 @@
                     <li
                         {{ Request::path() == 'kategori/ekle' ? 'class=active' : '' }}
                     >
-                        <a href="/kategori/ekle"> Kategori Ekle </a>
+                        <a href="/kategori/ekle"> Kategori ekle </a>
                     </li>
                     <li>
-                        <a href="/kategori/analiz"> Kategori Analizleri </a>
+                        <a href="/kategori/analiz"> Kategori analizleri </a>
                     </li>
                 </ul>
             </li>
@@ -107,10 +107,10 @@
                     <li
                         {{ Request::path() == 'marka/ekle' ? 'class=active' : '' }}
                     >
-                        <a href="/marka/ekle"> Marka Ekle </a>
+                        <a href="/marka/ekle"> Marka ekle </a>
                     </li>
                     <li>
-                        <a href="/marka/analiz"> Marka Analizleri </a>
+                        <a href="/marka/analiz"> Marka analizleri </a>
                     </li>
                 </ul>
             </li>
@@ -146,10 +146,10 @@
                     <li
                         {{ Request::path() == 'urun/ekle' ? 'class=active' : '' }}
                     >
-                        <a href="/urun/ekle"> Ürün Ekle </a>
+                        <a href="/urun/ekle"> Ürün ekle </a>
                     </li>
                     <li>
-                        <a href="/kategori/analiz"> Ürün Analizleri </a>
+                        <a href="/kategori/analiz"> Ürün analizleri </a>
                     </li>
                 </ul>
             </li>
@@ -318,6 +318,9 @@
                     {{ Request::path() == 'log' ? ' data-active=true' : '' }}
                     {{ Request::path() == 'log' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+                    {{ Request::path() == 'bildirim-ayarlari' ? ' data-active=true' : '' }}
+                    {{ Request::path() == 'bildirim-ayarlari' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                 >
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-center"><line x1="18" y1="10" x2="6" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="18" y1="18" x2="6" y2="18"></line></svg><span class="icon-name"> </span>
@@ -332,23 +335,30 @@
                     {{ Request::path() == 'profilim' ? 'show' : '' }}
                     {{ Request::path() == 'tercihlerim' ? 'show' : '' }}
                     {{ Request::path() == 'sifre-degistir' ? 'show' : '' }}
+                    {{ Request::path() == 'bildirim-ayarlari' ? 'show' : '' }}
                     {{ Request::path() == 'log' ? 'show' : '' }}
                 " id="settings" data-parent="#accordionExample">
                     <li
                         {{ Request::path() == 'profilim' ? 'class=active' : '' }}
                     >
-                        <a href="/profilim"> Profil Ayarları </a>
+                        <a href="/profilim"> Profil ayarları </a>
                     </li>
                     <li
                         {{ Request::path() == 'sube-bilgilerim' ? 'class=active' : '' }}
                     >
-                        <a href="/sube-bilgilerim"> Şube Bilgileri  </a>
+                        <a href="/sube-bilgilerim"> Şube bilgileri  </a>
                     </li>
 
                     <li
                         {{ Request::path() == 'tercihlerim' ? 'class=active' : '' }}
                     >
                         <a href="/tercihlerim"> Tercihler  </a>
+                    </li>
+
+                    <li
+                        {{ Request::path() == 'bildirim-ayarlari' ? 'class=active' : '' }}
+                    >
+                        <a href="/bildirim-ayarlari"> Bildirim ayarları  </a>
                     </li>
 
                     <li
@@ -360,13 +370,13 @@
                     <li
                         {{ Request::path() == 'sifre-degistir' ? 'class=active' : '' }}
                     >
-                        <a href="/sifre-degistir"> Şifre Değiştir  </a>
+                        <a href="/sifre-degistir"> Şifre değiştir  </a>
                     </li>
 
                     <li
                         {{ Request::path() == 'cıkıs' ? 'class=active' : '' }}
                     >
-                        <a href="/cikis"> Çıkış Yap  </a>
+                        <a href="/cikis"> Çıkış yap  </a>
                     </li>
 
                 </ul>

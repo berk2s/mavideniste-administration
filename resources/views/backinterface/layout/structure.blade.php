@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <meta name="branch_id" content="{{ auth()->user()->user_branch }}">
     <meta name="user_id" content="{{ auth()->user()->user_id }}">
+
+    <meta name="prepare_title" content="{{ \App\Models\PreparingNotificationSettings::find(1)->title }}">
+    <meta name="prepare_text" content="{{ \App\Models\PreparingNotificationSettings::find(1)->text }}">
+
+    <meta name="enroute_title" content="{{ \App\Models\EnrouteNotificationSettings::find(1)->title }}">
+    <meta name="enroute_text" content="{{ \App\Models\EnrouteNotificationSettings::find(1)->text }}">
+
+    <meta name="delivered_title" content="{{ \App\Models\DeliveredNotificationSettings::find(1)->title }}">
+    <meta name="delivered_text" content="{{ \App\Models\DeliveredNotificationSettings::find(1)->text }}">
+
+
     <title>@yield('title')</title>
 
     @include('backinterface.partials.header_addons')
