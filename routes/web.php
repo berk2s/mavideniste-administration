@@ -103,3 +103,15 @@ Route::group(['prefix' => '/kupon', 'middleware' => ['auth']], function() {
 
 });
 
+Route::group(['prefix' => '/bayi', 'middleware' => ['auth']], function() {
+
+    Route::get('/', 'Backside\Pages\Branch\ListBranch@get_view');
+    Route::get('/duraklat/{id}', 'Backside\Pages\Branch\ListBranch@pause_branch');
+    Route::get('/yayin/{id}', 'Backside\Pages\Branch\ListBranch@play_branch');
+    Route::get('/sil/{id}', 'Backside\Pages\Branch\ListBranch@delete_branch');
+
+    Route::get('/ekle', 'Backside\Pages\Branch\NewBranch@get_view');
+    Route::post('/ekle', 'Backside\Pages\Branch\NewBranch@handle_post');
+
+});
+

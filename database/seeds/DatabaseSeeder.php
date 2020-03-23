@@ -22,6 +22,27 @@ class DatabaseSeeder extends Seeder
             'password' => \Illuminate\Support\Facades\Hash::make('1234')
         ]);
 
+        DB::table('delivered_notification_settings')->insert([
+            [
+                'title' => 'Teslim edildi',
+                'text' => 'Siparis teslim edildi'
+            ]
+        ]);
+
+        DB::table('enroute_notification_settings')->insert([
+            [
+                'title' => 'Yolda',
+                'text' => 'Siarpisin yolda'
+            ]
+        ]);
+
+        DB::table('preparing_notification_settings')->insert([
+            [
+                'title' => 'Hazirlaniyor',
+                'text' => 'Siparis hazirlaniyor'
+            ]
+        ]);
+
         DB::table('user_roles')->insert([
             [
                 'role_name' => 'A',
