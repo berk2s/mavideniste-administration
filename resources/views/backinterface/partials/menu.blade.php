@@ -269,6 +269,7 @@
                 </ul>
             </li>
 
+
             <li class="menu">
                 <a
                     href="#users"
@@ -303,6 +304,61 @@
 
             <li class="menu">
                 <a
+                    href="#branch"
+                    data-toggle="collapse"
+                    class="dropdown-toggle"
+
+                >
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                        <span>Şube</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <ul class="collapse submenu list-unstyled
+
+                    " id="branch" data-parent="#accordionExample">
+
+
+                    <li
+                        {{ Request::path() == 'hizmet-bedeli' ? 'class=active' : '' }}
+                    >
+                        <a href="/hizmet-bedeli"> Şubeler  </a>
+                    </li>
+
+                    <li
+                        {{ Request::path() == 'hizmet-bedeli' ? 'class=active' : '' }}
+                    >
+                        <a href="/hizmet-bedeli"> Şube ekle  </a>
+                    </li>
+
+                    <li
+                        {{ Request::path() == 'hizmet-bedeli' ? 'class=active' : '' }}
+                    >
+                        <a href="/hizmet-bedeli"> Şube ayarları  </a>
+                    </li>
+
+                    <li
+                        {{ Request::path() == 'hizmet-bedeli' ? 'class=active' : '' }}
+                    >
+                        <a href="/hizmet-bedeli"> Şube operatörleri  </a>
+                    </li>
+
+                    <li
+                        {{ Request::path() == 'hizmet-bedeli' ? 'class=active' : '' }}
+                    >
+                        <a href="/hizmet-bedeli"> Operatör ekle  </a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            <li class="menu">
+                <a
                     href="#settings"
                     data-toggle="collapse"
                     class="dropdown-toggle"
@@ -321,6 +377,7 @@
                     {{ Request::path() == 'bildirim-ayarlari' ? ' data-active=true' : '' }}
                     {{ Request::path() == 'bildirim-ayarlari' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+
                 >
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-center"><line x1="18" y1="10" x2="6" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="18" y1="18" x2="6" y2="18"></line></svg><span class="icon-name"> </span>
@@ -335,18 +392,13 @@
                     {{ Request::path() == 'profilim' ? 'show' : '' }}
                     {{ Request::path() == 'tercihlerim' ? 'show' : '' }}
                     {{ Request::path() == 'sifre-degistir' ? 'show' : '' }}
-                    {{ Request::path() == 'bildirim-ayarlari' ? 'show' : '' }}
                     {{ Request::path() == 'log' ? 'show' : '' }}
+                {{ Request::path() == 'bildirim-ayarlari' ? 'show' : '' }}
                 " id="settings" data-parent="#accordionExample">
                     <li
                         {{ Request::path() == 'profilim' ? 'class=active' : '' }}
                     >
                         <a href="/profilim"> Profil ayarları </a>
-                    </li>
-                    <li
-                        {{ Request::path() == 'sube-bilgilerim' ? 'class=active' : '' }}
-                    >
-                        <a href="/sube-bilgilerim"> Şube bilgileri  </a>
                     </li>
 
                     <li
@@ -361,10 +413,11 @@
                         <a href="/bildirim-ayarlari"> Bildirim ayarları  </a>
                     </li>
 
+
                     <li
                         {{ Request::path() == 'log' ? 'class=active' : '' }}
                     >
-                        <a href="/log"> Log Geçmişi  </a>
+                        <a href="/log"> Log geçmişi  </a>
                     </li>
 
                     <li

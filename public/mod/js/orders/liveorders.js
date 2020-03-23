@@ -85,6 +85,7 @@ window.onload = async () => {
         const relevantDiv = document.createElement('div');
 
         relevantDiv.classList.add('todo-item');
+        relevantDiv.style.cursor = 'default';
 
         if(orderStatus == 0){
             countPending++;
