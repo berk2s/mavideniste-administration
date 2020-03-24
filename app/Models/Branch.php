@@ -16,4 +16,12 @@ class Branch extends Model
     public function get_county(){
         return $this->hasOne(County::class, 'id', 'branch_county');
     }
+
+    public function opereators(){
+        return $this->hasMany(
+            User::class,
+            'user_branch',
+            'branch_id'
+        )->where([['user_branch', auth()->user()->user_branch], ['is_ghost', false]]);
+    }
 }

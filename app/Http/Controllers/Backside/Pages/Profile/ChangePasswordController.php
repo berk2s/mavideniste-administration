@@ -29,7 +29,7 @@ class ChangePasswordController extends Controller
              * checks for security, if shorter than 6, returns false
              */
             if(strlen($new_password) < 6){
-                return redirect('/sifre-degistir?short=' . Str::random(5));
+                return redirect('/ayarlar/sifre-degistir?short=' . Str::random(5));
             }
 
             if (Auth::attempt(['email' => Auth::user()->email, 'password' => $current_password])) {
@@ -49,14 +49,14 @@ class ChangePasswordController extends Controller
                 $log->log_msg = $user->user_name. ' ('.$user_id.') kullanıcı şifresini değiştirdi!';
                 $log->save();
 
-                return redirect('/sifre-degistir?success=' . Str::random(5));
+                return redirect('/ayarlar/sifre-degistir?success=' . Str::random(5));
 
             } else {
-                return redirect('/sifre-degistir?error=' . Str::random(5));
+                return redirect('/ayarlar/sifre-degistir?error=' . Str::random(5));
             }
 
         }else{
-            return redirect('/sifre-degistir?match='.Str::random(5));
+            return redirect('/ayarlar/sifre-degistir?match='.Str::random(5));
         }
     }
 }

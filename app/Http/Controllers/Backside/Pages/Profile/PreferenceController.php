@@ -44,6 +44,6 @@ class PreferenceController extends Controller
         $log->save();
 
 
-        return redirect('/tercihlerim?success='.Str::random(5));
+        return redirect('/ayarlar/tercihlerim?success='.Str::random(5));
     }
 }

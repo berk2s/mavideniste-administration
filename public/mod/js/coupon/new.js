@@ -126,6 +126,7 @@ window.onload = () => {
                         limit_selected_items_only:LIMIT_selectedOnlyItems,
                         limit_selected_categories_only:LIMIT_selectedOnlyCategories,
                         limit_selected_items:LIMIT_selectedItems,
+                        branch_id: BRANCH_ID,
                     })
                 });
 

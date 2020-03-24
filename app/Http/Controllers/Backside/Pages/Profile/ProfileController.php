@@ -39,6 +39,6 @@ class ProfileController extends Controller
         $log->log_msg = $user->user_name. ' ('.$user_id.') kullanıcı bilgilerini değiştirdi!';
         $log->save();
 
-        return redirect('/profilim?token='.Str::random(10));
+        return redirect('/ayarlar/profilim?token='.Str::random(10));
     }
 }

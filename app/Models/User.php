@@ -39,6 +39,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function user_branch_info(){
+        return $this->hasOne(
+          Branch::class,
+          'branch_id',
+          'user_branch'
+        );;
+    }
+
+    public function user_authority(){
+        return $this->belongsToMany(
+            Pages::class,
+            'user_authority',
+            'user_id',
+            'page_id'
+        );
+    }
+
     public function role(){
         return $this->hasOne(UserRoles::class,'role_id','user_role');
     }

@@ -95,3 +95,23 @@ getSelectedValues = (el) => {
     }
     return result;
 }
+
+if(document.body.contains(document.getElementById('ghostMode_branch'))){
+    document.getElementById('ghostMode_branch').addEventListener('change', async (e) => {
+        const branch_id = e.target.value;
+
+        await fetch('/api/ghost', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                user_id: USER_ID,
+                branch_id:branch_id
+            })
+        });
+
+        window.location.href = '/anasayfa';
+
+    })
+}

@@ -22,7 +22,7 @@
     @include('backinterface.partials.header_addons')
     @yield('header_addons')
 </head>
-<body>
+<body id="test">
 <!-- BEGIN LOADER -->
     @include('backinterface.partials.loader')
 <!--  END LOADER -->

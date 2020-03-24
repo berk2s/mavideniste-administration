@@ -44,6 +44,16 @@
                                                             </div>
                                                         </div>
 
+
+                                                        <div class="form-group row  mb-4">
+                                                            <label for="couponDesc" class="col-sm-4 col-form-label col-form-label-sm">Bayi</label>
+                                                            <div class="col-sm-8">
+
+                                                                <input type="text" name="branch" value="{{$branch->branch_name}}" disabled class="form-control" />
+
+                                                            </div>
+                                                        </div>
+
                                                     </section>
                                                     <h3>Süre</h3>
                                                     <section>

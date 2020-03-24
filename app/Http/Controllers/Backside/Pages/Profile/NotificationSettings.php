@@ -39,7 +39,7 @@ class NotificationSettings extends Controller
         $update->title = $title;
         $update->text = $text;
         $update->save();
-        return redirect('/bildirim-ayarlari');
+        return redirect('/ayarlar/bildirim-ayarlari');
     }
 
     public function handle_enroute(Request $request){
@@ -50,7 +50,7 @@ class NotificationSettings extends Controller
         $update->title = $title;
         $update->text = $text;
         $update->save();
-        return redirect('/bildirim-ayarlari');
+        return redirect('/ayarlar/bildirim-ayarlari');
     }
 
     public function handle_delivered(Request $request){
@@ -61,7 +61,7 @@ class NotificationSettings extends Controller
         $update->title = $title;
         $update->text = $text;
         $update->save();
-        return redirect('/bildirim-ayarlari');
+        return redirect('/ayarlar/bildirim-ayarlari');
     }
 
 }

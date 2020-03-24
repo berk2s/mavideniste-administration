@@ -24,8 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('user_phone')->default(null)->nullable();
             $table->text('user_address')->default(null)->nullable();
 
-            $table->integer('user_role');
-            $table->tinyInteger('is_theme_dark');
+            $table->integer('user_role')->default(null)->nullable();
+            $table->tinyInteger('is_theme_dark')->default(0)->nullable();
+
+            $table->boolean('is_ghost')->default(false)->nullable();
 
             $table->bigInteger('user_branch');
 

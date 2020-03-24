@@ -24,3 +24,4 @@ Route::resource('/user/log', 'Backside\Api\Log\LogApi');
 Route::resource('/location/province', 'Backside\Api\Location\ProvinceApi');
 Route::resource('/location/county', 'Backside\Api\Location\CountyApi');
 Route::resource('/location/district', 'Backside\Api\Location\DistrictApi');
+Route::resource('/ghost', 'Backside\Api\Ghost\GhostApi');
