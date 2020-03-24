@@ -11,10 +11,12 @@ window.onload = async () => {
         console.log('baglandi!');
 
         socket.on('newOrder', (data) => {
-            document.getElementById('pendingOrdersTickler').style.display = 'block';
 
-            console.log('geldi');
-            addOrder(data.order);
+            if(data.order.branch_id == BRANCH_ID) {
+                document.getElementById('pendingOrdersTickler').style.display = 'block';
+                addOrder(data.order);
+            }
+
         });
 
     });
@@ -745,7 +747,7 @@ window.onload = async () => {
 
     getOpenOrders = async () => {
         try{
-            const orders = await fetch(`${API_URL}/api/orders/open`, {
+            const orders = await fetch(`${API_URL}/api/orders/open/${BRANCH_ID}`, {
                 method:'GET',
                 headers:{
                     'x-api-key': API_KEY

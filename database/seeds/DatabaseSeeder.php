@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
                 'user_phone' => '05396861440',
                 'user_address' => '1625.ada d blok daire 5',
                 'user_role' => 1,
-                'user_branch' => 1,
+                'user_branch' => 54,
                 'is_theme_dark' => true,
                 'email' => 'berk@mavideniste.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('123456'),
@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('branch')->insert([
            [
+               'branch_id' => 54,
                'branch_name' => 'Serdivan',
                'branch_committee' => 4,
                'branch_province' => 66,
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
                'status' => true
            ],
             [
+                'branch_id' => 2,
                 'branch_name' => 'Adapazari',
                 'branch_committee' => 4,
                 'branch_province' => 66,
