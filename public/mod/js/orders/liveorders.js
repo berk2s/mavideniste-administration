@@ -4,6 +4,7 @@ window.onload = async () => {
     let countPending=0;
     let countPrepare=0;
     let countEnroute=0;
+    let countCurrier=0;
 
     const socket = io.connect('http://localhost:3000');
 
@@ -14,17 +15,234 @@ window.onload = async () => {
 
             if(data.order.branch_id == BRANCH_ID) {
                 document.getElementById('pendingOrdersTickler').style.display = 'block';
-                addOrder(data.order);
+                if(data.order.is_bluecurrier)
+                    addBlueCurrier(data.order);
+                else
+                    addOrder(data.order);
             }
 
         });
 
     });
 
+    addBlueCurrier = async e => {
+
+        document.getElementById('loading').style.display = 'flex'
+
+        const orderArea = document.getElementById('ct');
+
+        const orderID = e._id;
+
+        const orderUniqueKey = e.visibility_id;
+
+        const orderStatus = e.order_status;
+
+        let orderUserName;
+        let orderUserID;
+        let phone;
+        if(Array.isArray(e.user)){
+            orderUserID = e.user[0]._id;
+            orderUserName = e.user[0].name_surname;
+            phone = e.user[0].phone_number;
+        }else{
+            orderUserID = e.user_id;
+            const userDetails = await getUserDetails(orderUserID);
+            console.log(userDetails)
+            orderUserName = userDetails.data.name_surname;
+            phone = userDetails.data.phone_number;
+        }
+
+
+        const orderAddressProvince = e.user_address.address_province.text;
+        const orderAddressCounty = e.user_address.address_county.text;
+        const orderAddressLTD = e.user_address.address_ltd;
+        const orderAddressLNG = e.user_address.address_lng;
+        const addressDesc = e.user_address.address+' ('+e.user_address.address_direction+')';
+
+        const orderDate = dateParse(e.order_date);
+
+        const relevantDiv = document.createElement('div');
+
+        relevantDiv.classList.add('todo-item');
+        relevantDiv.style.cursor = 'default';
+
+        countCurrier++;
+        relevantDiv.classList.add('bluecurrierorders');
+        document.getElementById('blueCurrierBadge').innerHTML = countCurrier;
+
+        relevantDiv.setAttribute('id', `ORDER_${orderID}`)
+
+        let orderStatusActions = '';
+        let orderStatusImage = '';
+
+
+            orderStatusActions = `<a
+                                class="dropdown-item danger"
+                                href="javascript:void(0);"
+                                onclick="setOrderToPrepare(this)"
+                                data-orderid="${orderID}"
+                                data-orderstatus="${orderStatus}"
+                                >
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+
+                                Görüşüldü
+                            </a>
+
+                            <a
+                                class="dropdown-item danger"
+                                href="javascript:void(0);"
+                                onclick="setOrderToPrepare(this)"
+                                data-orderid="${orderID}"
+                                data-orderstatus="${orderStatus}"
+                                >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                 Yolda
+                            </a>
+
+                            <a
+                                class="dropdown-item danger"
+                                href="javascript:void(0);"
+                                onclick="setOrderToPrepare(this)"
+                                data-orderid="${orderID}"
+                                data-orderstatus="${orderStatus}"
+                                >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                         Teslim edildi
+                            </a>
+                          `
+            orderStatusImage = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>`
+
+
+
+        relevantDiv.innerHTML = `
+            <div class="todo-item-inner">
+
+                <div class="todo-content">
+                    <h5 class="todo-heading">Mavi Kurye - #${orderUniqueKey} </h5>
+                    <p class="meta-date" style="margin:10px 0; display:flex; flex-direction: row; justify-content: space-between; align-items: center">
+
+                        <span style="width:max-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" style='margin-top:-3px' width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-watch"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
+                            <span>${orderDate}</span>
+                        </span>
+
+                        <span style="width:max-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" style='margin-top:-3px' width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <span><a href="">${orderUserName}</a></span>
+                        </span>
+
+                        <span style="width:max-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" style='margin-top:-3px' width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span>${orderAddressCounty}, ${orderAddressProvince}</span>
+                        </span>
+
+
+
+                    </p>
+
+                    ${phone}
+
+                </div>
+
+                <div class="priority-dropdown custom-dropdown-icon">
+                    <div class="dropdown p-dropdown">
+                        <a class="dropdown-toggle warning" href="#" role="button" id="ORDERDROPDOWN_${orderID}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            ${orderStatusImage}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="ORDERDROPDOWN_${orderID}" id="ORDERDROPDOWNACTIONS_${orderID}">
+                            ${orderStatusActions}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-dropdown custom-dropdown-icon">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink-19" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-19">
+
+                            <a class="dropdown-item" href="javascript:void(0);"
+
+                               onclick="printOrderPlug(this)"
+
+                               data-orderid="${orderID}"
+
+                               data-orderdate="${orderDate}"
+
+                               data-customername="${orderUserName}"
+                               data-customerid="${orderUserID}"
+
+
+                                data-location="${orderAddressCounty}, ${orderAddressProvince}"
+
+                                data-locationdesc="${addressDesc}"
+
+                            >Bilgi fişi</a>
+                            <a
+                            href="https://www.google.com/maps/dir/40.7474978,30.3565063/${orderAddressLTD},${orderAddressLNG}"
+                            class="dropdown-item"
+                            target="_blank"
+                            >Yol tarifi</a>
+                            <a
+                                class="dropdown-item"
+                                href="javascript:void(0);"
+
+                                onclick="updateOrderPrice(this)"
+
+                                 data-orderid="${orderID}"
+
+                               data-orderdate="${orderDate}"
+
+                               data-customername="${orderUserName}"
+                               data-customerid="${orderUserID}"
+
+
+                                data-location="${orderAddressCounty}, ${orderAddressProvince}"
+
+                                data-locationdesc="${addressDesc}"
+                                data-orderstatus="${orderStatus}"
+                                >Fiyatı güncelle</a>
+
+                            <a
+                                class="dropdown-item"
+                                 href="javascript:void(0);"
+                                 onclick="setOrderToCancel(this)"
+
+                                 data-orderid="${orderID}"
+
+                               data-orderdate="${orderDate}"
+
+                               data-customername="${orderUserName}"
+                               data-customerid="${orderUserID}"
+
+
+                                data-location="${orderAddressCounty}, ${orderAddressProvince}"
+
+                                data-locationdesc="${addressDesc}"
+                                data-orderstatus="${orderStatus}"
+                                 >İptal et</a>
+
+                        </div>
+                    </div>
+                </div>
+           </div>
+    `
+
+        orderArea.insertBefore(relevantDiv, orderArea.firstChild);
+
+        document.getElementById('loading').style.display = 'none';
+
+        document.getElementById('pendingorders').click()
+
+    }
+
     addOrder = async (e) => {
 
-        document.getElementById('loading').style.display = 'flex';
 
+        document.getElementById('loading').style.display = 'flex'
 
         const orderArea = document.getElementById('ct');
 
@@ -45,14 +263,13 @@ window.onload = async () => {
         }
 
 
-        const products = e.products;
-
-
         const orderAddressProvince = e.user_address.address_province.text;
         const orderAddressCounty = e.user_address.address_county.text;
         const orderAddressLTD = e.user_address.address_ltd;
         const orderAddressLNG = e.user_address.address_lng;
         const addressDesc = e.user_address.address+' ('+e.user_address.address_direction+')';
+
+        const products = e.products;
 
         const orderPaymentType = e.payload_type;
         const orderPaymentTypeText = orderPaymentType == 1 ? 'Nakit' : 'Kart';
@@ -738,7 +955,10 @@ window.onload = async () => {
             const orders = await getOpenOrders();
             console.log(orders)
             orders.data.map(e => {
-                addOrder(e);
+                if(e.is_bluecurrier)
+                    addBlueCurrier(e);
+                else
+                    addOrder(e);
             });
         }catch(e){
             console.log(e);
