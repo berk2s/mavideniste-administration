@@ -26,3 +26,5 @@ Route::resource('/location/county', 'Backside\Api\Location\CountyApi');
 Route::resource('/location/district', 'Backside\Api\Location\DistrictApi');
 Route::resource('/ghost', 'Backside\Api\Ghost\GhostApi');
 Route::resource('/branch', 'Backside\Api\Branch\BranchApi');
+
+Route::resource('/complaint', 'Backside\Api\Complaint\ComplaintApi');

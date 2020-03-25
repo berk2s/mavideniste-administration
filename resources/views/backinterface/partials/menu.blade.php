@@ -351,6 +351,9 @@
                         {{ Request::path() == 'bayim/operator/ekle' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'bayim/operator/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+                        {{ Request::path() == 'bayim/sikayetler' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'bayim/sikayetler' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
 
                     >
                         <div class="">
@@ -367,6 +370,7 @@
                         {{ Request::path() == 'bayim/ayarlar' ? 'show' : '' }}
                         {{ Request::path() == 'bayim/operatorler' ? 'show' : '' }}
                         {{ Request::path() == 'bayim/operator/ekle' ? 'show' : '' }}
+                        {{ Request::path() == 'bayim/sikayetler' ? 'show' : '' }}
                         " id="mybranch" data-parent="#accordionExample">
 
                         @if(array_search('bayim', $pageUrlArray) !== false)
@@ -401,6 +405,14 @@
                             {{ Request::path() == 'bayim/operator/ekle' ? 'class=active' : '' }}
                             >
                             <a href="/bayim/operator/ekle"> Operatör ekle </a>
+                          </li>
+                        @endif
+
+                        @if(array_search('bayim/sikayetler', $pageUrlArray) !== false)
+                          <li
+                            {{ Request::path() == 'bayim/sikayetler' ? 'class=active' : '' }}
+                            >
+                            <a href="/bayim/sikayetler"> Şikayetler </a>
                           </li>
                         @endif
 
@@ -481,6 +493,7 @@
                                 <a href="/bayi/operator/ekle"> Operatör ekle  </a>
                             </li>
                         @endif
+
 
 
                     </ul>
