@@ -48,8 +48,13 @@
                         class="dropdown-toggle"
                         {{ Request::path() == 'kategori' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'kategori' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                         {{ Request::path() == 'kategori/ekle' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'kategori/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+                        {{ Request::path() == 'kategori/tag/ekle' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'kategori/tag/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                     >
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -62,6 +67,7 @@
                     <ul class="collapse submenu list-unstyled
                         {{ Request::path() == 'kategori' ? 'show' : '' }}
                         {{ Request::path() == 'kategori/ekle' ? 'show' : '' }}
+                        {{ Request::path() == 'kategori/tag/ekle' ? 'show' : '' }}
 
                         " id="categories" data-parent="#accordionExample">
 
@@ -80,6 +86,14 @@
                                 <a href="/kategori/ekle"> Kategori ekle </a>
                             </li>
                         @endif
+
+                            @if(array_search('kategori/tag/ekle', $pageUrlArray) !== false)
+                                <li
+                                    {{ Request::path() == 'kategori/tag/ekle' ? 'class=active' : '' }}
+                                >
+                                    <a href="/kategori/tag/ekle"> Alt kategori ekle </a>
+                                </li>
+                            @endif
 
 
                     </ul>
@@ -188,7 +202,8 @@
 
                     >
                         <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                             <span>Siparişler</span>
                         </div>
                         <div>
@@ -208,6 +223,47 @@
                             </li>
                         @endif
 
+
+                    </ul>
+                </li>
+                        @endif
+
+                        @if(array_search(6, $pageTabArray) !== false)
+                            <li class="menu">
+                    <a
+                        href="#campaigns"
+                        data-toggle="collapse"
+                        class="dropdown-toggle"
+
+                        {{ Request::path() == 'kampanya' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'kampanya' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+                        {{ Request::path() == 'kampanya/olustur' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'kampanya/olustur' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+
+                    >
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            <span>Kampanya</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </a>
+
+                    <ul class="collapse submenu list-unstyled
+                        {{ Request::path() == 'kampanya' ? 'show' : '' }}
+                        {{ Request::path() == 'kampanya/olustur' ? 'show' : '' }}
+                    " id="campaigns" data-parent="#accordionExample">
+
+                        @if(array_search('kampanya/olustur', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'kampanya/olustur' ? 'class=active' : '' }}
+                            >
+                                <a href="/kampanya/olustur"> Kampanya oluştur  </a>
+                            </li>
+                         @endif
 
                     </ul>
                 </li>
@@ -438,6 +494,9 @@
                         {{ Request::path() == 'bayi/operator/ekle' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'bayi/operator/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+                        {{ Request::path() == 'bayi/sikayetler' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'bayi/sikayetler' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                         {{ Str::contains(Request::path(), 'bayi/duzenle') ? 'data-active=true' : '' }}
                         {{ Str::contains(Request::path(), 'bayi/duzenle') ? 'aria-expanded=true' : 'aria-expanded="false"' }}
 
@@ -456,6 +515,7 @@
                         {{ Request::path() == 'bayi/ekle' ? 'show' : '' }}
                         {{ Request::path() == 'bayi/operatorler' ? 'show' : '' }}
                         {{ Request::path() == 'bayi/operator/ekle' ? 'show' : '' }}
+                        {{ Request::path() == 'bayi/sikayetler' ? 'show' : '' }}
                         {{ Str::contains(Request::path(), 'bayi/') ? 'show' : '' }}
 
                         " id="branch" data-parent="#accordionExample">
@@ -491,6 +551,14 @@
                                 {{ Request::path() == 'bayi/operator/ekle' ? 'class=active' : '' }}
                             >
                                 <a href="/bayi/operator/ekle"> Operatör ekle  </a>
+                            </li>
+                        @endif
+
+                        @if(array_search('bayi/sikayetler', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'bayi/sikayetler' ? 'class=active' : '' }}
+                            >
+                                <a href="/bayi/sikayetler"> Şikayetler  </a>
                             </li>
                         @endif
 

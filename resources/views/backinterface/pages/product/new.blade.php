@@ -38,14 +38,22 @@
                                                     </div>
 
                                                     <div class="form-row ">
-                                                        <div class="form-group  col-md-6">
+
+                                                        <div class="form-group  col-md-4">
                                                             <label for="productCategory">Kategori</label>
-                                                            <select id='productCategory' class="form-control  basic">
+                                                            <select id='productCategory' onchange="handleCategoryChange(this)" class="form-control  basic">
 
                                                             </select>
                                                         </div>
 
-                                                        <div class="form-group  col-md-6">
+                                                        <div class="form-group  col-md-4">
+                                                            <label for="productSubCategory">Alt kategori</label>
+                                                            <select id='productSubCategory' class="form-control  basic">
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group  col-md-4">
                                                             <label for="productBrand">Marka</label>
                                                             <select id='productBrand' class="form-control  basic">
 

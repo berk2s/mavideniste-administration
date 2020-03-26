@@ -1,5 +1,43 @@
 window.onload = async () => {
 
+    handleCategoryChange = async (e) => {
+        await refreshCat()
+    }
+
+    refreshCat = async (first=null)  => {
+
+        let category_id;
+
+        if(first == null)
+            category_id = document.getElementById('productCategory').value;
+        else
+            category_id = first;
+
+        const subCategories = await fetchSubCategory(category_id)
+        document.getElementById('productSubCategory').innerHTML = ''
+        subCategories.data.map(e => {
+            const option = document.createElement('option');
+            option.value = e._id;
+            option.innerHTML = e.sub_category_name
+            document.getElementById('productSubCategory').append(option)
+        })
+    }
+
+    fetchSubCategory = async (category_id) => {
+        try{
+            const x = await fetch(`${API_URL}/api/subcategory/${category_id}`, {
+                method:'GET',
+                headers:{
+                    'x-api-key': API_KEY,
+                }
+            });
+            return x.json()
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+
     readyComponents = async () => {
         try{
             document.getElementById('loadingSpin').style.display = 'block';
@@ -25,11 +63,21 @@ window.onload = async () => {
         try{
             const category = await fetchBranchCategories();
             const categorySelect = document.getElementById('productCategory');
-            category.data.forEach(e => {
+            let i=0;
+            category.data.forEach(async (e) => {
                 const option = document.createElement('option');
+                i++;
+                if(i == 1){
+                    await refreshCat(e._id);
+                    option.selected = true
+                }
+
+                console.log(e.category_name, i)
+
                 option.value = e._id;
                 option.innerHTML = e.category_name;
                 categorySelect.append(option);
+
             });
             return category;
         }catch(e){
@@ -69,7 +117,7 @@ window.onload = async () => {
           const product_unit_weight = document.getElementById('productUnitWeight').value;
           const product_amount = document.getElementById('productAmount').value;
           const image = document.getElementById('productFile');
-
+          const subCategory = document.getElementById('productSubCategory').value;
           if(
               product_name.trim() == ''
               ||
@@ -90,7 +138,7 @@ window.onload = async () => {
               reader.onload = async () => {
                   const image = reader.result;
                   const imageData = await uploadProductImage(image);
-                  const productData = await addProduct(product_name, product_category, product_brand, product_list_price, product_discount_price, product_discount, product_unit_type, product_unit_weight, product_amount, PRODUCT_IMAGE_DIR+imageData.status.imagename);
+                  const productData = await addProduct(product_name, product_category, subCategory, product_brand, product_list_price, product_discount_price, product_discount, product_unit_type, product_unit_weight, product_amount, PRODUCT_IMAGE_DIR+imageData.status.imagename);
                   await readyComponents();
                   Snackbar.show({text:'Ürün başarılı şekilde eklendi.', duration:4000})
                   document.getElementById('btnAddProduct').innerHTML = 'Kaydet';
@@ -105,7 +153,7 @@ window.onload = async () => {
       }
     };
 
-    addProduct = async (product_name, product_category, product_brand, product_list_price, product_discount_price, product_discount, product_unit_type, product_unit_weight, product_amonut, image) => {
+    addProduct = async (product_name, product_category, subCategory, product_brand, product_list_price, product_discount_price, product_discount, product_unit_type, product_unit_weight, product_amonut, image) => {
         try{
             let product_discount_price_ = null;
             let product_discount_ = null;
@@ -126,6 +174,7 @@ window.onload = async () => {
                     branch_id: BRANCH_ID,
                     product_name: product_name,
                     category_id: product_category,
+                    sub_category_id:subCategory,
                     brand_id: product_brand,
                     product_list_price: parseFloat(product_list_price),
                     product_discount_price: product_discount_price_,

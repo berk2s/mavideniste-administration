@@ -30,6 +30,7 @@
                                                         <tr>
                                                             <th>MÜŞTERİ</th>
                                                             <th>TELEFON</th>
+                                                            <th>ŞUBE</th>
                                                             <th>SİPARİŞ</th>
                                                             <th>ŞİKAYET TARİHİ</th>
                                                             <th class="text-center">İŞLEM</th>
@@ -41,6 +42,7 @@
                                                             <tr>
                                                                 <td>{{$complaint->user_name}}</td>
                                                                 <td>{{$complaint->user_phone}}</td>
+                                                                <td>{{$complaint->branch->branch_name}}</td>
                                                                 <td>{{$complaint->order}}</td>
                                                                 <td>{{$complaint->created_at->diffForHumans()}}</td>
 
@@ -116,29 +118,6 @@
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/js/components/notification/custom-snackbar.js"></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
 
-    @php
-
-        if(!empty($_GET['success'])){
-            echo "<script>
-                Snackbar.show({text: 'Tercih değiştirildi! ', duration: 50000});
-            </script>";
-        }
 
 
-    @endphp
-
-    <script>
-        fetch('http://127.0.0.1:3000/api/category',{
-            headers:{
-                'x-api-key':'56595339-71a8-46e6-a890-700620d6a9ae'
-            }
-        })
-            .then((res) => {
-                return res.json();
-            })
-            .then((res2) => {
-                console.log(res2)
-            })
-            .catch((err) => console.log(err))
-    </script>
 @endsection

@@ -49,7 +49,10 @@ Route::group(['prefix' => '/ayarlar', 'middleware' => ['auth', 'authority']], fu
 
 Route::group(['prefix' => '/kategori', 'middleware' => ['auth', 'authority']], function() {
     Route::get('/', 'Backside\Pages\Category\ListCategory@get_view');
+
     Route::get('/ekle', 'Backside\Pages\Category\NewCategory@get_view');
+    Route::get('/tag/ekle', 'Backside\Pages\Category\NewSubCategory@get_view');
+
     Route::post('/ekle', 'Backside\Pages\Category\NewCategory@handle_post');
 });
 
@@ -108,6 +111,8 @@ Route::group(['prefix' => '/bayi', 'middleware' => ['auth', 'authority']], funct
     Route::get('/operator/ekle', 'Backside\Pages\Branch\NewBranchOperator@get_view');
     Route::post('/operator/ekle', 'Backside\Pages\Branch\NewBranchOperator@handle_post');
 
+    Route::get('/sikayetler', 'Backside\Pages\Branch\Complaints@get_view');
+
    // Route::get('/hizmet-bedeli', '');
 
 });
@@ -123,5 +128,14 @@ Route::group(['prefix' => '/bayim', 'middleware' => ['auth', 'authority']], func
 
     Route::get('/operator/ekle', 'Backside\Pages\MyBranch\NewBranchOperator@get_view');
     Route::post('/operator/ekle', 'Backside\Pages\MyBranch\NewBranchOperator@handle_post');
+
+    Route::get('/sikayetler', 'Backside\Pages\MyBranch\Complaints@get_view');
+
+});
+
+Route::group(['prefix' => '/kampanya', 'middleware' => ['auth', 'authority']], function() {
+
+    Route::get('/olustur', 'Backside\Pages\Campaign\NewCampaign@get_view');
+
 });
 

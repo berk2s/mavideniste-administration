@@ -13,6 +13,13 @@
 <script src="/mod/js/constants.js"></script>
 <script src="/mod/js/fetchfunctions.js"></script>
 <script src="/mod/js/socket.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+
+
+
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
 

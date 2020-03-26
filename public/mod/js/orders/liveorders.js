@@ -14,11 +14,15 @@ window.onload = async () => {
         socket.on('newOrder', (data) => {
 
             if(data.order.branch_id == BRANCH_ID) {
-                document.getElementById('pendingOrdersTickler').style.display = 'block';
-                if(data.order.is_bluecurrier)
+
+                if(data.order.is_bluecurrier) {
                     addBlueCurrier(data.order);
-                else
+                    document.getElementById('blueCurrierTickler').style.display = 'block';
+
+                }else {
                     addOrder(data.order);
+                    document.getElementById('pendingOrdersTickler').style.display = 'block';
+                }
             }
 
         });
@@ -53,6 +57,15 @@ window.onload = async () => {
         }
 
 
+        let statukotext = ''
+
+        if(orderStatus == 0)
+            statukotext = '(Görüşülmedi)';
+        else if(orderStatus == 1)
+            statukotext = '(Hazırlanıyor)';
+        else if(orderStatus == 2)
+            statukotext = '(Yolda)';
+
         const orderAddressProvince = e.user_address.address_province.text;
         const orderAddressCounty = e.user_address.address_county.text;
         const orderAddressLTD = e.user_address.address_ltd;
@@ -60,6 +73,8 @@ window.onload = async () => {
         const addressDesc = e.user_address.address+' ('+e.user_address.address_direction+')';
 
         const orderDate = dateParse(e.order_date);
+
+        const orderPrice = e.price == null ? 0 : e.price
 
         const relevantDiv = document.createElement('div');
 
@@ -82,8 +97,10 @@ window.onload = async () => {
                                 onclick="setOrderToPrepare(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="true"
                                 >
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
 
                                 Görüşüldü
                             </a>
@@ -91,34 +108,35 @@ window.onload = async () => {
                             <a
                                 class="dropdown-item danger"
                                 href="javascript:void(0);"
-                                onclick="setOrderToPrepare(this)"
+                                onclick="setOrderToEnRoute(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="true"
                                 >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                                  Yolda
                             </a>
 
                             <a
                                 class="dropdown-item danger"
                                 href="javascript:void(0);"
-                                onclick="setOrderToPrepare(this)"
+                                onclick="setOrderToSuccessfull(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="true"
                                 >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                                          Teslim edildi
                             </a>
                           `
-            orderStatusImage = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>`
-
-
+            orderStatusImage = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>`
 
         relevantDiv.innerHTML = `
             <div class="todo-item-inner">
 
                 <div class="todo-content">
-                    <h5 class="todo-heading">Mavi Kurye - #${orderUniqueKey} </h5>
+                    <h5 class="todo-heading">Mavi Kurye - #${orderUniqueKey} <small id="blueCurrierStatusText${orderID}">${statukotext}</small> </h5>
                     <p class="meta-date" style="margin:10px 0; display:flex; flex-direction: row; justify-content: space-between; align-items: center">
 
                         <span style="width:max-content">
@@ -136,11 +154,16 @@ window.onload = async () => {
                             <span>${orderAddressCounty}, ${orderAddressProvince}</span>
                         </span>
 
+                        <span style="width:max-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" style='margin-top:-3px' width="16" height="16"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trello"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><rect x="7" y="7" width="3" height="9"></rect><rect x="14" y="7" width="3" height="5"></rect></svg>
+                             <span id="PRICE_${orderID}">${orderPrice} TL</span>
+                        </span>
 
 
                     </p>
 
-                    ${phone}
+                    Telefon numarası: <b>${phone}</b> <br />
+                    <b>${addressDesc}</b>
 
                 </div>
 
@@ -201,9 +224,12 @@ window.onload = async () => {
 
 
                                 data-location="${orderAddressCounty}, ${orderAddressProvince}"
-
                                 data-locationdesc="${addressDesc}"
                                 data-orderstatus="${orderStatus}"
+
+                                data-ordername="${orderUniqueKey}"
+
+                                data-totalprice="${orderPrice}"
                                 >Fiyatı güncelle</a>
 
                             <a
@@ -223,6 +249,7 @@ window.onload = async () => {
 
                                 data-locationdesc="${addressDesc}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="true"
                                  >İptal et</a>
 
                         </div>
@@ -333,6 +360,7 @@ window.onload = async () => {
                                 onclick="setOrderToPrepare(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="false"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
                                 Hazırlanan
@@ -347,6 +375,7 @@ window.onload = async () => {
                                 onclick="setOrderToEnRoute(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="false"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                 Yolda
@@ -362,6 +391,7 @@ window.onload = async () => {
                                 onclick="setOrderToSuccessfull(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="false"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
                                 Teslim edildi
@@ -504,6 +534,7 @@ window.onload = async () => {
                                 data-ordername="${orderUniqueKey}"
                                 data-orderstatus="${orderStatus}"
                                 data-totalprice="${orderPrice}"
+                                data-bluecurrier="false"
                                  >İptal et</a>
 
                         </div>
@@ -532,7 +563,13 @@ window.onload = async () => {
                 const elem = document.getElementById(`ORDER_${orderid}`);
                 elem.parentNode.removeChild(elem);
                 Snackbar.show({text:'Siparişi iptal ettiniz', duration:3000})
-                calcStatusCount(orderstatus, -1)
+                if(e.getAttribute('data-bluecurrier') == 'false') {
+
+                    calcStatusCount(orderstatus, -1)
+
+                }else{
+                    calcStatusCount(orderstatus, 4)
+                }
 
                 //ORDERDROPDOWN_${orderID}
                 //ORDERDROPDOWNACTIONS_${orderID}
@@ -543,6 +580,9 @@ window.onload = async () => {
     setOrderToPrepare = async e => {
 
         if(confirm('Sipariş durumunu hazırlanan yapmak istiyor musunuz?')){
+
+
+
             const orderid = e.getAttribute('data-orderid');
             const orderstatus = e.getAttribute('data-orderstatus');
 
@@ -552,12 +592,22 @@ window.onload = async () => {
 
             if(updateRequest.state.code == 'PO_1') {
                 const elem = document.getElementById(`ORDER_${orderid}`);
-                elem.classList.remove('pendingorders');
-                elem.classList.add('prepareorders');
-                document.getElementById('pendingorders').click();
-                Snackbar.show({text:'Ürün hazırlanıyor', duration:3000})
-                calcStatusCount(orderstatus, 1)
-                changeDropdown(orderid, 1);
+
+
+                if(e.getAttribute('data-bluecurrier') == 'false'){
+                    calcStatusCount(orderstatus, 1)
+                    changeDropdown(orderid, 1);
+                    elem.classList.remove('pendingorders');
+                    elem.classList.add('prepareorders');
+                    document.getElementById('pendingorders').click();
+                    Snackbar.show({text:'Ürün hazırlanıyor', duration:3000})
+                    document.getElementById('pendingOrdersTickler').style.display = 'none';
+                }else{
+                    document.getElementById('blueCurrierTickler').style.display = 'none';
+
+                    document.getElementById(`blueCurrierStatusText${orderid}`).innerHTML = '(Hazırlanıyor)'
+
+                }
 
                 //ORDERDROPDOWN_${orderID}
                 //ORDERDROPDOWNACTIONS_${orderID}
@@ -577,12 +627,21 @@ window.onload = async () => {
 
             if(updateRequest.state.code == 'PO_1') {
                 const elem = document.getElementById(`ORDER_${orderid}`);
-                elem.classList.remove('prepareorders');
-                elem.classList.add('enrouteorders');
-                document.getElementById('prepareorders').click();
-                Snackbar.show({text:'Ürün yola çıktı', duration:3000})
-                calcStatusCount(orderstatus, 2)
-                changeDropdown(orderid, 2);
+
+
+                if(e.getAttribute('data-bluecurrier') == 'false'){
+                    calcStatusCount(orderstatus, 2)
+                    changeDropdown(orderid, 2);
+                    elem.classList.remove('prepareorders');
+                    elem.classList.add('enrouteorders');
+                    document.getElementById('prepareorders').click();
+                    Snackbar.show({text:'Ürün yola çıktı', duration:3000})
+                }else{
+                    document.getElementById('blueCurrierTickler').style.display = 'none';
+
+                    document.getElementById(`blueCurrierStatusText${orderid}`).innerHTML = '(Yolda)'
+
+                }
 
                 //ORDERDROPDOWN_${orderID}
                 //ORDERDROPDOWNACTIONS_${orderID}
@@ -604,8 +663,15 @@ window.onload = async () => {
                 const elem = document.getElementById(`ORDER_${orderid}`);
                 elem.parentNode.removeChild(elem);
                 Snackbar.show({text:'Tebrikler! Sipariş başarı ile teslim edildi', duration:3000})
-                calcStatusCount(orderstatus, 3)
-                changeDropdown(orderid, 3);
+
+                if(e.getAttribute('data-bluecurrier') == 'true'){
+                    calcStatusCount(orderstatus, 4)
+                    changeDropdown(orderid, 4);
+                }else{
+                    calcStatusCount(orderstatus, 3)
+                    changeDropdown(orderid, 3);
+                }
+
 
                 //ORDERDROPDOWN_${orderID}
                 //ORDERDROPDOWNACTIONS_${orderID}
@@ -670,11 +736,11 @@ window.onload = async () => {
 
     calcStatusCount = (decrement, increment) => {
 
-        if(decrement == 0)
+        if(decrement == 0 && increment != 4)
             countPending--;
-        else if(decrement == 1)
+        else if(decrement == 1 && increment != 4)
             countPrepare--;
-        else if(decrement == 2)
+        else if(decrement == 2 && increment != 4)
             countEnroute--;
 
         if(increment == 0)
@@ -684,9 +750,13 @@ window.onload = async () => {
         else if(increment == 2)
             countEnroute++;
 
+        if(increment == 4)
+            countCurrier--;
+
         document.getElementById('pendingBadge').innerHTML = countPending;
         document.getElementById('prepareBadge').innerHTML = countPrepare;
         document.getElementById('enrouteBadge').innerHTML = countEnroute;
+        document.getElementById('blueCurrierBadge').innerHTML = countCurrier;
     }
 
     orderPrepare = async (id) => {

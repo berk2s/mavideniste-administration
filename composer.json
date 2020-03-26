@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "google/apiclient": "^2.0",
         "htmlmin/htmlmin": "^6.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",

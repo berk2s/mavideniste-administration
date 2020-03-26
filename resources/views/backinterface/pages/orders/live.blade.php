@@ -33,7 +33,7 @@
                                                 Bekleyen
                                                 <div class="spinner-grow text-info align-self-center loader-sm" style="width:20px;height:20px;float:right;display:none" id="pendingOrdersTickler" ></div>
 
-                                                <span class="badge" id="pendingBadge"></span>
+                                                <span class="badge" id="pendingBadge" style=" font-size: 10px; display: flex;justify-content: center;align-items: center;top: 20px;"></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -43,22 +43,24 @@
                                                 data-toggle="pill" href="#prepareorders" role="tab" aria-selected="false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
                                                 Hazırlanan
-                                                <span class="badge" id="prepareBadge"></span>
+                                                <span class="badge" id="prepareBadge" style=" font-size: 10px; display: flex;justify-content: center;align-items: center;top: 20px;"></span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link list-actions" id="enrouteorders" data-toggle="pill" href="#enrouteorders" role="tab" aria-selected="false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                                 Yolda
-                                                <span class="badge" id="enrouteBadge"></span>
+                                                <span class="badge" id="enrouteBadge" style=" font-size: 10px; display: flex;justify-content: center;align-items: center;top: 20px;"></span>
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
                                             <a class="nav-link list-actions" id="bluecurrierorders" data-toggle="pill" href="#enrouteorders" role="tab" aria-selected="false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                                                <div class="spinner-grow text-info align-self-center loader-sm" style="width:20px;height:20px;float:right;display:none" id="blueCurrierTickler" ></div>
+
                                                 Mavi Kurye
-                                                <span class="badge" id="blueCurrierBadge"></span>
+                                                <span class="badge" id="blueCurrierBadge" style=" font-size: 10px; display: flex;justify-content: center;align-items: center;top: 20px;"></span>
                                             </a>
                                         </li>
 
