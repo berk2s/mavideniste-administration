@@ -761,7 +761,7 @@ window.onload = async () => {
 
     orderPrepare = async (id) => {
         try{
-            const request = await fetch(`${API_URL}/api/orders/status/prepare`,{
+            const request = await fetch(`${API_URL}/api/p/orders/status/prepare`,{
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json',
@@ -781,7 +781,7 @@ window.onload = async () => {
 
     orderSuccessfull = async (id) => {
         try{
-            const request = await fetch(`${API_URL}/api/orders/status/successfull`,{
+            const request = await fetch(`${API_URL}/api/p/orders/status/successfull`,{
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json',
@@ -801,7 +801,7 @@ window.onload = async () => {
 
     orderCancel = async (id) => {
         try{
-            const request = await fetch(`${API_URL}/api/orders/status/cancel`,{
+            const request = await fetch(`${API_URL}/api/p/orders/status/cancel`,{
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json',
@@ -819,7 +819,7 @@ window.onload = async () => {
 
     orderEnroute = async (id) => {
         try{
-            const request = await fetch(`${API_URL}/api/orders/status/enroute`,{
+            const request = await fetch(`${API_URL}/api/p/orders/status/enroute`,{
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json',
@@ -862,7 +862,7 @@ window.onload = async () => {
                 return false;
             }
 
-            const updatePrice = await fetch(`${API_URL}/api/orders/price`, {
+            const updatePrice = await fetch(`${API_URL}/api/p/orders/price`, {
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json',
@@ -1008,7 +1008,7 @@ window.onload = async () => {
 
     getProducts = async (order_id) => {
         try{
-            const userDetails = await fetch(`${API_URL}/api/orders/product/${order_id}`, {
+            const userDetails = await fetch(`${API_URL}/api/p/orders/product/${order_id}`, {
                 method:'GET',
                 headers:{
                     'x-api-key': API_KEY
@@ -1037,7 +1037,7 @@ window.onload = async () => {
 
     getOpenOrders = async () => {
         try{
-            const orders = await fetch(`${API_URL}/api/orders/open/${BRANCH_ID}`, {
+            const orders = await fetch(`${API_URL}/api/p/orders/open/${BRANCH_ID}`, {
                 method:'GET',
                 headers:{
                     'x-api-key': API_KEY
