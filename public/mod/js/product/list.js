@@ -12,6 +12,21 @@ window.onload = async () => {
         ['adet', 'Adet'],
     ];
 
+    handleCatChange = async e => {
+        const value = document.getElementById('productCategory').value;
+        const subCategroies = await fetchSubCategories(value);
+
+        const subSelect = document.getElementById('productSubCategory');
+        subSelect.innerHTML = '';
+
+        subCategroies.data.map(e => {
+            const option = document.createElement('option');
+            option.value = e._id;
+            option.innerHTML = e.sub_category_name;
+            subSelect.append(option)
+        });
+    }
+
     readyProducts = async () => {
         try{
             loadingSpin.style.display = 'block';
@@ -59,6 +74,7 @@ window.onload = async () => {
 
                                 data-productname="${e.product_name}"
                                 data-productcategory="${e.category_id}"
+                                data-subcategoryid="${e.sub_category_id}"
                                 data-productbrand="${e.brand == null ? null : e.brand.brand_id}"
                                 data-productweightype="${e.product_unit_type}"
                                 data-productunitweight="${e.product_unit_weight}"
@@ -106,7 +122,7 @@ window.onload = async () => {
                      </div>
                 `;
 
-                data.push([e.product_name, e.category == null ? 'YOK' : e.category.category_name, e.brand == null ? 'YOK' : e.brand.brand_name, e.product_list_price, discountPriceText, discountText, unitWeightText, e.product_amonut, productStatus, process]);
+                data.push([e.product_name, e.category == null ? 'YOK' : e.category.category_name, e.subcategory == null ? 'YOK' : e.subcategory.sub_category_name, e.brand == null ? 'YOK' : e.brand.brand_name, e.product_list_price, discountPriceText, discountText, unitWeightText, e.product_amonut, productStatus, process]);
             });
 
             $('#html5-extension').DataTable( {
@@ -253,12 +269,52 @@ window.onload = async () => {
         });
     }
 
+    fetchSubCategories = async (category_id) => {
+        try{
+            const subs = await fetch(`${API_URL}/api/subcategory/${category_id}`,{
+                method:'GET',
+                headers:{
+                    'x-api-key':API_KEY
+                }
+            });
+            return subs.json();
+        }catch(e){
+            console.log(e);
+        }
+    }
+
+
     clickProductEdit = async(e) => {
         try{
             document.getElementById('loadingSpinForEdit').style.display = 'block';
             const productid = e.getAttribute('data-productid');
             const productname = e.getAttribute('data-productname');
             const productcategory = e.getAttribute('data-productcategory');
+            const productsubcategory = e.getAttribute('data-subcategoryid');
+
+
+            console.log(productsubcategory)
+            console.log(typeof productsubcategory)
+
+            if(productcategory != 'null'){
+                const subCategroies = await fetchSubCategories(productcategory);
+
+                const subSelect = document.getElementById('productSubCategory');
+                subSelect.innerHTML = '';
+
+                subCategroies.data.map(e => {
+                    const option = document.createElement('option');
+
+                    if(productsubcategory == e._id){
+                        option.selected = true;
+                    }
+
+                    option.value = e._id;
+                    option.innerHTML = e.sub_category_name;
+                    subSelect.append(option)
+                });
+            }
+
             const productbrand = e.getAttribute('data-productbrand');
             const productweightype = e.getAttribute('data-productweightype');
             const productunitweight = e.getAttribute('data-productunitweight');
@@ -267,9 +323,11 @@ window.onload = async () => {
             document.getElementById('productName').value = productname;
             document.getElementById('productUnitWeight').value = productunitweight;
             document.getElementById('productAmount').value = productamount;
+
             await putCategories(productcategory);
             await putBrands(productbrand);
             await putWeightUnitTypes(productweightype);
+
             document.getElementById('loadingSpinForEdit').style.display = 'none';
         }catch(e){
             console.log(e);
@@ -288,6 +346,8 @@ window.onload = async () => {
             const productUnitWeight = document.getElementById('productUnitWeight').value;
             const productAmount = document.getElementById('productAmount').value;
 
+            const subCat = document.getElementById('productSubCategory').value;
+
             if(
                 productName.trim() == ''
                 ||
@@ -297,7 +357,7 @@ window.onload = async () => {
             ){
                 Snackbar.show({text:'İlgili alanları boş bırakmayınız.', duration:4000})
             }else{
-                await editProduct(productName, productCategory, productBrand, productUnitType, productUnitWeight, productAmount, productid);
+                await editProduct(subCat, productName, productCategory, productBrand, productUnitType, productUnitWeight, productAmount, productid);
                 await readyProducts();
             }
 
@@ -669,7 +729,7 @@ window.onload = async () => {
         }
     }
 
-    editProduct = async (productName, productCategory, productBrand, productUnitType, productUnitWeight, productAmount, productid) => {
+    editProduct = async (subCat, productName, productCategory, productBrand, productUnitType, productUnitWeight, productAmount, productid) => {
         try{
             const update = await fetch(`${API_URL}/api/product/edit`, {
                method:'PUT',
@@ -685,6 +745,7 @@ window.onload = async () => {
                    product_unit_type: productUnitType,
                    product_unit_weight: productUnitWeight,
                    product_amonut: productAmount,
+                   sub_category_id:subCat
                })
             });
             return update.json();

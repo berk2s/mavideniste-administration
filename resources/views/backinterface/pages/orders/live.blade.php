@@ -145,6 +145,33 @@
                     </div>
                 </div>
 
+
+
+
+                <div class="modal fade" id="userInfoArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Kullanıcı bilgileri</h5>
+                            </div>
+                            <div class="modal-body">
+
+                                <ul class="list-group ">
+                                    <li class="list-group-item" id="USERINFO_namesurname">Berk Topcu</li>
+                                    <li class="list-group-item" id="USERINFO_email">berktopcu@outlook.com</li>
+                                    <li class="list-group-item" id="USERINFO_phone">05396861440</li>
+                                    <li class="list-group-item" id="USERINFO_date">23123*213*12*3</li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalTitle" aria-hidden="true">
                     <div class="modal-dialog  modal-lg"  role="document">
                         <div class="modal-content">

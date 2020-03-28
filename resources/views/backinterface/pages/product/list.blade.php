@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>ÜRÜN</th>
                                     <th>KATEGORİ</th>
+                                    <th>ALT KATEGORİ</th>
                                     <th>MARKA</th>
                                     <th>LİSTE FİYATI</th>
                                     <th>İNDRM FİYATI</th>
@@ -77,14 +78,20 @@
                                     </div>
 
                                     <div class="form-row ">
-                                        <div class="form-group  col-md-6">
+                                        <div class="form-group  col-md-4">
                                             <label for="productCategory">Kategori</label>
-                                            <select id='productCategory' class="form-control  basic">
-
+                                            <select id='productCategory' onchange="handleCatChange(this)" class="form-control  basic">
                                             </select>
                                         </div>
 
-                                        <div class="form-group  col-md-6">
+                                        <div class="form-group  col-md-4">
+                                            <label for="productSubCategory">Alt kategori</label>
+                                            <select id='productSubCategory' class="form-control  basic">
+                                            </select>
+                                        </div>
+
+
+                                        <div class="form-group  col-md-4">
                                             <label for="productBrand">Marka</label>
                                             <select id='productBrand' class="form-control  basic">
 
@@ -299,9 +306,7 @@
                         <ul class="list-group list-group-icons-meta">
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Ürün Adı</h6>
                                         <p class="mg-b-0" id="DETAIL_productname"></p>
@@ -310,9 +315,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action ">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Kategori</h6>
                                         <p class="mg-b-0" id="DETAIL_productcategory"></p>
@@ -322,9 +325,7 @@
 
                             <li class="list-group-item list-group-item-action ">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Marka</h6>
                                         <p class="mg-b-0" id="DETAIL_productbrand"></p>
@@ -333,9 +334,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Liste Fiyatı</h6>
                                         <p class="mg-b-0" id="DETAIL_productlistprice"></p>
@@ -344,9 +343,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">İndirimli Fiyat</h6>
                                         <p class="mg-b-0" id="DETAIL_productdiscountprice"></p>
@@ -355,9 +352,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">İndirim</h6>
                                         <p class="mg-b-0" id="DETAIL_productdiscount"></p>
@@ -366,9 +361,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Birim Gramaj Tipi</h6>
                                         <p class="mg-b-0" id="DETAIL_productweightunittype"></p>
@@ -377,9 +370,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Gramaj</h6>
                                         <p class="mg-b-0" id="DETAIL_productunitweight"></p>
@@ -388,9 +379,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Miktar</h6>
                                         <p class="mg-b-0" id="DETAIL_productamount"></p>
@@ -399,9 +388,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Durum</h6>
                                         <p class="mg-b-0" id="DETAIL_productstatus"></p>
@@ -410,9 +397,7 @@
                             </li>
                             <li class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <div class="d-flex mr-3">
-                                        <svg> ... </svg>
-                                    </div>
+
                                     <div class="media-body">
                                         <h6 class="tx-inverse">Eklenme Tarihi</h6>
                                         <p class="mg-b-0" id="DETAIL_productdate"></p>

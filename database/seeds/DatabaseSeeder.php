@@ -121,6 +121,7 @@ class DatabaseSeeder extends Seeder
            ['user_id' => 1, 'page_id' => 32],
            ['user_id' => 1, 'page_id' => 33],
            ['user_id' => 1, 'page_id' => 34],
+           ['user_id' => 1, 'page_id' => 35],
         ]);
 
         DB::table('pages')->insert([
@@ -138,6 +139,7 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'urun/ekle', 'desc' => 'Ürün ekleme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 4],
 
             ['page_url' => 'siparisler', 'desc' => 'Canlı siparişler ve aksiyonlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 5],
+            ['page_url' => 'siparisler/gecmis', 'desc' => 'Geçmiş siparişler ve aksiyonlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 5],
 
             ['page_url' => 'kampanya', 'desc' => 'Kampanyalar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 6],
             ['page_url' => 'kampanya/olustur', 'desc' => 'Kampanya oluşturma', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 6],

@@ -43,17 +43,26 @@ window.onload = async () => {
 
         let orderUserName;
         let orderUserID;
+        let userEmail;
+        let userPhone;
+        let userDate;
         let phone;
         if(Array.isArray(e.user)){
             orderUserID = e.user[0]._id;
             orderUserName = e.user[0].name_surname;
+            userEmail = e.user[0].email_address;
+            userPhone = e.user[0].phone_number;
             phone = e.user[0].phone_number;
+            userDate = e.user[0].createdAt;
         }else{
             orderUserID = e.user_id;
             const userDetails = await getUserDetails(orderUserID);
             console.log(userDetails)
-            orderUserName = userDetails.data.name_surname;
+            orderUserName = userDetails.data.name_surname
+            userEmail = userDetails.data.email_address;
+            userPhone = userDetails.data.phone_number;
             phone = userDetails.data.phone_number;
+            userDate = userDetails.data.createdAt;
         }
 
 
@@ -144,9 +153,18 @@ window.onload = async () => {
                             <span>${orderDate}</span>
                         </span>
 
-                        <span style="width:max-content">
+                         <span style="width:max-content">
                             <svg xmlns="http://www.w3.org/2000/svg" style='margin-top:-3px' width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                            <span><a href="">${orderUserName}</a></span>
+                            <span><a
+                              href=""
+                              data-toggle="modal"
+                              data-target="#userInfoArea"
+                              data-username="${orderUserName}"
+                              data-useremail="${userEmail}"
+                              data-userphone="${userPhone}"
+                              data-userdate="${userDate}"
+                                onclick="handleUserInfoClick(this)"
+                              >${orderUserName}</a></span>
                         </span>
 
                         <span style="width:max-content">
@@ -266,6 +284,19 @@ window.onload = async () => {
 
     }
 
+
+    handleUserInfoClick = e => {
+        const username = e.getAttribute('data-username');
+        const useremail = e.getAttribute('data-useremail');
+        const userphone = e.getAttribute('data-userphone');
+        const userdate = dateParse(e.getAttribute('data-userdate'));
+
+        document.getElementById('USERINFO_namesurname').innerHTML = username;
+        document.getElementById('USERINFO_email').innerHTML = useremail;
+        document.getElementById('USERINFO_phone').innerHTML = userphone;
+        document.getElementById('USERINFO_date').innerHTML = userdate;
+    }
+
     addOrder = async (e) => {
 
 
@@ -279,14 +310,23 @@ window.onload = async () => {
 
         let orderUserName;
         let orderUserID;
+        let userEmail;
+        let userPhone;
+        let userDate;
         if(Array.isArray(e.user)){
             orderUserID = e.user[0]._id;
             orderUserName = e.user[0].name_surname;
+            userEmail = e.user[0].email_address;
+            userPhone = e.user[0].phone_number;
+            userDate = e.user[0].createdAt;
         }else{
             orderUserID = e.user_id;
             const userDetails = await getUserDetails(orderUserID);
             console.log(userDetails)
             orderUserName = userDetails.data.name_surname
+            userEmail = userDetails.data.email_address;
+            userPhone = userDetails.data.phone_number;
+            userDate = userDetails.data.createdAt;
         }
 
 
@@ -414,7 +454,16 @@ window.onload = async () => {
 
                         <span style="width:max-content">
                             <svg xmlns="http://www.w3.org/2000/svg" style='margin-top:-3px' width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                            <span><a href="">${orderUserName}</a></span>
+                            <span><a
+                              href=""
+                              data-toggle="modal"
+                              data-target="#userInfoArea"
+                              data-username="${orderUserName}"
+                              data-useremail="${userEmail}"
+                              data-userphone="${userPhone}"
+                              data-userdate="${userDate}"
+                                onclick="handleUserInfoClick(this)"
+                              >${orderUserName}</a></span>
                         </span>
 
                         <span style="width:max-content">
@@ -693,6 +742,7 @@ window.onload = async () => {
                                 onclick="setOrderToPrepare(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="false"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
                                 Hazırlanan
@@ -707,6 +757,7 @@ window.onload = async () => {
                                 onclick="setOrderToEnRoute(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="false"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                                 Yolda
@@ -722,6 +773,7 @@ window.onload = async () => {
                                 onclick="setOrderToSuccessfull(this)"
                                 data-orderid="${orderID}"
                                 data-orderstatus="${orderStatus}"
+                                data-bluecurrier="false"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
                                 Teslim edildi
@@ -966,10 +1018,7 @@ window.onload = async () => {
             <span><b>${e.product_name}</b></span>
             <span><b>${e.count} Adet</b></span>
         `;
-
             area.append(item);
-
-
         })
 
 

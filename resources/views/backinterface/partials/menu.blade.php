@@ -200,6 +200,9 @@
                         {{ Request::path() == 'siparisler' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'siparisler' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+                        {{ Request::path() == 'siparisler/gecmis' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'siparisler/gecmis' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                     >
                         <div class="">
 
@@ -213,6 +216,7 @@
 
                     <ul class="collapse submenu list-unstyled
                         {{ Request::path() == 'siparisler' ? 'show' : '' }}
+                        {{ Request::path() == 'siparisler/gecmis' ? 'show' : '' }}
                     " id="orders" data-parent="#accordionExample">
 
                         @if(array_search('siparisler', $pageUrlArray) !== false)
@@ -220,6 +224,14 @@
                                 {{ Request::path() == 'siparisler' ? 'class=active' : '' }}
                             >
                                 <a href="/siparisler"> Canlı siparişler </a>
+                            </li>
+                        @endif
+
+                        @if(array_search('siparisler/gecmis', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'siparisler/gecmis' ? 'class=active' : '' }}
+                            >
+                                <a href="/siparisler/gecmis"> Geçmiş siparişler </a>
                             </li>
                         @endif
 

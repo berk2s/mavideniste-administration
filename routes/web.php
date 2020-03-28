@@ -85,6 +85,7 @@ Route::group(['prefix' => '/kullanicilar', 'middleware' => ['auth', 'authority']
 Route::group(['prefix' => '/siparisler', 'middleware' => ['auth', 'authority']], function() {
 
     Route::get('/', 'Backside\Pages\Orders\Live@get_view');
+    Route::get('/gecmis', 'Backside\Pages\Orders\History@get_view');
 
 });
 
