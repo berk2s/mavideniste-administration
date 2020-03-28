@@ -24,22 +24,26 @@
                     <div class="widget-content widget-content-area" >
                         <input type="hidden" id="imageBase64" />
 
-                        <div class="table-responsive" style="min-height: 400px!important;">
-                            <table id='categoryListTable' class="table table-bordered table-hover mb-4" >
+
+
+                        <div class="table-responsive mb-4 mt-4">
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>Kategori ADI</th>
                                     <th>Kategori RESMİ</th>
+                                    <th>Alt kategoriler</th>
                                     <th class="text-center">Durum</th>
+                                    <th class="text-center">Eklenme tarihi</th>
                                     <th class="text-center">İŞLEM</th>
                                 </tr>
                                 </thead>
-
                                 <tbody id="categoryListTableTBody">
 
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -66,14 +70,23 @@
 
                             <div class="row">
                                 <form id="EditCategoryForm" enctype="multipart/form-data" method="post">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="degree2">Kategori Adı</label>
-                                        <input type="text" class="form-control mb-4" id="EDIT_categoryName" value="">
-                                    </div>
-                                </div>
 
-                                 <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="degree2">Kategori Adı</label>
+                                            <input type="text" class="form-control mb-4" id="EDIT_categoryName" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="degree2">Alt kategoriler</label>
+                                            <select class="form-control" id="EDIT_subcategories" multiple></select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="degree2">Durum <small id="EDIT_categoryStatus_TEXT"></small></label>
 
@@ -97,6 +110,7 @@
                                             <div class="custom-file-container__image-preview" style="height:120px"></div>
                                         </div>
 
+                                        <input type="hidden" id="EDIT_currentimage" />
                                     </div>
                                 </div>
                                 </form>
@@ -157,9 +171,17 @@
     <link href="/mod/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/css/forms/switches.css">
     <link href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/file-upload/file-upload-with-preview.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/select2/select2.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/custom_dt_html5.css">
+    <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/dt-global_style.css">
+
 @endsection
 
 @section('footer_addons')
+    <script src="/mod/plugins/select2/select2.min.js"></script>
+
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/js/users/account-settings.js"></script>
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/blockui/jquery.blockUI.min.js"></script>
     <!-- toastr -->
@@ -172,10 +194,19 @@
 
     <script src="/mod/plugins/file-upload/file-upload-with-preview.min.js"></script>
 
+
+    <script src="/mod/plugins/table/datatable/datatables.js"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="/mod/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="/mod/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="/mod/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="/mod/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+
+
     <script>
         //First upload
         var firstUpload = new FileUploadWithPreview('categoryImageChange')
-
+        $('#EDIT_subcategories').select2({})
     </script>
 
     <script src="/mod/js/category/list.js"></script>

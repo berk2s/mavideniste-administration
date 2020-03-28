@@ -39,7 +39,11 @@ class CategoryImageUploadApi extends Controller
             /*
              * resize to app's list format
              */
-            $image_->resize(100, 80);
+
+            $width = $request->width != null ? $request->width : 100;
+            $height = $request->height != null ? $request->height : 80;
+
+            $image_->resize($width, $height);
             $image_->save(public_path('mod/img/category/').$imageName);
         }catch(Intervention\Image\Exception\NotReadableException $e){
             return response()->json(['status' => ['state' => false, 'code' => 'UC_0']]);

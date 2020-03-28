@@ -1,5 +1,5 @@
-const PANEL_URL = `http://192.168.1.105:5000`;
-const API_URL = `http://192.168.1.105:3000`;
+const PANEL_URL = `http://192.168.1.106:5000`;
+const API_URL = `http://192.168.1.106:3000`;
 const API_KEY = `56595339-71a8-46e6-a890-700620d6a9ae`;
 const TOPIC_EVERYBODY = `_Herkes_`;
 const CATEGORY_IMAGE_DIR = `/mod/img/category/`;

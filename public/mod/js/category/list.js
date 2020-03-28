@@ -28,7 +28,16 @@ window.onload = () => {
                         const category_id = e.getAttribute('data-categoryid');
                         const category_name = document.getElementById('EDIT_categoryName').value;
                         const status = document.getElementById('EDIT_categoryStatus').checked;
-                        const fetchPost = await editCategory(category_id, category_name, CATEGORY_IMAGE_DIR+res.status.imagename, status)
+
+                        const subCategories = getSelectedValues(document.getElementById('EDIT_subcategories'))
+
+                        const subs = await fetchSubCategories(category_id);
+
+                        const deleteSubs = subs.data.map(e => e._id).filter(e => subCategories.indexOf(e) === -1);
+
+                        console.log(deleteSubs);
+
+                        const fetchPost = await editCategory(category_id, category_name,deleteSubs, CATEGORY_IMAGE_DIR+res.status.imagename, status)
                         BranchCategories();
                         document.getElementById('EDIT_categorySaveBtn').innerHTML = 'Kaydet';
                         Snackbar.show({text: category_name+' kategorisi düzenlendi!', duration: 4000});
@@ -41,7 +50,17 @@ window.onload = () => {
                 const category_id = e.getAttribute('data-categoryid');
                 const category_name = document.getElementById('EDIT_categoryName').value;
                 const status = document.getElementById('EDIT_categoryStatus').checked;
-                const fetchPost = await editCategory(category_id, category_name, null, status)
+
+                const subCategories = getSelectedValues(document.getElementById('EDIT_subcategories'))
+
+
+                const subs = await fetchSubCategories(category_id);
+
+                const deleteSubs = subs.data.map(e => e._id).filter(e => subCategories.indexOf(e) === -1);
+
+                console.log(deleteSubs);
+                const fetchPost = await editCategory(category_id, category_name,deleteSubs, document.getElementById('EDIT_currentimage').value, status)
+
                 BranchCategories();
                 document.getElementById('EDIT_categorySaveBtn').innerHTML = 'Kaydet';
                 Snackbar.show({text: category_name+' kategorisi düzenlendi!', duration: 4000});
@@ -70,6 +89,20 @@ window.onload = () => {
                 document.getElementById('EDIT_categoryStatus_TEXT').innerHTML = 'Yayında değil';
                 document.getElementById('EDIT_categoryStatus').checked = false;
             }
+
+            const subs = await fetchSubCategories(categoryid);
+            const subSelect = document.getElementById('EDIT_subcategories');
+            subSelect.innerHTML = ''
+            document.getElementById('EDIT_currentimage').value = e.getAttribute('data-categoryimage');
+
+            subs.data.map(e => {
+                const option = document.createElement('option');
+                option.value = e._id;
+                option.innerHTML = e.sub_category_name;
+                option.selected = true;
+                subSelect.append(option);
+            })
+
             document.getElementById('loadingSpinForEdit').style.display = 'none';
         }catch(e){
             console.log(e);
@@ -128,16 +161,23 @@ window.onload = () => {
         }
     }
 
-    insertCategories = (category_id, category_name, category_image, status_) => {
+    insertCategories = (category_id, category_name, category_image, status_, subs) => {
         const liveOrders = document.getElementById('categoryListTable');
         const row = liveOrders.insertRow(1);
         const categoryname = row.insertCell(0);
         const categoryimage = row.insertCell(1);
-        const status = row.insertCell(2);
-        const process = row.insertCell(3);
+        const sub = row.insertCell(2);
+        const status = row.insertCell(3);
+        const process = row.insertCell(4);
         let deleteImageDOM = '';
+
         categoryname.innerHTML = `<span style='color:green'>${category_name}</span>`;
 
+        subs.data.map(e => {
+            sub.innerHTML += `<span style="color:white">${e.sub_category_name}, </span>`
+        })
+
+       // sub.innerHTML = `<li>${JSON.stringify(subs.data)}</li>`
 
         if(category_image == null) {
             categoryimage.innerHTML = `<span style="color:red">Resim yok</span>`;
@@ -183,7 +223,7 @@ window.onload = () => {
                  </a>
 
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                     <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);" onclick="clickCategoryEdit(this)" data-categoryid="${category_id}" data-category_name="${category_name}" data-type="editcategory">Düzenle</a>
+                     <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);" onclick="clickCategoryEdit(this)" data-categoryid="${category_id}" data-category_name="${category_name}" data-categoryimage="${categoryimage}" data-type="editcategory">Düzenle</a>
                      <a class="dropdown-item" href="javascript:void(0);" onclick="clickChangeStatus(this)" data-currentstatus='${status_}' data-categoryid="${category_id}" data-category_name="${category_name}">${statusProcessText}</a>
                      ${deleteImageDOM}
                      <a class="dropdown-item" href="javascript:void(0);" data-categoryid="${category_id}" onclick="clickDeleteCategory(this)" data-category_name="${category_name}">Sil</a>
@@ -192,7 +232,6 @@ window.onload = () => {
         `;
 
     }
-
 
     fetchCategory = async (category_id) => {
         try{
@@ -208,7 +247,7 @@ window.onload = () => {
         }
     }
 
-    editCategory = async (category_id, category_name, category_image=null, status) => {
+    editCategory = async (category_id, category_name,deleteSubs, category_image=null, status) => {
         try{
             const fetchPost = await fetch(`${API_URL}/api/category/p/edit`, {
                 method:'PUT',
@@ -217,10 +256,11 @@ window.onload = () => {
                     'x-api-key': API_KEY
                 },
                 body:JSON.stringify({
-                    category_id,
-                    category_name,
-                    category_image,
-                    status
+                    category_id:category_id,
+                    category_name:category_name,
+                    category_image:category_image,
+                    status:status,
+                    delete_subs:deleteSubs
                 }),
             });
             await sendLog(USER_ID, BRANCH_ID, 2, `<b>${category_name} </b> kategorisi düzenlendi! <span style="font-size: 1px">(${category_id})</span>`);
@@ -291,17 +331,136 @@ window.onload = () => {
         }
     }
 
+    fetchSubCategories = async (category_id) => {
+        try{
+            const subs = await fetch(`${API_URL}/api/subcategory/${category_id}`,{
+                method:'GET',
+                headers:{
+                    'x-api-key':API_KEY
+                }
+            });
+            return subs.json();
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     BranchCategories = () => {
         fetchBranchCategories()
-            .then((res) => {
+            .then(async (res) => {
                 loadingSpin.style.display = 'none';
-                clearTable('categoryListTable')
-                res.data.forEach((e) => {
-                    insertCategories(e._id, e.category_name, e.category_image, e.status);
-                })
+             //   clearTable('categoryListTable');
+
+
+              //  const data = [];
+
+                const mapProsmise = res.data.map(async (e) => {
+                    return new Promise(async (resolve, reject) => {
+                        const category_id = e._id
+                        const category_name = e.category_name
+                        const status_ = e.status
+                        const subs = await fetchSubCategories(e._id);
+                        let categoryname = `<span style='color:green'>${e.category_name}</span>`;
+                        let sub = '';
+                        subs.data.map(e => {
+                            sub += `<span style="color:white">${e.sub_category_name}, </span>`
+                        })
+                        let categoryimage = '';
+                        let deleteImageDOM = ''
+                        if(e.category_image == null) {
+                            categoryimage = `<span style="color:red">Resim yok</span>`;
+                        }else {
+                            categoryimage = `<a
+             data-toggle="modal"
+             data-target="#imagePlay"
+             href="javascript:void(0);"
+             onclick="clickImageShow(this)"
+             data-imageurl="${PANEL_URL}${e.category_image}"
+             >Gör</a>`;
+                            deleteImageDOM = `
+                    <a
+                    class="dropdown-item"
+                    href="javascript:void(0);"
+                    onclick="clickDeleteImage(this)"
+                    data-categoryid="${category_id}"
+                    data-category_name="${category_name}"
+                    >
+                        Resmi Kaldır
+                    </a>`
+                        }
+                        let statusProcessText='';
+                        let status=''
+                        if(status_ == true) {
+                            status = `<span style='color:green'>Yayında</span>`;
+                            statusProcessText = `Yayından kaldır`;
+                        }else{
+                            status = `<span style='color:red'>Yayında değil</span>`;
+                            statusProcessText = `Yayına al`;
+                        }
+                        let process = '';
+                        process = `
+                         <div class="dropdown custom-dropdown mx-auto">
+                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                             </a>
+
+                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                 <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);" onclick="clickCategoryEdit(this)" data-categoryid="${category_id}" data-category_name="${category_name}" data-categoryimage="${e.categoryimage}" data-type="editcategory">Düzenle</a>
+                                 <a class="dropdown-item" href="javascript:void(0);" onclick="clickChangeStatus(this)" data-currentstatus='${status_}' data-categoryid="${category_id}" data-category_name="${category_name}">${statusProcessText}</a>
+                                 ${deleteImageDOM}
+                                 <a class="dropdown-item" href="javascript:void(0);" data-categoryid="${category_id}" onclick="clickDeleteCategory(this)" data-category_name="${category_name}">Sil</a>
+                             </div>
+                         </div>
+                    `;
+
+                        resolve([e.category_name, categoryimage, sub, status, dateParse(e.created_at), process]);
+                        //             resolve(true)
+                    });
+                });
+
+
+                const data = await Promise.all(mapProsmise);
+
+                return data;
             })
+            .then((data) => {
+                console.log(data)
+                $('#html5-extension').DataTable( {
+                    destroy:true,
+                    data:data,
+                    dom:"<'row'<'col-sm-12 col-md-8'l  ><'col-sm-12 col-md-4'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p> <'col-md-12 mx-auto float-right p-0' <'mx-auto'B> >>",
+                    buttons: {
+                        buttons: [
+                            { extend: 'copy', className: 'btn' },
+                            { extend: 'csv', className: 'btn' },
+                            { extend: 'excel', className: 'btn' },
+                            { extend: 'print', className: 'btn' },
+                        ]
+                    },
+                    "oLanguage": {
+                        "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                        "sInfo": "_PAGE_ .sayfa",
+                        "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                        "sSearchPlaceholder": "Ara...",
+                        "sLengthMenu": "Listele :  _MENU_",
+                    },
+                    "language": {
+                        "zeroRecords": "Hiç sonuç bulunamadı"
+                    },
+                    "stripeClasses": [],
+                    "lengthMenu": [7, 10, 20, 50],
+                    "pageLength": 10
+                });
+            })
+
+
     }
 
     BranchCategories();
+
+
+
 
 };

@@ -28,3 +28,4 @@ Route::resource('/ghost', 'Backside\Api\Ghost\GhostApi');
 Route::resource('/branch', 'Backside\Api\Branch\BranchApi');
 
 Route::resource('/complaint', 'Backside\Api\Complaint\ComplaintApi');
+Route::resource('/appsettings', 'Backside\Api\AppSettingsApi');

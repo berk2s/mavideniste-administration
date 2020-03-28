@@ -57,7 +57,7 @@ window.onload = () => {
                 body:JSON.stringify({
                     category_name: category_name,
                     branch_id:branch_id,
-                    category_image:category_image
+                    category_image:category_image,
                 })
             });
             await sendLog(USER_ID, BRANCH_ID, 1, `<b>${category_name}</b> kategorisi eklendi!`);
@@ -75,7 +75,9 @@ window.onload = () => {
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
-                    dataimage: category_image
+                    dataimage: category_image,
+                    width:100,
+                    height:80
                 })
             });
             return upload.json();

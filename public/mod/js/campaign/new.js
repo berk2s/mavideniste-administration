@@ -59,7 +59,8 @@ window.onload = () => {
                             campaign_short_desc:campaign_short_desc,
                             campaign_type:campaign_type,
                             campaign_desc:campaign_desc,
-                            campaign_image:PRODUCT_IMAGE_DIR+imageData.status.imagename
+                            campaign_image:CATEGORY_IMAGE_DIR+imageData.status.imagename,
+                            branch_id:BRANCH_ID
                         })
                     });
 
@@ -91,13 +92,15 @@ window.onload = () => {
 
     uploadImage = async (image) => {
         try{
-            const upload = await fetch(`/api/product/upload`, {
+            const upload = await fetch(`/api/category/upload`, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
-                    dataimage: image
+                    dataimage: image,
+                    width:355,
+                    height:172,
                 })
             });
             return upload.json();

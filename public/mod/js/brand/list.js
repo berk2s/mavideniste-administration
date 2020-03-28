@@ -69,6 +69,26 @@ window.onload = () => {
         }
     }
 
+    handleRemove = async e => {
+        try{
+            const id = e.getAttribute('data-brandid');
+            await fetch(`${API_URL}/api/brand`, {
+                method:"DELETE",
+                headers:{
+                    'Content-Type':'application/json',
+                    'x-api-key':API_KEY,
+                },
+                body:JSON.stringify({
+                    brand_id:id
+                })
+            });
+            Snackbar.show({text:'Marka silindi', duration:4000});
+            await insertBrands()
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     insertBrands = async () => {
         try{
             loadingSpin.style.display = 'block';
@@ -88,7 +108,7 @@ window.onload = () => {
 
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                      <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);" onclick="clickBrandEdit(this)"  data-brandid="${e._id}">Düzenle</a>
-                     <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);" onclick=""  data-type="editcategory">Ürün Listesi</a>
+                     <a class="dropdown-item" href="javascript:void(0);" onclick="handleRemove(this)" data-brandid="${e._id}"  data-type="editcategory">Sil</a>
                  </div>
              </div>`;
                data.push([e.brand_name, 5, dateParse(e.brand_date), process]);

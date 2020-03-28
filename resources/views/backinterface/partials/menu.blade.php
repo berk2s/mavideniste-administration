@@ -269,7 +269,7 @@
                 </li>
                         @endif
 
-                        @if(array_search(6, $pageTabArray) !== false)
+                        @if(array_search(7, $pageTabArray) !== false)
                             <li class="menu">
                     <a
                         href="#coupon"
@@ -310,7 +310,7 @@
                 </li>
                         @endif
 
-                        @if(array_search(7, $pageTabArray) !== false)
+                        @if(array_search(8, $pageTabArray) !== false)
                             <li class="menu">
                     <a
                         href="#interactions"
@@ -351,7 +351,48 @@
                 </li>
                         @endif
 
-                        @if(array_search(8, $pageTabArray) !== false)
+                        @if(array_search(9, $pageTabArray) !== false)
+                            <li class="menu">
+                    <a
+                        href="#news"
+                        data-toggle="collapse"
+                        class="dropdown-toggle"
+
+                        {{ Request::path() == 'haberler' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'haberler' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+                        {{ Request::path() == 'haberler/olustur' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'haberler/olustur' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
+
+                    >
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <span>Haberler</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </a>
+
+                    <ul class="collapse submenu list-unstyled
+                        {{ Request::path() == 'haberler/olustur' ? 'show' : '' }}
+                        {{ Request::path() == 'haberler/olustur' ? 'show' : '' }}
+                    " id="news" data-parent="#accordionExample">
+
+                        @if(array_search('haberler/olustur', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'haberler/olustur' ? 'class=active' : '' }}
+                            >
+                                <a href="/haberler/olustur"> Haber oluştur  </a>
+                            </li>
+                        @endif
+
+                    </ul>
+                </li>
+                        @endif
+
+                        @if(array_search(10, $pageTabArray) !== false)
                             <li class="menu">
                     <a
                         href="#users"
@@ -388,7 +429,7 @@
                 </li>
                         @endif
 
-                        @if(array_search(9, $pageTabArray) !== false)
+                        @if(array_search(11, $pageTabArray) !== false)
                             <li class="menu">
                     <a
                         href="#mybranch"
@@ -476,7 +517,7 @@
                 </li>
                         @endif
 
-                        @if(array_search(10, $pageTabArray) !== false)
+                        @if(array_search(12, $pageTabArray) !== false)
                             <li class="menu">
                     <a
                         href="#branch"
@@ -568,7 +609,7 @@
                 </li>
                         @endif
 
-                        @if(array_search(11, $pageTabArray) !== false)
+                        @if(array_search(13, $pageTabArray) !== false)
                             <li class="menu">
                     <a
                         href="#settings"

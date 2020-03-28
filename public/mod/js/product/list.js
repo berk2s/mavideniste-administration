@@ -59,7 +59,7 @@ window.onload = async () => {
 
                                 data-productname="${e.product_name}"
                                 data-productcategory="${e.category_id}"
-                                data-productbrand="${e.brand_id}"
+                                data-productbrand="${e.brand == null ? null : e.brand.brand_id}"
                                 data-productweightype="${e.product_unit_type}"
                                 data-productunitweight="${e.product_unit_weight}"
                                 data-productamount="${e.product_amonut}"
@@ -81,8 +81,8 @@ window.onload = async () => {
                                 data-productlistprice='${e.product_list_price}'
                                 data-productamount='${e.product_amonut}'
                                 data-productdate='${dateParse(e.product_date)}'
-                                data-productcategory='${e.category.category_name}'
-                                data-productbrand='${e.brand.brand_name}'
+                                data-productcategory='${e.category == null ? 'YOK' : e.category.category_name}'
+                                data-productbrand='${e.brand == null ? 'YOK' : e.brand.brand_name}'
                                 data-productstatus='${e.product_status}'
                                 onclick='clickProductDetail(this)'
                                 >Detaylar</a>
@@ -100,15 +100,13 @@ window.onload = async () => {
                                 data-productstatustext="${productStatus}"
                                 >İndirim</a>
                              <a class="dropdown-item" data-toggle="modal" data-target="#imagePlay" href="javascript:void(0);" data-productid="${e._id}" onclick="clickProductImage(this);" data-image="${e.product_image}" data-productid="${e._id}">Ürün Resmi</a>
-                             <a class="dropdown-item" data-toggle="modal" data-target="#imagePlay" href="javascript:void(0);" data-productid="${e._id}" onclick="clickProductImage(this);" data-image="${e.product_image}">Önizleme</a>
-                             <a class="dropdown-item" data-toggle="modal" data-target="#fadeinModal" href="javascript:void(0);">Analiz</a>
                              <a class="dropdown-item" href="javascript:void(0);" data-productid="${e._id}" onclick="clickChangeStatusProduct(this)" data-currentstatus="${e.product_status}">${changeStatusText}</a>
                              <a class="dropdown-item" href="javascript:void(0);" data-productid="${e._id}" onclick="clickDeleteProduct(this)">Sil</a>
                           </div>
                      </div>
                 `;
 
-                data.push([e.product_name, e.category.category_name, e.brand.brand_name, e.product_list_price, discountPriceText, discountText, unitWeightText, e.product_amonut, productStatus, process]);
+                data.push([e.product_name, e.category == null ? 'YOK' : e.category.category_name, e.brand == null ? 'YOK' : e.brand.brand_name, e.product_list_price, discountPriceText, discountText, unitWeightText, e.product_amonut, productStatus, process]);
             });
 
             $('#html5-extension').DataTable( {

@@ -139,3 +139,9 @@ Route::group(['prefix' => '/kampanya', 'middleware' => ['auth', 'authority']], f
 
 });
 
+Route::group(['prefix' => '/haberler', 'middleware' => ['auth', 'authority']], function() {
+
+    Route::get('/olustur', 'Backside\Pages\News\NewNews@get_view');
+
+});
+

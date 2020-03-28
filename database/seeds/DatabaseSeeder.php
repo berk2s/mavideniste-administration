@@ -55,6 +55,16 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        DB::table('appsettings')->insert([
+            [
+                'has_update' => false,
+                'is_update_required' => false,
+                'version' => 1.0,
+                'playstore_link' => 'http://www.playstore.com',
+                'appstore_link' => 'http://www.appstore.com'
+            ]
+        ]);
+
         DB::table('delivered_notification_settings')->insert([
             [
                 'title' => 'Teslim edildi',
@@ -110,6 +120,7 @@ class DatabaseSeeder extends Seeder
            ['user_id' => 1, 'page_id' => 31],
            ['user_id' => 1, 'page_id' => 32],
            ['user_id' => 1, 'page_id' => 33],
+           ['user_id' => 1, 'page_id' => 34],
         ]);
 
         DB::table('pages')->insert([
@@ -135,30 +146,32 @@ class DatabaseSeeder extends Seeder
 
             ['page_url' => 'etkilesim/bildirim-gonder', 'desc' => 'Bildirim gönderme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 8],
 
-            ['page_url' => 'kullanicilar', 'desc' => 'Kullanıcı listesi ve düzenlenmesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 9],
+            ['page_url' => 'haberler/olustur', 'desc' => 'Haber oluştur', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 9],
 
-            ['page_url' => 'bayim', 'desc' => 'Bayim', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
-            ['page_url' => 'bayim/ayarlar', 'desc' => 'Bayim ayarlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
-            ['page_url' => 'bayim/operatorler', 'desc' => 'Bayim operatör listesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
-            ['page_url' => 'bayim/operator/ekle', 'desc' => 'Bayim operatör ekle', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
-            ['page_url' => 'bayim/sikayetler', 'desc' => 'Bayim şikayetler', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
+            ['page_url' => 'kullanicilar', 'desc' => 'Kullanıcı listesi ve düzenlenmesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
 
-            ['page_url' => 'bayi', 'desc' => 'Bayi listesi', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/operatorler', 'desc' => 'Bayi operatör listesi', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/operator/ekle', 'desc' => 'Bayi operatör ekle', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/ekle', 'desc' => 'Bayi ekleme', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/duzenle', 'desc' => 'Bayi düzenleme', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/duraklat', 'desc' => 'Bayiyi duraklat', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/yayin', 'desc' => 'Bayiyi yayına al', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/sil', 'desc' => 'Bayiyi sil', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 11],
-            ['page_url' => 'bayi/sikayetler', 'desc' => 'Bayi sikyaetleri', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 11],
+            ['page_url' => 'bayim', 'desc' => 'Bayim', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/ayarlar', 'desc' => 'Bayim ayarlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/operatorler', 'desc' => 'Bayim operatör listesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/operator/ekle', 'desc' => 'Bayim operatör ekle', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/sikayetler', 'desc' => 'Bayim şikayetler', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+
+            ['page_url' => 'bayi', 'desc' => 'Bayi listesi', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/operatorler', 'desc' => 'Bayi operatör listesi', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/operator/ekle', 'desc' => 'Bayi operatör ekle', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/ekle', 'desc' => 'Bayi ekleme', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/duzenle', 'desc' => 'Bayi düzenleme', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/duraklat', 'desc' => 'Bayiyi duraklat', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/yayin', 'desc' => 'Bayiyi yayına al', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/sil', 'desc' => 'Bayiyi sil', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/sikayetler', 'desc' => 'Bayi sikyaetleri', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
 
 
-            ['page_url' => 'ayarlar/profilim', 'desc' => 'Profil ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 12],
-            ['page_url' => 'ayarlar/tercihlerim', 'desc' => 'Tercihlerim', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 12],
-            ['page_url' => 'ayarlar/sifre-degistir', 'desc' => 'Şifre değişikliği', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 12],
-            ['page_url' => 'ayarlar/log', 'desc' => 'Log geçmişi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 12],
-            ['page_url' => 'ayarlar/bildirim-ayarlari', 'desc' => 'Bildirim ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 12],
+            ['page_url' => 'ayarlar/profilim', 'desc' => 'Profil ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],
+            ['page_url' => 'ayarlar/tercihlerim', 'desc' => 'Tercihlerim', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],
+            ['page_url' => 'ayarlar/sifre-degistir', 'desc' => 'Şifre değişikliği', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],
+            ['page_url' => 'ayarlar/log', 'desc' => 'Log geçmişi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],
+            ['page_url' => 'ayarlar/bildirim-ayarlari', 'desc' => 'Bildirim ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],
 
         ]);
 
