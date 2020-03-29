@@ -28,17 +28,17 @@
 
 
                                                 <div class="col-lg-12 ">
-                                                        <div class="form-group mb-4">
-                                                            <label for="notificationTitleInput">Bildirim başlığı</label>
-                                                            <input type="text" class="form-control" id="notificationTitleInput" placeholder="İndirim">
-                                                        </div>
-                                                        <div class="form-group mb-4">
-                                                            <label for="notificationDescInput">Bildirim içeriği</label>
-                                                            <input type="text" class="form-control" id="notificationDescInput" placeholder="Bugüne özel 20% indirim">
-                                                        </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="notificationTitleInput">Bildirim başlığı</label>
+                                                        <input type="text" class="form-control" id="notificationTitleInput" placeholder="İndirim">
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="notificationDescInput">Bildirim içeriği</label>
+                                                        <input type="text" class="form-control" id="notificationDescInput" placeholder="Bugüne özel 20% indirim">
+                                                    </div>
 
 
-                                                        <input type="submit" id="sendNotificationBtn" class="btn btn-primary" value="Bildirimi gönder">
+                                                    <input type="submit" id="sendNotificationBtn" class="btn btn-primary" value="Bildirimi gönder">
                                                 </div>
 
 
@@ -107,7 +107,7 @@
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/js/components/notification/custom-snackbar.js"></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
-    <script src="/mod/js/interactions/sendnotifications.js"></script>
+    <script src="/mod/js/branch/sendnotification.js"></script>
 
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/blockui/jquery.blockUI.min.js"></script>
 

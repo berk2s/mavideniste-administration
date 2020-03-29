@@ -55,6 +55,9 @@
                         {{ Request::path() == 'kategori/tag/ekle' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'kategori/tag/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+                        {{ Request::path() == 'kategori/analiz' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'kategori/analiz' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                     >
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -68,6 +71,7 @@
                         {{ Request::path() == 'kategori' ? 'show' : '' }}
                         {{ Request::path() == 'kategori/ekle' ? 'show' : '' }}
                         {{ Request::path() == 'kategori/tag/ekle' ? 'show' : '' }}
+                        {{ Request::path() == 'kategori/analiz' ? 'show' : '' }}
 
                         " id="categories" data-parent="#accordionExample">
 
@@ -92,6 +96,14 @@
                                     {{ Request::path() == 'kategori/tag/ekle' ? 'class=active' : '' }}
                                 >
                                     <a href="/kategori/tag/ekle"> Alt kategori ekle </a>
+                                </li>
+                            @endif
+
+                            @if(array_search('kategori/analiz', $pageUrlArray) !== false)
+                                <li
+                                    {{ Request::path() == 'kategori/analiz' ? 'class=active' : '' }}
+                                >
+                                    <a href="/kategori/analiz"> Kategori analizi </a>
                                 </li>
                             @endif
 
@@ -155,6 +167,8 @@
                         {{ Request::path() == 'urun' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
                         {{ Request::path() == 'urun/ekle' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'urun/ekle' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+                        {{ Request::path() == 'urun/analiz' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'urun/analiz' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
                     >
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
@@ -167,6 +181,7 @@
                     <ul class="collapse submenu list-unstyled
                         {{ Request::path() == 'urun' ? 'show' : '' }}
                         {{ Request::path() == 'urun/ekle' ? 'show' : '' }}
+                        {{ Request::path() == 'urun/analiz' ? 'show' : '' }}
 
                         " id="products" data-parent="#accordionExample">
 
@@ -183,6 +198,14 @@
                                 {{ Request::path() == 'urun/ekle' ? 'class=active' : '' }}
                             >
                                 <a href="/urun/ekle"> Ürün ekle </a>
+                            </li>
+                        @endif
+
+                        @if(array_search('urun/analiz', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'urun/analiz' ? 'class=active' : '' }}
+                            >
+                                <a href="/urun/analiz"> Ürün analizleri </a>
                             </li>
                         @endif
 
@@ -269,6 +292,14 @@
                         {{ Request::path() == 'kampanya/olustur' ? 'show' : '' }}
                     " id="campaigns" data-parent="#accordionExample">
 
+                        @if(array_search('kampanya', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'kampanya' ? 'class=active' : '' }}
+                            >
+                                <a href="/kampanya"> Kampanyalar  </a>
+                            </li>
+                        @endif
+
                         @if(array_search('kampanya/olustur', $pageUrlArray) !== false)
                             <li
                                 {{ Request::path() == 'kampanya/olustur' ? 'class=active' : '' }}
@@ -310,7 +341,15 @@
                         {{ Request::path() == 'kupon/olustur' ? 'show' : '' }}
                     " id="coupon" data-parent="#accordionExample">
 
-                        @if(array_search('kupon/olustur', $pageUrlArray) !== false)
+                        @if(array_search('kupon', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'kupon' ? 'class=active' : '' }}
+                            >
+                                <a href="/kupon"> Kuponlar  </a>
+                            </li>
+                         @endif
+
+                            @if(array_search('kupon/olustur', $pageUrlArray) !== false)
                             <li
                                 {{ Request::path() == 'kupon/olustur' ? 'class=active' : '' }}
                             >
@@ -329,8 +368,8 @@
                         data-toggle="collapse"
                         class="dropdown-toggle"
 
-                        {{ Request::path() == 'etkilesim' ? ' data-active=true' : '' }}
-                        {{ Request::path() == 'etkilesim' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+                        {{ Request::path() == 'etkilesim/sms-gonder' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'etkilesim/sms-gonder' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
                         {{ Request::path() == 'etkilesim/bildirim-gonder' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'etkilesim/bildirim-gonder' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
@@ -347,9 +386,17 @@
                     </a>
 
                     <ul class="collapse submenu list-unstyled
-                        {{ Request::path() == 'etkilesim' ? 'show' : '' }}
+                        {{ Request::path() == 'etkilesim/sms-gonder' ? 'show' : '' }}
                         {{ Request::path() == 'etkilesim/bildirim-gonder' ? 'show' : '' }}
                     " id="interactions" data-parent="#accordionExample">
+
+                        @if(array_search('etkilesim/sms-gonder', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'etkilesim/sms-gonder' ? 'class=active' : '' }}
+                            >
+                                <a href="/etkilesim/sms-gonder"> SMS gönder  </a>
+                            </li>
+                        @endif
 
                         @if(array_search('etkilesim/bildirim-gonder', $pageUrlArray) !== false)
                             <li
@@ -380,7 +427,7 @@
                     >
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                            <span>Haberler</span>
+                            <span>Haber</span>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -388,9 +435,17 @@
                     </a>
 
                     <ul class="collapse submenu list-unstyled
-                        {{ Request::path() == 'haberler/olustur' ? 'show' : '' }}
+                        {{ Request::path() == 'haberler' ? 'show' : '' }}
                         {{ Request::path() == 'haberler/olustur' ? 'show' : '' }}
                     " id="news" data-parent="#accordionExample">
+
+                        @if(array_search('haberler', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'haberler' ? 'class=active' : '' }}
+                            >
+                                <a href="/haberler"> Haberler  </a>
+                            </li>
+                        @endif
 
                         @if(array_search('haberler/olustur', $pageUrlArray) !== false)
                             <li
@@ -417,7 +472,8 @@
 
                     >
                         <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>                        <span>Kullanıcılar</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                            <span>Kullanıcı</span>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -604,6 +660,22 @@
                                 {{ Request::path() == 'bayi/operator/ekle' ? 'class=active' : '' }}
                             >
                                 <a href="/bayi/operator/ekle"> Operatör ekle  </a>
+                            </li>
+                        @endif
+
+                        @if(array_search('bayi/sms', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'bayi/sms' ? 'class=active' : '' }}
+                            >
+                                <a href="/bayi/sms"> SMS gönder  </a>
+                            </li>
+                        @endif
+
+                        @if(array_search('bayi/bildirim', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'bayi/bildirim' ? 'class=active' : '' }}
+                            >
+                                <a href="/bayi/bildirim"> Bildirim gönder  </a>
                             </li>
                         @endif
 

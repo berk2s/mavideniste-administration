@@ -2,8 +2,8 @@
 @section('title', 'Maviden İste - Bildirim Gönder')
 
 @section('page_navigation')
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Etkileşim</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><span>Bildirim gönder</span></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Bayi sistemi</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><span>SMS gönder</span></li>
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                             <div class="info">
-                                <h5 class="">Bildirim gönder</h5>
+                                <h5 class="">SMS gönder</h5>
                                 <div class="row">
 
                                     <div class="col-md-11 mx-auto">
@@ -28,17 +28,16 @@
 
 
                                                 <div class="col-lg-12 ">
-                                                        <div class="form-group mb-4">
-                                                            <label for="notificationTitleInput">Bildirim başlığı</label>
-                                                            <input type="text" class="form-control" id="notificationTitleInput" placeholder="İndirim">
-                                                        </div>
-                                                        <div class="form-group mb-4">
-                                                            <label for="notificationDescInput">Bildirim içeriği</label>
-                                                            <input type="text" class="form-control" id="notificationDescInput" placeholder="Bugüne özel 20% indirim">
-                                                        </div>
+
+                                                    <div class="form-group mb-4">
+                                                        <label for="notificationDescInput">SMS içeriği</label>
+
+                                                        <textarea class="form-control" id="smsContent" style="height:200px"></textarea>
+
+                                                    </div>
 
 
-                                                        <input type="submit" id="sendNotificationBtn" class="btn btn-primary" value="Bildirimi gönder">
+                                                    <input type="submit" id="sendNotificationBtn" class="btn btn-primary" value="SMS gönder">
                                                 </div>
 
 
@@ -107,7 +106,7 @@
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/js/components/notification/custom-snackbar.js"></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
-    <script src="/mod/js/interactions/sendnotifications.js"></script>
+    <script src="/mod/js/branch/sms.js"></script>
 
     <script src="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/blockui/jquery.blockUI.min.js"></script>
 

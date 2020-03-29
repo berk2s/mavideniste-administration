@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mavideniste-ios-push",
+  "private_key_id": "d69b67c928dfb5dde7015546441f0a4c0985a21d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCaVe8AeaHmdw/1\nrCvWfeIKG0yE5eq8yTv6VtFcOTf9kmeHZf0gvYDwvembOXa7EBbgbD/a1SBdVrOk\ndXq7pBfG+La4iB4mUQt4WJPiO1FnaA2zTpq6u/VzzUXeCDC+SyeGgQ14RRzlPs2E\npK5waJoKlpRLs7QT1/P0mwk6UqkbZzabnNizIDOI4H6aDAYNyO9nefWQQHcx/sW0\n0sH1XHRd/Yu+I2T+fQ+eDjxm/qy67V+qZDGy7UMHVYi5KuWBSWJnuxaRs2JM9aTD\nfZol9MUfMeAFc7BWCRkhtWot4e5gZRhMZHznFIg7L/dTTXQqkebXX+sS7Sbv9Fcg\n4WS9IWiHAgMBAAECggEAFQALaNekGX1q7QVT47g2SSTEyTKVucFyCVLF4xQgE79X\nmftdMZbHlDprLoVnq/V4/2mLWMX2RO0WvZKEtEKUP605A6v12kXd1y7KVJa4sWbd\nsl/IOw93Sx4L2zXnGAWW57zorcxNrb3ZbiqQV9hL2ZP6ssBNiQOx/L8ZxtdXjlRL\nRuB1qlH+TQ2jwijcjoBwRsQMfMxprPOliIuqmqYojPJZOuZTjxiNwxkCzl14/4dO\nmWUnI8Ea+zeDlEUNU1Sa91JGdTAm4I7Dw/4es0nr2i03S2E76BzlMA5KZh/eieoe\nsCuHXU6kZjP6RzKq7qvVUZJNFIvJQ30oBRclSjnWOQKBgQDVGaOBCvx/7auIqvMP\nEAmHDN5sE1XGZ72bFQtks1BCWBoY6ZC4yPImA40RaPrPz5iVBjiClp2n7yU9Bxoz\nDSfhAFL4z3FP4RaBwsuGM01aeqIVwfkcM92+wFlBrAYGi38CRSRicpvo35cB6pQl\nvIK0+ugXh+3+IItY3iEXRYlJ2QKBgQC5Z8zb2OUO4Xhtzu1duaryC0d1p8eyX3P6\nuFFqMjGJyyB9fPSq0a4VWX0Fv2kA9iyGhtauCWZklXf/rx5x/n03vgoP6JCzP+qN\nli3qvaCm4gXOz504ciAtWpXrUcfKjlwSQmG/ZjBft64+8ESxPv/+kD73cjnUL8ip\nOMVCEu1pXwKBgE1l2X/V+K2SKhoiVNNktMErSGGiiCXeqfv4ocG6au0dyKTBuEGV\nInXyFjt7kJUHxlhiAQZVI//JmRHYUYi3P4O2NWyPE426qA0LLhaY7YBuSA50/EBl\nCiXtAL4cd7fK1J+Dc1qaW8wx4Uvd4l7uX97RvphFU4hYU6Q8UXJ9XAbJAoGBALXf\nPPXsLcYLJzeQZQgruaT1q4OesiYnvH2VkUe7NR0WRSjUCq4GQd5vilS5DygCVGsi\nmjTew7KnbK9D+XmZSvwDT5uLZ2ZurId3alN68LzDuy7EOlXEngvfcHEGKBZqz6aZ\nt4kplQpQBH148+lrA3OTzDCvvEqJFS3qopXOO1XBAoGBAM0C0KsXE28cgxwr7TRn\nkLyv5/Ex9B57CC+T8Fb3eAAxXlzdBpLy7fmj4yPw34rK5gQVkUVBM518YYPIhvya\nxm+KodOcz5EYxRXRtG+w7Qss1mZYmvP9MEWAxWkNGpzV3oHT3SE2TR/qy4NHY5sV\n9Sl5+8cUsxnkbqphFHbi1h7d\n-----END PRIVATE KEY-----\n",
+  "client_email": "analytics-for-panel@mavideniste-ios-push.iam.gserviceaccount.com",
+  "client_id": "114063142576736508797",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/analytics-for-panel%40mavideniste-ios-push.iam.gserviceaccount.com"
+}

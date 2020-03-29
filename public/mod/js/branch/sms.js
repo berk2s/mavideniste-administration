@@ -1,26 +1,24 @@
+//smsContent
 window.onload = () => {
 
     document.getElementById('sendNotificationBtn').addEventListener('click', async () => {
 
         try{
 
-            const title = document.getElementById('notificationTitleInput').value;
-            const desc = document.getElementById('notificationDescInput').value;
+            const desc = document.getElementById('smsContent').value;
             if(desc.trim() == ''){
                 Snackbar.show({text: 'İlgili alanları doldurunuz', duration: 4000});
                 return false;
             }else{
                 document.getElementById('sendNotificationBtn').value = '...'
 
-                const sendPush = await fetch(`${API_URL}/api/notification/push`, {
+                const sendPush = await fetch(`${API_URL}/api/notification/all/sms`, {
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json',
                         'x-api-key': API_KEY
                     },
                     body:JSON.stringify({
-                        group:TOPIC_EVERYBODY,
-                        title:title,
                         body:desc,
                         branch_id: BRANCH_ID
                     })
@@ -28,9 +26,9 @@ window.onload = () => {
 
                 console.log(sendPush);
 
-                Snackbar.show({text: 'Bildirim gönderildi', duration: 4000});
+                Snackbar.show({text: 'SMS gönderildi', duration: 4000});
 
-                document.getElementById('sendNotificationBtn').value = 'Bildirimi gönder';
+                document.getElementById('sendNotificationBtn').value = 'SMS gönder';
 
             }
 

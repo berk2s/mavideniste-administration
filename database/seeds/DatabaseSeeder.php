@@ -122,6 +122,13 @@ class DatabaseSeeder extends Seeder
            ['user_id' => 1, 'page_id' => 33],
            ['user_id' => 1, 'page_id' => 34],
            ['user_id' => 1, 'page_id' => 35],
+           ['user_id' => 1, 'page_id' => 36],
+           ['user_id' => 1, 'page_id' => 37],
+           ['user_id' => 1, 'page_id' => 38],
+           ['user_id' => 1, 'page_id' => 39],
+           ['user_id' => 1, 'page_id' => 40],
+           ['user_id' => 1, 'page_id' => 41],
+           ['user_id' => 1, 'page_id' => 42],
         ]);
 
         DB::table('pages')->insert([
@@ -131,12 +138,14 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'kategori', 'desc' => 'Kategori listesi ve düzenlenmesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 2],
             ['page_url' => 'kategori/ekle', 'desc' => 'Kategori ekleme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 2],
             ['page_url' => 'kategori/tag/ekle', 'desc' => 'Alt kategori ekleme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 2],
+            ['page_url' => 'kategori/analiz', 'desc' => 'Kategoriler ve kategori analizi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 2],
 
             ['page_url' => 'marka', 'desc' => 'Marka listesi ve düzenlenmesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 3],
             ['page_url' => 'marka/ekle', 'desc' => 'Marka ekleme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 3],
 
             ['page_url' => 'urun', 'desc' => 'Ürün listesi ve düzenlenmesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 4],
             ['page_url' => 'urun/ekle', 'desc' => 'Ürün ekleme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 4],
+            ['page_url' => 'urun/analiz', 'desc' => 'Ürün analizleri', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 4],
 
             ['page_url' => 'siparisler', 'desc' => 'Canlı siparişler ve aksiyonlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 5],
             ['page_url' => 'siparisler/gecmis', 'desc' => 'Geçmiş siparişler ve aksiyonlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 5],
@@ -144,10 +153,13 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'kampanya', 'desc' => 'Kampanyalar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 6],
             ['page_url' => 'kampanya/olustur', 'desc' => 'Kampanya oluşturma', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 6],
 
+            ['page_url' => 'kupon', 'desc' => 'Kuponlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 7],
             ['page_url' => 'kupon/olustur', 'desc' => 'Kupon oluşturma', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 7],
 
+            ['page_url' => 'etkilesim/sms-gonder', 'desc' => 'SMS gönderme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 8],
             ['page_url' => 'etkilesim/bildirim-gonder', 'desc' => 'Bildirim gönderme', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 8],
 
+            ['page_url' => 'haberler', 'desc' => 'Haberler', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 9],
             ['page_url' => 'haberler/olustur', 'desc' => 'Haber oluştur', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 9],
 
             ['page_url' => 'kullanicilar', 'desc' => 'Kullanıcı listesi ve düzenlenmesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 10],
@@ -166,7 +178,9 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'bayi/duraklat', 'desc' => 'Bayiyi duraklat', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/yayin', 'desc' => 'Bayiyi yayına al', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/sil', 'desc' => 'Bayiyi sil', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
-            ['page_url' => 'bayi/sikayetler', 'desc' => 'Bayi sikyaetleri', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/sikayetler', 'desc' => 'Bayi şikayetleri', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/sms', 'desc' => 'Herkese sms gönder', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/bildirim', 'desc' => 'Herkese bildirim gönder', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
 
 
             ['page_url' => 'ayarlar/profilim', 'desc' => 'Profil ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],

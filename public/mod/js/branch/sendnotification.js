@@ -12,7 +12,7 @@ window.onload = () => {
             }else{
                 document.getElementById('sendNotificationBtn').value = '...'
 
-                const sendPush = await fetch(`${API_URL}/api/notification/push`, {
+                const sendPush = await fetch(`${API_URL}/api/notification/all/push`, {
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json',

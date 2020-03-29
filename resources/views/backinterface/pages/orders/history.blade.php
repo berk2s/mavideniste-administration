@@ -8,6 +8,8 @@
 
 @section('content')
     <div class="layout-px-spacing">
+
+
         <div class="row invoice layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="app-hamburger-container">
@@ -21,6 +23,24 @@
                                     <input type="text" class="form-control" placeholder="Siparişlerde ara">
                                 </div>
                                 <ul class="nav nav-pills inv-list-container d-block" id="pills-tab" role="tablist">
+
+                                    @foreach($results->data as $result)
+                                        <li class='nav-item'>
+                                            <div class='nav-link list-actions' id='invoice-{{$result->visibility_id}}' data-invoice-id="{{$result->visibility_id}}">
+                                                <div class="f-m-body">
+                                                    <div class="f-head">
+                                                        <svg style='border-radius: 0!important' xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                                    </div>
+                                                    <div class="f-body">
+                                                        <p class="invoice-number">{{$result->is_bluecurrier == true ? 'Mavikurye' : 'Sipariş'}} - #{{$result->visibility_id}}</p>
+                                                        <p class="invoice-customer-name">{{$result->user[0]->name_surname}}</p>
+                                                        <p class="invoice-generated-date">{{Carbon\Carbon::parse($result->order_date)->format('d-m-Y H:i')}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
 
                                 </ul>
                             </div>
@@ -43,7 +63,140 @@
 
                             <div id="ct" class="">
 
+                                @foreach($results->data as $result)
 
+
+                                    <div class='invoice-{{$result->visibility_id}}'>
+                                    <div class="content-section  animated animatedFadeInUp fadeInUp">
+
+                                        <div class="row inv--head-section">
+
+                                            <div class="col-sm-6 col-12">
+                                                <h3 class="in-heading">SİPARİŞ </h3>
+                                            </div>
+                                            <div class="col-sm-6 col-12 align-self-center text-sm-right">
+                                                <div class="company-info">
+                                                    <img src="/logo.png" style="width:30px;height:30px;margin-right: 20px;" />
+                                                    <h5 class="inv-brand-name">Maviden İste</h5>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row inv--detail-section">
+
+                                            <div class="col-sm-7 align-self-center">
+                                                <p class="inv-to">Sipariş Sahibi</p>
+                                            </div>
+
+
+                                            <div class="col-sm-7 align-self-center">
+                                                <p class="inv-customer-name">{{$result->user[0]->name_surname}}</p>
+                                                <p class="inv-street-addr">{{$result->user_address->address}}</p>
+                                                <p class="inv-email-address">{{$result->user[0]->phone_number}}</p>
+                                            </div>
+                                            <div class="col-sm-5 align-self-center  text-sm-right order-2">
+                                                <p class="inv-list-number"><span class="inv-title">Sipariş numarası : </span> <span class="inv-number">[invoice number]</span></p>
+                                                <p class="inv-created-date"><span class="inv-title">Sipariş tarihi : </span> <span class="inv-date">{{Carbon\Carbon::parse($result->order_date)->format('d-m-Y H:i') }}</span></p>
+                                                <p class="inv-created-date"><span class="inv-title">Hazırlanma tarihi : </span> <span class="inv-date">{{Carbon\Carbon::parse($result->order_history_prepare)->format('d-m-Y H:i') }}</span></p>
+                                                <p class="inv-created-date"><span class="inv-title">Yola çıkma tarihi : </span> <span class="inv-date">{{Carbon\Carbon::parse($result->order_history_enroute)->format('d-m-Y H:i') }}</span></p>
+                                                <p class="inv-due-date"><span class="inv-title">Teslim tarihi : </span> <span class="inv-date">{{Carbon\Carbon::parse($result->order_history_success)->format('d-m-Y H:i') }}</span></p>
+                                            </div>
+                                        </div>
+                                        @if($result->products != null)
+
+                                        <div class="row inv--product-table-section">
+                                            <div class="col-12">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead class="">
+                                                        <tr>
+                                                            <th scope="col">S.No</th>
+                                                            <th scope="col">Ürün</th>
+                                                            <th  scope="col">Miktar</th>
+                                                            <th  scope="col">Tutar</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php $i = 0; @endphp
+                                                            @foreach($result->products as $product)
+                                                                <tr>
+                                                                    <td>{{$i}}</td>
+                                                                    <td>{{$product->product_name}}</td>
+                                                                    <td>{{$product->count}}</td>
+                                                                    <td>{{$product->product_list_price}}</td>
+
+                                                                </tr>
+                                                                @php $i++ @endphp
+                                                            @endforeach
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
+
+                                        <div class="row mt-4">
+                                            @if($result->products != null)
+
+                                            <div class="col-sm-5 col-12 order-sm-0 order-1">
+                                                <div class="inv--payment-info">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-12">
+                                                            <h6 class=" inv-title">Diğer Bilgiler:</h6>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <p class=" inv-subtitle">Ödeme: </p>
+                                                        </div>
+                                                        <div class="col-sm-8 col-12">
+                                                            <p class="">{{$result->payload_type == 1 ? 'Nakit' : 'Kart'}}</p>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <p class=" inv-subtitle">Sipariş notu : </p>
+                                                        </div>
+                                                        <div class="col-sm-8 col-12">
+                                                            <p class="">{{$result->order_note != null ? $result->order_note : ''}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @endif
+
+                                            <div class="col-sm-7 col-12 order-sm-1 order-0">
+                                                <div class="inv--total-amounts text-sm-right">
+                                                    <div class="row">
+                                                        @if($result->products != null)
+
+                                                        <div class="col-sm-8 col-7">
+                                                            <p class="">Kupon: </p>
+                                                        </div>
+                                                        <div class="col-sm-4 col-5">
+                                                            <p class="">{{$result->coupon != null ? $result->coupon->coupon_name : 'Yok'}}</p>
+                                                        </div>
+                                                        @endif
+                                                        <div class="col-sm-8 col-7 grand-total-title">
+                                                            <h4 class="">Sipariş Tutarı : </h4>
+                                                        </div>
+                                                        <div class="col-sm-4 col-5 grand-total-amount">
+                                                            <h4 class="">{{$result->price}} TL</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+
+
+
+
+
+
+                            @endforeach
 
 
                             </div>
@@ -54,7 +207,7 @@
                         <div class="inv--thankYou">
                             <div class="row">
                                 <div class="col-sm-12 col-12">
-                                    <p class="">Thank you for doing Business with us.</p>
+                                    <p class="">mavideniste</p>
                                 </div>
                             </div>
                         </div>

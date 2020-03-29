@@ -2,7 +2,7 @@ window.onload = () => {
 
     fetchUsers = async () => {
         try{
-            const result = await fetch(`${API_URL}/api/p/user`, {
+            const result = await fetch(`${API_URL}/api/p/user/branch/${BRANCH_ID}`, {
                 method:'GET',
                 headers:{
                     'x-api-key': API_KEY
@@ -19,6 +19,46 @@ window.onload = () => {
         document.getElementById('saveSendNotification').setAttribute('data-token', token);
         document.getElementById('userNameText').innerHTML = e.getAttribute('data-username');
         document.getElementById('aSendNotification').click()
+    }
+
+    handleSendSMS = (e) => {
+        const phone_number = e.getAttribute('data-phonenumber');
+        document.getElementById('saveSendSMS').setAttribute('data-phonenumber', phone_number);
+        document.getElementById('aSendSms').click()
+    }
+
+    clickSendSMS= async (e) => {
+        try{
+            //sendSMS_Desc
+            document.getElementById('saveSendSMS').innerHTML = `<div class="spinner-border text-white mr-2 align-self-center loader-sm" style="width:20px;height:20px"></div>`;
+            const phone_number = e.getAttribute('data-phonenumber');
+
+            const desc = document.getElementById('sendSMS_Desc').value;
+
+            if(desc.trim() == ''){
+                Snackbar.show({text: 'İlgili alanları doldurunuz', duration: 4000});
+                document.getElementById('saveSendSMS').innerHTML = 'Yolla';
+            }else {
+
+                const send = await fetch(`${API_URL}/api/notification/sms/user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json',
+                        'x-api-key': API_KEY
+                    },
+                    body:JSON.stringify({
+                        phone_number:phone_number,
+                        body:desc
+                    })
+                });
+                document.getElementById('saveSendSMS').innerHTML = 'Yolla';
+                Snackbar.show({text: 'SMS gönderildi.', duration: 4000});
+
+            }
+
+        }catch(e){
+            console.log(e);
+        }
     }
 
     clickSendNotification = async (e) => {
@@ -83,6 +123,16 @@ window.onload = () => {
                                 onclick="handleUserSendNotificationClick(this)"
                                 data-token="${e.token}"
                                 >Bildirim gönder</a>
+
+                                <a
+                                class="dropdown-item"
+                                data-toggle="modal"
+                                data-target="#fadeinModal"
+                                href="javascript:void(0);"
+                                data-username="${e.name_surname}"
+                                onclick="handleSendSMS(this)"
+                                data-phonenumber="9${e.phone_number}"
+                                >SMS gönder</a>
 
                                <a
                                 class="dropdown-item"

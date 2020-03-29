@@ -49,6 +49,7 @@ Route::group(['prefix' => '/ayarlar', 'middleware' => ['auth', 'authority']], fu
 
 Route::group(['prefix' => '/kategori', 'middleware' => ['auth', 'authority']], function() {
     Route::get('/', 'Backside\Pages\Category\ListCategory@get_view');
+    Route::get('/analiz', 'Backside\Pages\Category\Analytics@get_view');
 
     Route::get('/ekle', 'Backside\Pages\Category\NewCategory@get_view');
     Route::get('/tag/ekle', 'Backside\Pages\Category\NewSubCategory@get_view');
@@ -65,14 +66,14 @@ Route::group(['prefix' => '/marka', 'middleware' => ['auth', 'authority']], func
 Route::group(['prefix' => '/urun', 'middleware' => ['auth', 'authority']], function() {
     Route::get('/', 'Backside\Pages\Product\ListProductController@get_view');
     Route::get('/ekle', 'Backside\Pages\Product\NewProductController@get_view');
+    Route::get('/analiz', 'Backside\Pages\Product\Analytic@get_view');
 
 });
 
 Route::group(['prefix' => '/etkilesim', 'middleware' => ['auth', 'authority']], function() {
 
-    Route::get('/', 'Backside\Pages\Product\ListProductController@get_view');
     Route::get('/bildirim-gonder', 'Backside\Pages\Interactions\SendNotification@get_view');
-    Route::get('/kullanici-gruplari', 'Backside\Pages\Interactions\UserGroups@get_view');
+    Route::get('/sms-gonder', 'Backside\Pages\Interactions\SendSMS@get_view');
 
 });
 
@@ -91,6 +92,7 @@ Route::group(['prefix' => '/siparisler', 'middleware' => ['auth', 'authority']],
 
 Route::group(['prefix' => '/kupon', 'middleware' => ['auth', 'authority']], function() {
 
+    Route::get('/', 'Backside\Pages\Coupon\ListCoupon@get_view');
     Route::get('/olustur', 'Backside\Pages\Coupon\NewCoupon@get_view');
 
 });
@@ -114,6 +116,9 @@ Route::group(['prefix' => '/bayi', 'middleware' => ['auth', 'authority']], funct
 
     Route::get('/sikayetler', 'Backside\Pages\Branch\Complaints@get_view');
 
+    Route::get('/sms', 'Backside\Pages\Branch\SendSMS@get_view');
+    Route::get('/bildirim', 'Backside\Pages\Branch\SendNotification@get_view');
+
    // Route::get('/hizmet-bedeli', '');
 
 });
@@ -136,12 +141,14 @@ Route::group(['prefix' => '/bayim', 'middleware' => ['auth', 'authority']], func
 
 Route::group(['prefix' => '/kampanya', 'middleware' => ['auth', 'authority']], function() {
 
+    Route::get('/', 'Backside\Pages\Campaign\ListCampaign@get_view');
     Route::get('/olustur', 'Backside\Pages\Campaign\NewCampaign@get_view');
 
 });
 
 Route::group(['prefix' => '/haberler', 'middleware' => ['auth', 'authority']], function() {
 
+    Route::get('/', 'Backside\Pages\News\ListNews@get_view');
     Route::get('/olustur', 'Backside\Pages\News\NewNews@get_view');
 
 });
