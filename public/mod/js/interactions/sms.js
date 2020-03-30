@@ -25,6 +25,7 @@ window.onload = () => {
                 });
 
                 console.log(sendPush);
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı SMS gönderdi. <br /> İçerik: ${desc} </b>`);
 
                 Snackbar.show({text: 'SMS gönderildi', duration: 4000});
 

@@ -129,6 +129,11 @@ class DatabaseSeeder extends Seeder
            ['user_id' => 1, 'page_id' => 40],
            ['user_id' => 1, 'page_id' => 41],
            ['user_id' => 1, 'page_id' => 42],
+           ['user_id' => 1, 'page_id' => 43],
+           ['user_id' => 1, 'page_id' => 44],
+           ['user_id' => 1, 'page_id' => 45],
+           ['user_id' => 1, 'page_id' => 46],
+           ['user_id' => 1, 'page_id' => 47],
         ]);
 
         DB::table('pages')->insert([
@@ -149,6 +154,7 @@ class DatabaseSeeder extends Seeder
 
             ['page_url' => 'siparisler', 'desc' => 'Canlı siparişler ve aksiyonlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 5],
             ['page_url' => 'siparisler/gecmis', 'desc' => 'Geçmiş siparişler ve aksiyonlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 5],
+            ['page_url' => 'siparisler/gecmis/uye', 'desc' => 'Üyenin geçmiş siparişleri ve aksiyonları', 'is_sub' => true, 'is_owner_page' => false, 'tab'=> 5],
 
             ['page_url' => 'kampanya', 'desc' => 'Kampanyalar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 6],
             ['page_url' => 'kampanya/olustur', 'desc' => 'Kampanya oluşturma', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 6],
@@ -167,11 +173,17 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'bayim', 'desc' => 'Bayim', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
             ['page_url' => 'bayim/ayarlar', 'desc' => 'Bayim ayarlar', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
             ['page_url' => 'bayim/operatorler', 'desc' => 'Bayim operatör listesi', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/operatorler/duzenle', 'desc' => 'Bayi operatör düzenleme', 'is_sub' => true, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/operatorler/sil', 'desc' => 'Bayi operatör silme', 'is_sub' => true, 'is_owner_page' => false, 'tab'=> 11],
             ['page_url' => 'bayim/operator/ekle', 'desc' => 'Bayim operatör ekle', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
             ['page_url' => 'bayim/sikayetler', 'desc' => 'Bayim şikayetler', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 11],
+            ['page_url' => 'bayim/log', 'desc' => 'Bayi log geçmişleri', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+
 
             ['page_url' => 'bayi', 'desc' => 'Bayi listesi', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/operatorler', 'desc' => 'Bayi operatör listesi', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/operatorler/duzenle', 'desc' => 'Bayi operatör düzenleme', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/operatorler/sil', 'desc' => 'Bayi operatör silme', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/operator/ekle', 'desc' => 'Bayi operatör ekle', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/ekle', 'desc' => 'Bayi ekleme', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/duzenle', 'desc' => 'Bayi düzenleme', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
@@ -181,6 +193,8 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'bayi/sikayetler', 'desc' => 'Bayi şikayetleri', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/sms', 'desc' => 'Herkese sms gönder', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/bildirim', 'desc' => 'Herkese bildirim gönder', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/kullanicilar', 'desc' => 'Tüm bayilere kayıtlı kullanıcılar', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/log', 'desc' => 'Bayi log geçmişleri', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
 
 
             ['page_url' => 'ayarlar/profilim', 'desc' => 'Profil ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],

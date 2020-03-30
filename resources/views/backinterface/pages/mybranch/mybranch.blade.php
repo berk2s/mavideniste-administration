@@ -1,10 +1,10 @@
 
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Tercih Değiştir')
+@section('title', 'Maviden İste - Bayi bilgileri')
 
 @section('page_navigation')
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Ayarlar</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><span>Tercihlerim</span></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Bayim</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><span>Bayi bilgileri</span></li>
 @endsection
 
 @section('content')

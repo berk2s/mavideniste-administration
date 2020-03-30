@@ -83,6 +83,8 @@ window.onload = () => {
                     coupon_id:id
                 })
             });
+            await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı kupon sildi. </b>`);
+
             Snackbar.show({text:'Kupon silindi', duration:4000});
             await insertBrands()
         }catch(e){
@@ -117,6 +119,7 @@ window.onload = () => {
                             image:lastImage
                         })
                     });
+
                     Snackbar.show({text:'Güncelleme başarılı', duration:4000});
 
                 };
@@ -232,6 +235,7 @@ window.onload = () => {
                 })
             });
             await insertBrands();
+            await sendLog(USER_ID, BRANCH_ID, 2, `<b>Kullanıcı kupon durumu değiştirdi. </b>`);
             Snackbar.show({text:'Yayın değişikliği yapıldı', duration:4000})
         }catch(e){
             console.log(e);

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class NewBranchOperator extends Controller
 {
     public function get_view(){
-        $authorities = Pages::get();
+        $authorities = Pages::where('tab', '!=', 11)->get();
         return view('backinterface.pages.mybranch.newoperator', compact('authorities'));
     }
 

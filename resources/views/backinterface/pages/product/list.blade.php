@@ -1,9 +1,9 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Ürünler Listesi')
+@section('title', 'Maviden İste - Ürünler listesi')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Ürünler</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><span>Ürünler Listesi</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span>Ürünler listesi</span></li>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Ürünler Listesi
+                                <h4>ÜRÜNLER LİSTESİ
 
                                     <div id='loadingSpin' class="spinner-border text-success align-self-center loader-sm" style="display: none;float:right;width:20px;height:20px"></div>
                                 </h4>

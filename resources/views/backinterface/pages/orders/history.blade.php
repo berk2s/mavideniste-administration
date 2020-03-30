@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Canlı siparişler')
+@section('title', 'Maviden İste - Geçmiş siparişler')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Siparişler</a></li>
@@ -23,7 +23,7 @@
                                     <input type="text" class="form-control" placeholder="Siparişlerde ara">
                                 </div>
                                 <ul class="nav nav-pills inv-list-container d-block" id="pills-tab" role="tablist">
-
+                                    @if(count($results->data) != 0)
                                     @foreach($results->data as $result)
                                         <li class='nav-item'>
                                             <div class='nav-link list-actions' id='invoice-{{$result->visibility_id}}' data-invoice-id="{{$result->visibility_id}}">
@@ -40,6 +40,7 @@
                                             </div>
                                         </li>
                                     @endforeach
+                                    @endif
 
 
                                 </ul>
@@ -62,7 +63,7 @@
                             </div>
 
                             <div id="ct" class="">
-
+                                @if(count($results->data) != 0)
                                 @foreach($results->data as $result)
 
 
@@ -124,7 +125,7 @@
                                                                     <td>{{$i}}</td>
                                                                     <td>{{$product->product_name}}</td>
                                                                     <td>{{$product->count}}</td>
-                                                                    <td>{{$product->product_list_price}}</td>
+                                                                    <td>{{$product->product_list_price}} TL</td>
 
                                                                 </tr>
                                                                 @php $i++ @endphp
@@ -177,11 +178,11 @@
                                                             <p class="">{{$result->coupon != null ? $result->coupon->coupon_name : 'Yok'}}</p>
                                                         </div>
                                                         @endif
-                                                        <div class="col-sm-8 col-7 grand-total-title">
-                                                            <h4 class="">Sipariş Tutarı : </h4>
+                                                        <div class="col-sm-8 col-7">
+                                                            <p class=""><b>Sipariş Tutarı :</b> </p>
                                                         </div>
-                                                        <div class="col-sm-4 col-5 grand-total-amount">
-                                                            <h4 class="">{{$result->price}} TL</h4>
+                                                        <div class="col-sm-4 col-5 ">
+                                                            <p class=""><b>{{$result->price}} TL</b></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -197,6 +198,7 @@
 
 
                             @endforeach
+                            @endif
 
 
                             </div>

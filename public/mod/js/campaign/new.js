@@ -64,6 +64,9 @@ window.onload = () => {
                         })
                     });
 
+                    await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı ${campaign_name} kampanyasını ekledi. </b>`);
+
+
                     Snackbar.show({text:'Kampanya başarılı şekilde eklendi.', duration:4000})
 
                 }

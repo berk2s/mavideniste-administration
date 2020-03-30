@@ -130,6 +130,8 @@ window.onload = () => {
                     })
                 });
 
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı kupon ekledi. </b>`);
+
                 Snackbar.show({text:'Kupon oluşturuldu', duration:4000});
 
 

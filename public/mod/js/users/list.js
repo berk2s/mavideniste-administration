@@ -51,6 +51,8 @@ window.onload = () => {
                         body:desc
                     })
                 });
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı SMS gönderdi.</b>`);
+
                 document.getElementById('saveSendSMS').innerHTML = 'Yolla';
                 Snackbar.show({text: 'SMS gönderildi.', duration: 4000});
 
@@ -85,6 +87,7 @@ window.onload = () => {
                         body:desc
                     })
                 });
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı bildirim gönderdi.</b>`);
                 document.getElementById('saveSendNotification').innerHTML = 'Yolla';
                 Snackbar.show({text: 'Bildirim gönderildi.', duration: 4000});
 
@@ -93,6 +96,41 @@ window.onload = () => {
         }catch(e){
             console.log(e);
         }
+    }
+
+    handleUserAddressList = async (e) => {
+        const userid = e.getAttribute('data-userid');
+        document.getElementById('aAddressList').click();
+        fetch(`${API_URL}/api/p/user/address/${userid}`, {
+            method:'GET',
+            headers:{
+                'x-api-key':API_KEY
+            }
+        })
+            .then(data => data.json())
+            .then(data => {
+                const area = document.getElementById('addressListArea');
+                area.innerHTML = ''
+                data.data.map(e => {
+
+                    const li = `
+                            <li class="list-group-item">
+                                <b>${e.address_title}</b> <br />
+                                <small><b>${e.address_county.text}, ${e.address_province.text}</b></small> <br />
+                                ${e.address} <br />
+                                <small>${e.address_direction != null ? e.address_direction : ''}</small> <br />
+                                   <a
+                                    href="https://www.google.com/maps/dir/40.7474978,30.3565063/${e.address_ltd},${e.address_lng}"
+                                    class="dropdown-item"
+                                    target="_blank"
+                                    style="padding-left:0px"
+                                    >Yol tarifi</a>
+                            </li>
+                    `
+
+                    area.innerHTML += li;
+                })
+            })
     }
 
     setReadyPage = async () => {
@@ -107,12 +145,22 @@ window.onload = () => {
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                          </a>
                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                             <a
+
+
+                                 <a
+                                class="dropdown-item"
+                                href="${PANEL_URL}/siparisler/gecmis/uye/${e._id}"
+                                target="_blank"
+                                >Geçmiş siparişler</a>
+
+                                 <a
                                 class="dropdown-item"
                                 data-toggle="modal"
                                 data-target="#fadeinModal"
                                 href="javascript:void(0);"
-                                >Düzenle</a>
+                                data-userid="${e._id}"
+                                onclick="handleUserAddressList(this)"
+                                >Adres listesi</a>
 
                                 <a
                                 class="dropdown-item"
@@ -134,10 +182,7 @@ window.onload = () => {
                                 data-phonenumber="9${e.phone_number}"
                                 >SMS gönder</a>
 
-                               <a
-                                class="dropdown-item"
-                                href="javascript:void(0);"
-                                >Sil</a>
+
                           </div>
                      </div>
                 `;

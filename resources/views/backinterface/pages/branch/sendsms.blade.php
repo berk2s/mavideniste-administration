@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Bildirim Gönder')
+@section('title', 'Maviden İste - SMS gönder')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Bayi sistemi</a></li>

@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Kupon oluştur')
+@section('title', 'Maviden İste - Kampanya oluştur')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Kampanya</a></li>

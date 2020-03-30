@@ -140,6 +140,8 @@ window.onload = async () => {
                   const imageData = await uploadProductImage(image);
                   const productData = await addProduct(product_name, product_category, subCategory, product_brand, product_list_price, product_discount_price, product_discount, product_unit_type, product_unit_weight, product_amount, PRODUCT_IMAGE_DIR+imageData.status.imagename);
                   await readyComponents();
+                  await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı ${product_name} ürünü ekledi.</b>`);
+
                   Snackbar.show({text:'Ürün başarılı şekilde eklendi.', duration:4000})
                   document.getElementById('btnAddProduct').innerHTML = 'Kaydet';
                   console.log(productData);

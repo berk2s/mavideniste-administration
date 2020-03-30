@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Markalar Listesi')
+@section('title', 'Maviden İste - Kampanya listesi')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Kampanya</a></li>
@@ -14,7 +14,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Kampanya Listesi
+                                <h4>KAMPANYA LİSTESİ
 
                                     <div id='loadingSpin' class="spinner-border text-success align-self-center loader-sm" style="display:none;float:right;width:20px;height:20px"></div>
                                 </h4>

@@ -56,16 +56,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-12">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label>Panel Yetkisi</label>
-                                                                <input type="text" class="form-control mb-4" id="access" value="{{$user->role->role_name}}" disabled>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
 
                                                 <div class="col-md-12">
                                                     <div class="form-group">

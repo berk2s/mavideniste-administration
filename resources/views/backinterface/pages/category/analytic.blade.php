@@ -1,8 +1,8 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Anasayfa')
+@section('title', 'Maviden İste - Kategori analizleri')
 
 @section('page_navigation')
-    <li class="breadcrumb-item"><a href="javascript:void(0);">Kategori</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Kategoriler</a></li>
     <li class="breadcrumb-item active" aria-current="page"><span>Analiz</span></li>
 @endsection
 

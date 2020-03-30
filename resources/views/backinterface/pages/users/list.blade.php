@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - APP Üyeleri')
+@section('title', 'Maviden İste - Kullanıcı listesi')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Kullanıcılar</a></li>
@@ -48,6 +48,7 @@
 
     <a data-toggle="modal" style="display:none" id="aSendNotification" data-target="#sendNotification"></a>
     <a data-toggle="modal" style="display:none" id="aSendSms" data-target="#sendSMS"></a>
+    <a data-toggle="modal" style="display:none" id="aAddressList" data-target="#addressList"></a>
 
     <div id="sendSMS" class="modal animated fadeInDown" role="dialog">
         <div class="modal-dialog">
@@ -153,12 +154,12 @@
         </div>
     </div>
 
-    <div id="createGroup" class="modal animated fadeInDown" role="dialog">
+    <div id="addressList" class="modal animated fadeInDown" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" >
-                    <h5 class="modal-title" id="edit_categoryName">Grup oluştur
+                    <h5 class="modal-title" id="edit_categoryName">Adres listesi
                         <div id='loadingSpinForEdit' style="display: none" class="spinner-border text-success align-self-center loader-sm" style="float:right;width:20px;height:20px;margin:5px"></div></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -172,33 +173,11 @@
                         <div class="work-section">
 
                             <div class="row">
-                                <form id="CreateGroupForxm" class="w-100" enctype="multipart/form-data" method="post">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="degree2">Grup adı</label>
-                                            <input type="text" class="form-control mb-4" id="CREATE_groupname" value="">
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="degree2">Grup açıklaması</label>
-                                            <input type="text" class="form-control mb-4" id="CREATE_groupdesc" value="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="degree2">Kullanıcılar</label>
-                                            <select id='CREATE_users' class="form-control tagging" multiple="multiple">
-
-                                            </select>
-                                        </div>
-                                    </div>
+                                <ul class="list-group w-100" id="addressListArea">
 
 
-
-                                </form>
+                                </ul>
 
                             </div>
 
@@ -210,8 +189,6 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Vazgeç</button>
-                    <button type="button" id='CREATE_usergroupSave' onclick="clickUserGroupsSave(this)" class="btn btn-primary">
-                        Oluştur</button>
                 </div>
             </div>
         </div>
@@ -236,6 +213,8 @@
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/table/datatable/dt-global_style.css">
     <link rel="stylesheet" type="text/css" href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}plugins/select2/select2.min.css">
+    <link href="/mod/{{ \Illuminate\Support\Facades\Auth::user()->is_theme_dark ? '' : 'light/' }}assets/css/components/custom-list-group.css" rel="stylesheet" type="text/css">
+
 @endsection
 
 @section('footer_addons')

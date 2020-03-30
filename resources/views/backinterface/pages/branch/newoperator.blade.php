@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Marka Ekle')
+@section('title', 'Maviden İste - Operatör ekle')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Bayi</a></li>

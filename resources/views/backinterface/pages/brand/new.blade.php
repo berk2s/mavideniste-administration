@@ -3,7 +3,7 @@
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Markalar</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><span>Marka Ekle</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span>Marka ekle</span></li>
 @endsection
 
 @section('content')

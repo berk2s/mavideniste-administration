@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
 
             $table->bigInteger('user_branch');
 
+            $table->string('key')->default(null)->nullable();
 
             $table->rememberToken();
             $table->timestamps();

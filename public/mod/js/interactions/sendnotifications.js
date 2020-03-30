@@ -27,7 +27,7 @@ window.onload = () => {
                 });
 
                 console.log(sendPush);
-
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı bildirim gönderdi. <br /> Başlık: ${title} <br/> İçerik: ${desc} </b>`);
                 Snackbar.show({text: 'Bildirim gönderildi', duration: 4000});
 
                 document.getElementById('sendNotificationBtn').value = 'Bildirimi gönder';

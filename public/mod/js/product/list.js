@@ -357,8 +357,11 @@ window.onload = async () => {
             ){
                 Snackbar.show({text:'İlgili alanları boş bırakmayınız.', duration:4000})
             }else{
+
                 await editProduct(subCat, productName, productCategory, productBrand, productUnitType, productUnitWeight, productAmount, productid);
                 await readyProducts();
+                await sendLog(USER_ID, BRANCH_ID, 2, `<b>Kullanıcı ${productName} ürünü düzenledi.</b>`);
+
             }
 
             document.getElementById('EDIT_productSaveBtn').innerHTML = `Kaydet`;
@@ -539,6 +542,8 @@ window.onload = async () => {
                     'x-api-key': API_KEY
                 }
             });
+            await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı ürünü sildi.</b>`);
+
             return deleteProduct.json();
         }catch(e){
             return e;

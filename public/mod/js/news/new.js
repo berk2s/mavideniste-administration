@@ -29,6 +29,7 @@ window.onload = () => {
                         branch_id: BRANCH_ID
                     })
                 })
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı haber ekledi</b>`);
                 Snackbar.show({text: 'Haber başarılı şekilde eklendi', duration: 4000});
             };
             reader.readAsDataURL(document.getElementById('NEW_newsfile').files[0]);

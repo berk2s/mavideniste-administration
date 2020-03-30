@@ -611,6 +611,7 @@ window.onload = async () => {
             if(updateRequest.state.code == 'PO_1') {
                 const elem = document.getElementById(`ORDER_${orderid}`);
                 elem.parentNode.removeChild(elem);
+                await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı Sipariş iptal etti.</b>`);
                 Snackbar.show({text:'Siparişi iptal ettiniz', duration:3000})
                 if(e.getAttribute('data-bluecurrier') == 'false') {
 
@@ -658,6 +659,8 @@ window.onload = async () => {
 
                 }
 
+                await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı siparişi hazırlattı <span style="font-size:1px">${orderid}</span>.</b>`);
+
                 //ORDERDROPDOWN_${orderID}
                 //ORDERDROPDOWNACTIONS_${orderID}
             }
@@ -692,6 +695,7 @@ window.onload = async () => {
 
                 }
 
+                await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı siparişi yola çıkarttı <span style="font-size:1px">${orderid}</span>.</b>`);
                 //ORDERDROPDOWN_${orderID}
                 //ORDERDROPDOWNACTIONS_${orderID}
             }
@@ -720,6 +724,8 @@ window.onload = async () => {
                     calcStatusCount(orderstatus, 3)
                     changeDropdown(orderid, 3);
                 }
+
+                await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı siparişi teslim etti <span style="font-size:1px">${orderid}</span>.</b>`);
 
 
                 //ORDERDROPDOWN_${orderID}

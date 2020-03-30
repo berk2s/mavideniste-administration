@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Tercih Değiştir')
+@section('title', 'Maviden İste - Operatör listesi')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Bayim</a></li>
@@ -50,8 +50,9 @@
 
                                                                 <td class="text-center">
 
-                                                                    <a href="/bayi/operator/duzenle/{{$user->user_id}}">Düzenle</a>
-                                                                    | <a href="/bayi/operator/sil/{{$user->user_id}}">Sil</a>
+                                                                    <a href="/bayim/operatorler/duzenle/{{$user->user_id}}">Düzenle</a>
+                                                                    | <a href="/bayim/log/{{$user->user_id}}">Log</a>
+                                                                    | <a href="/bayim/operatorler/sil/{{$user->user_id}}">Sil</a>
 
                                                                 </td>
                                                             </tr>

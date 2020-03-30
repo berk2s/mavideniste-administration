@@ -26,6 +26,8 @@ window.onload = () => {
                     })
                 });
 
+                await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı üyelere bildirim gönderdi. <br /> Başlık: ${title} <br /> İçerik: ${desc}</b>`);
+
                 console.log(sendPush);
 
                 Snackbar.show({text: 'Bildirim gönderildi', duration: 4000});

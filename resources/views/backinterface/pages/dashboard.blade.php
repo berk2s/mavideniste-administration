@@ -3,7 +3,7 @@
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Anasayfa</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><span>Genel Bilgiler</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span>Genel bilgiler</span></li>
 @endsection
 
 @section('content')

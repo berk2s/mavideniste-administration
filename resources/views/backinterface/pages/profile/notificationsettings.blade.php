@@ -1,5 +1,5 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Şifre Değiştir')
+@section('title', 'Maviden İste - Bildirim ayarları')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Ayarlar</a></li>

@@ -87,6 +87,7 @@ Route::group(['prefix' => '/siparisler', 'middleware' => ['auth', 'authority']],
 
     Route::get('/', 'Backside\Pages\Orders\Live@get_view');
     Route::get('/gecmis', 'Backside\Pages\Orders\History@get_view');
+    Route::get('/gecmis/uye/{user_id}', 'Backside\Pages\Orders\UserHistory@get_view');
 
 });
 
@@ -107,6 +108,10 @@ Route::group(['prefix' => '/bayi', 'middleware' => ['auth', 'authority']], funct
     Route::get('/sil/{id}', 'Backside\Pages\Branch\ListBranch@delete_branch');
 
     Route::get('/operatorler', 'Backside\Pages\Branch\OperatorList@get_view');
+    Route::get('/operatorler/duzenle/{id}', 'Backside\Pages\Branch\EditBranchOperator@get_view');
+    Route::post('/operatorler/duzenle/{id}', 'Backside\Pages\Branch\EditBranchOperator@handle_post');
+    Route::get('/operatorler/sil/{id}', 'Backside\Pages\Branch\EditBranchOperator@handle_delete');
+
 
     Route::get('/ekle', 'Backside\Pages\Branch\NewBranch@get_view');
     Route::post('/ekle', 'Backside\Pages\Branch\NewBranch@handle_post');
@@ -118,6 +123,9 @@ Route::group(['prefix' => '/bayi', 'middleware' => ['auth', 'authority']], funct
 
     Route::get('/sms', 'Backside\Pages\Branch\SendSMS@get_view');
     Route::get('/bildirim', 'Backside\Pages\Branch\SendNotification@get_view');
+
+    Route::get('/kullanicilar', 'Backside\Pages\Branch\UserList@get_view');
+    Route::get('/log/{id}', 'Backside\Pages\Branch\Log@get_view');
 
    // Route::get('/hizmet-bedeli', '');
 
@@ -131,11 +139,15 @@ Route::group(['prefix' => '/bayim', 'middleware' => ['auth', 'authority']], func
     Route::post('/ayarlar', 'Backside\Pages\MyBranch\BranchSettings@handle_post');
 
     Route::get('/operatorler', 'Backside\Pages\MyBranch\BranchOperators@get_view');
+    Route::get('/operatorler/duzenle/{id}', 'Backside\Pages\MyBranch\EditBranchOperator@get_view');
+    Route::post('/operatorler/duzenle/{id}', 'Backside\Pages\MyBranch\EditBranchOperator@handle_post');
+    Route::get('/operatorler/sil/{id}', 'Backside\Pages\MyBranch\EditBranchOperator@handle_delete');
 
     Route::get('/operator/ekle', 'Backside\Pages\MyBranch\NewBranchOperator@get_view');
     Route::post('/operator/ekle', 'Backside\Pages\MyBranch\NewBranchOperator@handle_post');
 
     Route::get('/sikayetler', 'Backside\Pages\MyBranch\Complaints@get_view');
+    Route::get('/log/{id}', 'Backside\Pages\MyBranch\Log@get_view');
 
 });
 

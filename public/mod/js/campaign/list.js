@@ -72,17 +72,19 @@ window.onload = () => {
     handleRemove = async e => {
         try{
             const id = e.getAttribute('data-brandid');
-            await fetch(`${API_URL}/api/brand`, {
+            await fetch(`${API_URL}/api/campaign`, {
                 method:"DELETE",
                 headers:{
                     'Content-Type':'application/json',
                     'x-api-key':API_KEY,
                 },
                 body:JSON.stringify({
-                    brand_id:id
+                    campaign_id:id
                 })
             });
-            Snackbar.show({text:'Marka silindi', duration:4000});
+            await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı kampanya sildi. </b>`);
+
+            Snackbar.show({text:'Kampanya silindi', duration:4000});
             await insertBrands()
         }catch(e){
             console.log(e);
@@ -116,6 +118,8 @@ window.onload = () => {
                           image:lastImage
                       })
                   });
+                    await sendLog(USER_ID, BRANCH_ID, 2, `<b>Kullanıcı kampanya resmini düzenledi. </b>`);
+
                     Snackbar.show({text:'Güncelleme başarılı', duration:4000});
 
                 };
@@ -254,6 +258,7 @@ window.onload = () => {
                     campaign_desc:campaigntype == 1 ? campaigndesc : null
                 })
             })
+            await sendLog(USER_ID, BRANCH_ID, 2, `<b>Kullanıcı ${campaign_name} kampanyasını düzenledi. </b>`);
             insertBrands();
             document.getElementById('EDIT_save').innerHTML = 'Kaydet'
         }catch(e){

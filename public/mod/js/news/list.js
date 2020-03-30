@@ -82,7 +82,9 @@ window.onload = () => {
                     news_id:id
                 })
             });
-            Snackbar.show({text:'Marka silindi', duration:4000});
+            await sendLog(USER_ID, BRANCH_ID, 3, `<b>Kullanıcı haber sildi</b>`);
+
+            Snackbar.show({text:'Haber silindi', duration:4000});
             await insertBrands()
         }catch(e){
             console.log(e);

@@ -18,6 +18,8 @@ window.onload = () => {
                     brand_name,
                 })
             });
+
+
             return brand.json();
         }catch (e) {
             return e;
@@ -82,6 +84,7 @@ window.onload = () => {
                     brand_id:id
                 })
             });
+            await sendLog(USER_ID, BRANCH_ID, 2, `<b>Kullanıcı markas sildi.</b>`);
             Snackbar.show({text:'Marka silindi', duration:4000});
             await insertBrands()
         }catch(e){
