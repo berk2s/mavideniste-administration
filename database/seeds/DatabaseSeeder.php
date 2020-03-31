@@ -134,6 +134,10 @@ class DatabaseSeeder extends Seeder
            ['user_id' => 1, 'page_id' => 45],
            ['user_id' => 1, 'page_id' => 46],
            ['user_id' => 1, 'page_id' => 47],
+           ['user_id' => 1, 'page_id' => 48],
+           ['user_id' => 1, 'page_id' => 49],
+           ['user_id' => 1, 'page_id' => 50],
+           ['user_id' => 1, 'page_id' => 51],
         ]);
 
         DB::table('pages')->insert([
@@ -195,6 +199,7 @@ class DatabaseSeeder extends Seeder
             ['page_url' => 'bayi/bildirim', 'desc' => 'Herkese bildirim gönder', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/kullanicilar', 'desc' => 'Tüm bayilere kayıtlı kullanıcılar', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
             ['page_url' => 'bayi/log', 'desc' => 'Bayi log geçmişleri', 'is_sub' => true, 'is_owner_page' => true, 'tab'=> 12],
+            ['page_url' => 'bayi/istek', 'desc' => 'Bayilik istekleri', 'is_sub' => false, 'is_owner_page' => true, 'tab'=> 12],
 
 
             ['page_url' => 'ayarlar/profilim', 'desc' => 'Profil ayarları', 'is_sub' => false, 'is_owner_page' => false, 'tab'=> 13],

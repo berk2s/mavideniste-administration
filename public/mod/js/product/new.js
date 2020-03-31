@@ -15,12 +15,19 @@ window.onload = async () => {
 
         const subCategories = await fetchSubCategory(category_id)
         document.getElementById('productSubCategory').innerHTML = ''
+
+        const option = document.createElement('option');
+        option.value = null
+        option.innerHTML = 'YOK'
+        document.getElementById('productSubCategory').append(option)
+
         subCategories.data.map(e => {
             const option = document.createElement('option');
             option.value = e._id;
             option.innerHTML = e.sub_category_name
             document.getElementById('productSubCategory').append(option)
-        })
+        });
+
     }
 
     fetchSubCategory = async (category_id) => {
@@ -63,6 +70,7 @@ window.onload = async () => {
         try{
             const category = await fetchBranchCategories();
             const categorySelect = document.getElementById('productCategory');
+            categorySelect.innerHTML = '';
             let i=0;
             category.data.forEach(async (e) => {
                 const option = document.createElement('option');
@@ -118,6 +126,7 @@ window.onload = async () => {
           const product_amount = document.getElementById('productAmount').value;
           const image = document.getElementById('productFile');
           const subCategory = document.getElementById('productSubCategory').value;
+
           if(
               product_name.trim() == ''
               ||
@@ -138,6 +147,7 @@ window.onload = async () => {
               reader.onload = async () => {
                   const image = reader.result;
                   const imageData = await uploadProductImage(image);
+                  console.log(imageData)
                   const productData = await addProduct(product_name, product_category, subCategory, product_brand, product_list_price, product_discount_price, product_discount, product_unit_type, product_unit_weight, product_amount, PRODUCT_IMAGE_DIR+imageData.status.imagename);
                   await readyComponents();
                   await sendLog(USER_ID, BRANCH_ID, 1, `<b>Kullanıcı ${product_name} ürünü ekledi.</b>`);
@@ -189,6 +199,7 @@ window.onload = async () => {
             });
             return add.json();
         }catch(e){
+            console.log(e);
             return e;
         }
     }
@@ -206,6 +217,7 @@ window.onload = async () => {
           });
           return upload.json();
       }catch(e){
+          console.log(e);
           return e;
       }
     };

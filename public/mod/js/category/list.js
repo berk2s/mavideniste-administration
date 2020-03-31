@@ -345,6 +345,14 @@ window.onload = () => {
         }
     }
 
+    clickDeleteSub = async (category_id) => {
+        try{
+
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     BranchCategories = () => {
         fetchBranchCategories()
             .then(async (res) => {
@@ -362,28 +370,36 @@ window.onload = () => {
                         const subs = await fetchSubCategories(e._id);
                         let categoryname = `<span style='color:green'>${e.category_name}</span>`;
                         let sub = '';
-                        subs.data.map(e => {
-                            sub += `<span style="color:white">${e.sub_category_name}, </span>`
-                        })
+
+                        const subsPromise = subs.data.map(e => {
+                            return new Promise((resolve, reject) => {
+                                sub += `${e.sub_category_name},`
+                                resolve(true);
+                            })
+                        });
+                        await Promise.all(subsPromise);
+
+                        console.log(sub)
+
                         let categoryimage = '';
                         let deleteImageDOM = ''
                         if(e.category_image == null) {
-                            categoryimage = `<span style="color:red">Resim yok</span>`;
+                            categoryimage = `<span style='color:red'>Resim yok</span>`;
                         }else {
                             categoryimage = `<a
-             data-toggle="modal"
-             data-target="#imagePlay"
-             href="javascript:void(0);"
-             onclick="clickImageShow(this)"
-             data-imageurl="${PANEL_URL}${e.category_image}"
+             data-toggle='modal'
+             data-target='#imagePlay'
+             href='javascript:void(0);'
+             onclick='clickImageShow(this)'
+             data-imageurl='${PANEL_URL}${e.category_image}'
              >Gör</a>`;
                             deleteImageDOM = `
                     <a
-                    class="dropdown-item"
-                    href="javascript:void(0);"
-                    onclick="clickDeleteImage(this)"
-                    data-categoryid="${category_id}"
-                    data-category_name="${category_name}"
+                    class='dropdown-item'
+                    href='javascript:void(0);'
+                    onclick='clickDeleteImage(this)'
+                    data-categoryid='${category_id}'
+                    data-category_name='${category_name}'
                     >
                         Resmi Kaldır
                     </a>`

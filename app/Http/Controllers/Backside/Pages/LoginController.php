@@ -56,7 +56,7 @@ class LoginController extends Controller
 
 
 
-            return redirect('/anasayfa');
+            return redirect('/ayarlar/profilim');
         }else{
             return redirect('/');
         }

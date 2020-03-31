@@ -19,6 +19,11 @@ window.onload = async () => {
         const subSelect = document.getElementById('productSubCategory');
         subSelect.innerHTML = '';
 
+        const option = document.createElement('option');
+        option.value = null;
+        option.innerHTML = 'YOK';
+        subSelect.append(option);
+
         subCategroies.data.map(e => {
             const option = document.createElement('option');
             option.value = e._id;
@@ -301,6 +306,11 @@ window.onload = async () => {
 
                 const subSelect = document.getElementById('productSubCategory');
                 subSelect.innerHTML = '';
+
+                const option = document.createElement('option');
+                option.value = null;
+                option.innerHTML = 'YOK';
+                subSelect.append(option);
 
                 subCategroies.data.map(e => {
                     const option = document.createElement('option');

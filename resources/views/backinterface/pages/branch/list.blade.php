@@ -54,7 +54,10 @@
                                                                         <a href="{{$branch->status == true ? '/bayi/duraklat/'.$branch->branch_id : '/bayi/yayin/'.$branch->branch_id}}">
                                                                             {{$branch->status == true ? 'Duraklat' : 'Yayına al'}}
                                                                         </a> | <a href="/bayi/duzenle/{{$branch->branch_id}}">Düzenle</a>
-                                                                        </a> | <a href="/bayi/sil/{{$branch->branch_id}}">Sil</a>
+                                                                        </a>
+                                                                        @if($branch->branch_id != 54)
+                                                                        | <a href="/bayi/sil/{{$branch->branch_id}}">Sil</a>
+                                                                        @endif
 
                                                                     </td>
                                                                 </tr>

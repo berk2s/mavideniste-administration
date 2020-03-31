@@ -1,9 +1,9 @@
 @extends('backinterface.layout.structure')
-@section('title', 'Maviden İste - Şikayetler')
+@section('title', 'Maviden İste - Bayilik istekleri')
 
 @section('page_navigation')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Bayi</a></li>
-    <li class="breadcrumb-item active" aria-current="page"><span>Şikayetler</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span>Bayilik istekleri</span></li>
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                                 <div class="info">
-                                    <h5 class="">GELEN ŞİKAYETLER</h5>
+                                    <h5 class="">GELEN BAYİLİK İSTEKLERİ</h5>
                                     <div class="row">
 
                                         <div class="col-md-11 mx-auto">
@@ -28,31 +28,23 @@
                                                     <table class="table table-bordered table-hover table-striped mb-4">
                                                         <thead>
                                                         <tr>
-                                                            <th>MÜŞTERİ</th>
-                                                            <th>TELEFON</th>
-                                                            <th>ŞUBE</th>
-                                                            <th>SİPARİŞ</th>
-                                                            <th>ŞİKAYET TARİHİ</th>
-                                                            <th class="text-center">İŞLEM</th>
+                                                            <th>#</th>
+                                                            <th>AD SOYAD</th>
+                                                            <th>İL</th>
+                                                            <th>TELEFON NUMARASI</th>
+                                                            <th>BİOGRAFİ</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                        @foreach($complaints as $complaint)
+                                                        @foreach($requests as $request)
                                                             <tr>
-                                                                <td>{{$complaint->user_name}}</td>
-                                                                <td>{{$complaint->user_phone}}</td>
-                                                                <td>{{$complaint->branch->branch_name}}</td>
-                                                                <td>{{$complaint->order}}</td>
-                                                                <td>{{$complaint->created_at->diffForHumans()}}</td>
+                                                                <td>{{$request->request_id}}</td>
+                                                                <td>{{$request->name_surname}}</td>
+                                                                <td>{{$request->province_detail->il_adi}}</td>
+                                                                <td>{{$request->phone_number}}</td>
+                                                                <td>{{$request->bio}}</td>
 
-                                                                <td class="text-center">
-
-
-                                                                    <a href="" data-toggle="modal" data-target="#COMPLAINT_{{$complaint->complaint_id}}">Metni gör</a>
-                                                                    | <a href="/bayi/sil/">Sil</a>
-
-                                                                </td>
                                                             </tr>
                                                         @endforeach
 
@@ -79,22 +71,7 @@
 
     </div>
 
-    @foreach($complaints as $complaint)
-        <div class="modal fade" id="COMPLAINT_{{$complaint->complaint_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{$complaint->user_name}} kullanıcısının şikayeti</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p class="modal-text">
-                            {{$complaint->complaint}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
+
 
 @endsection
 

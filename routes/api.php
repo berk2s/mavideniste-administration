@@ -31,3 +31,4 @@ Route::resource('/complaint', 'Backside\Api\Complaint\ComplaintApi');
 Route::resource('/appsettings', 'Backside\Api\AppSettingsApi');
 
 Route::resource('/identity', 'Backside\Api\Identity');
+Route::resource('/requestbranch', 'Backside\Api\RequestBranch');

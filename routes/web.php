@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', 'Backside\Pages\LoginController@get_view')
     ->name('login')
     ->middleware('guest');
@@ -126,6 +128,7 @@ Route::group(['prefix' => '/bayi', 'middleware' => ['auth', 'authority']], funct
 
     Route::get('/kullanicilar', 'Backside\Pages\Branch\UserList@get_view');
     Route::get('/log/{id}', 'Backside\Pages\Branch\Log@get_view');
+    Route::get('/istek', 'Backside\Pages\Branch\RequestBranch@get_view');
 
    // Route::get('/hizmet-bedeli', '');
 

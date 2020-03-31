@@ -615,6 +615,9 @@
                         {{ Request::path() == 'bayi/kullanicilar' ? ' data-active=true' : '' }}
                         {{ Request::path() == 'bayi/kullanicilar' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
 
+                        {{ Request::path() == 'bayi/istek' ? ' data-active=true' : '' }}
+                        {{ Request::path() == 'bayi/istek' ? ' aria-expanded=true' : 'aria-expanded="false"' }}
+
                         {{ Str::contains(Request::path(), 'bayi/duzenle') ? 'data-active=true' : '' }}
                         {{ Str::contains(Request::path(), 'bayi/duzenle') ? 'aria-expanded=true' : 'aria-expanded="false"' }}
 
@@ -642,6 +645,7 @@
                         {{ Request::path() == 'bayi/sikayetler' ? 'show' : '' }}
                         {{ Request::path() == 'bayi/kullanicilar' ? 'show' : '' }}
                         {{ Request::path() == 'bayi/log' ? 'show' : '' }}
+                        {{ Request::path() == 'bayi/istek' ? 'show' : '' }}
                         {{ Str::contains(Request::path(), 'bayi/') ? 'show' : '' }}
 
                         " id="branch" data-parent="#accordionExample">
@@ -710,6 +714,14 @@
                                 {{ Request::path() == 'bayi/sikayetler' ? 'class=active' : '' }}
                             >
                                 <a href="/bayi/sikayetler"> Şikayetler  </a>
+                            </li>
+                        @endif
+
+                        @if(array_search('bayi/istek', $pageUrlArray) !== false)
+                            <li
+                                {{ Request::path() == 'bayi/istek' ? 'class=active' : '' }}
+                            >
+                                <a href="/bayi/istek"> Bayilik istekleri  </a>
                             </li>
                         @endif
 
